@@ -1,0 +1,31 @@
+#--
+# Compressed
+#++
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+#--
+# Backup files
+#++
+*~
+*#
+
+#--
+# OS genterated files
+#++
+.DS_Store
+ehtumbs.db
+Thumbs.db
+
+#--
+# Specific
+#++
+.thumbnails/
+.gimp-2.6/
+.gitk
