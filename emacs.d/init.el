@@ -38,6 +38,8 @@
 	      '(("\\.h$"   . c++-mode))
               '(("\\.org"  . org-mode))
               '(("\\.org_archive" . org-mode))
+              '(("\\.rb"   . ruby-mode))
+              '(("\\.erb"  . ruby-mode))
 	      auto-mode-alist))
 
 ;; Set tab distance to 4
