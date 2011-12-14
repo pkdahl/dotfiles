@@ -17,6 +17,29 @@
 (if (file-directory-p "c:/bin/cygwin/bin")
     (add-to-list 'exec-path "c:/bin/cygwin/bin"))
 
+;;--
+;; Backup
+;;++
+
+;; Put backup files in one directory
+(setq backup-directory-alist
+      '((".*" . "~/.emacs.d/backups/")))
+
+;; Copy to create backup files
+(setq backup-by-copying t)
+
+;; Make backup versions
+(setq version-control t)
+
+;; Backup versions to keep (default value "2")
+(setq kept-old-versions 2)
+(setq kept-new-versions 5)
+
+;; Delete backup files silently
+(setq delete-old-versions t)
+
+;;--
+
 ;; File types by the file suffix
 (setq auto-mode-alist
       (append '(("\\.mss$" . scribe-mode))
@@ -37,6 +60,8 @@
               '(("\\.rb"   . ruby-mode))
               '(("\\.erb"  . ruby-mode))
 	      auto-mode-alist))
+
+;;--
 
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
@@ -137,5 +162,7 @@
 
 ;; Do not change TODO state to DONE when archiving
 (setq org-archive-mark-done nil)
+
+;;--
 
 (message "* -- [ .emacs.d/init.el loaded ] --")
