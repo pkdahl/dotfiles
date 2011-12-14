@@ -1,16 +1,12 @@
 ;;--
-;; File .emacs.d/init.el
+;; .emacs.d/init.el
 ;;++
-
-
-;; Uncomment this to debug on error
-;; (setq debug-on-error t)
 
 ;; Do not display splash screen on startup
 (setq inhibit-splash-screen t)
 
 ;; Show column numbers
-(column-number-mode 1)
+(column-number-mode t)
 
 ;; Set Dropbox directory
 (if (eq system-type 'windows-nt)
@@ -42,11 +38,13 @@
               '(("\\.erb"  . ruby-mode))
 	      auto-mode-alist))
 
-;; Set tab distance to 4
-(setq c-basic-offset 4)
-
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
+
+;; Mode specific indent distances
+(setq c-basic-offset 4)
+(setq css-indent-offset 2)
+(setq sh-basic-offset 2)
 
 ;; Set timestamps to appear in English
 (setq system-time-locale "C")
@@ -58,9 +56,9 @@
 (set-keyboard-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
 
-;;
+;;--
 ;; Org mode
-;;
+;;++
 
 (require 'org-install)
 
