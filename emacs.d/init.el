@@ -129,13 +129,8 @@
 
 ;; TODO keywords
 (setq org-todo-keywords
-      '((sequence "TODO(t)" 
-                  "STARTED(s!)"
-                  "WAITING(w@/@)"
-                  "|"
-                  "DONE(d!/!)"
-                  "CANCELLED(c@/!)"
-                  "CALL(c!)")))
+      '((sequence "TODO(t)" "STARTED(s!)" "WAITING(w@/@)" "|"
+                  "DONE(d!/!)" "CANCELLED(c@/!)" "CALL(c!)")))
 
 ;; TODO faces
 (setq org-todo-keyword-faces
@@ -151,12 +146,14 @@
 
 ;; Agenda view
 
-;; Capture mode
+;; Capture templates
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline (concat org-directory "/refile.org" "Tasks"))
+      '(("t" "todo" entry (file (concat org-directory "/refile.org"))
          "* TODO %?\n %U\n %a")
-        ("l" "Log" entry (file+datetree (concat org-directory "/log.org"))
-         "* %U %^{Activity}")))
+        ("n" "note" entry (file (concat org-directory "/refile.org"))
+         "* %?\n %U\n %a")
+        ("l" "log" entry (file+datetree (concat org-directory "/log.org"))
+         "* %U %?")))
 
 ;; Archiving
 
