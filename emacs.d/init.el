@@ -123,9 +123,10 @@
 (setq org-refile-use-outline-path nil)
 
 ;; Agenda files
-(setq org-agenda-files (list (concat org-directory "/mcg.org")
-                             (concat org-directory "/personal.org")
-                             (concat org-directory "/log.org")))
+(setq org-agenda-files (file-expand-wildcards (concat org-directory "/*.org")))
+;(setq org-agenda-files (list (concat org-directory "/mcg.org")
+;                             (concat org-directory "/personal.org")
+;                             (concat org-directory "/log.org")))
 
 ;; TODO keywords
 (setq org-todo-keywords
