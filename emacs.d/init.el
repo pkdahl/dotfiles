@@ -103,9 +103,6 @@
 ;; Is this superflous when we have DONE(d!/!)?
 (setq org-log-done t)
 
-;; Inherit properties. Need this for contacts to inherit company.
-(setq org-use-property-inheritance t)
-
 ;; Keep stored links after insertion
 (setq org-keep-stored-link-after-insertion t)
 
