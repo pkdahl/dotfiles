@@ -146,14 +146,12 @@
 ;; Allow changing TODO states with S-left/-right without the normal processing
 (setq org-treat-S-cursor-todo-selection-as-state-change nil)
 
-;; Agenda view
-
 ;; Capture templates
 (setq org-capture-templates
       '(("t" "todo" entry (file (concat org-directory "/refile.org"))
-         "* TODO %?\n %U\n %a")
+         "* TODO %?\n CREATED: %U")
         ("n" "note" entry (file (concat org-directory "/refile.org"))
-         "* %?\n %U\n %a")
+         "* %?\n CREATED: %U")
         ("l" "log" entry (file+datetree (concat org-directory "/log.org"))
          "* %U %?")))
 
