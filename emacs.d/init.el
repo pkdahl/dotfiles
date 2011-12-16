@@ -107,7 +107,7 @@
 (setq org-keep-stored-link-after-insertion t)
 
 ;; Follow links with RET
-(setq org-return-follow-link t)
+(setq org-return-follows-link t)
 
 ;; Set org directories
 (setq org-directory (concat dropbox-directory "/Org"))
