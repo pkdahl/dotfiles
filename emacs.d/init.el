@@ -106,6 +106,9 @@
 ;; Keep stored links after insertion
 (setq org-keep-stored-link-after-insertion t)
 
+;; Follow links with RET
+(setq org-return-follow-link t)
+
 ;; Set org directories
 (setq org-directory (concat dropbox-directory "/Org"))
 (setq org-mobile-directory (concat dropbox-directory "/MobileOrg"))
@@ -116,8 +119,9 @@
 (setq org-default-notes-file (concat org-directory "/refile.org"))
 (setq org-mobile-inbox-for-pull (concat org-directory "/refile.org"))
 
+;; Refile targets
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
-(setq org-refile-use-outline-path nil)
+(setq org-refile-use-outline-path t)
 
 ;; Agenda files
 (setq org-agenda-files (file-expand-wildcards (concat org-directory "/*.org")))
