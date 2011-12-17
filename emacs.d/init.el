@@ -103,6 +103,9 @@
 ;; Is this superflous when we have DONE(d!/!)?
 (setq org-log-done t)
 
+;; Want to create IDs manually
+(setq org-link-to-org-use-id 'use-existing)
+
 ;; Keep stored links after insertion
 (setq org-keep-stored-link-after-insertion t)
 
@@ -129,10 +132,14 @@
 ;                             (concat org-directory "/personal.org")
 ;                             (concat org-directory "/log.org")))
 
+;; Agenda settings
+(setq org-agenda-skip-deadline-if-done t)
+(setq org-agenda-skip-scheduled-if-done t)
+
 ;; TODO keywords
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s!)" "WAITING(w@/@)" "|"
-                  "DONE(d!/!)" "CANCELLED(c@/!)" "CALL(c!)")))
+      '((sequence "TODO(t)" "STARTED(s!)" "WAITING(w@/@)" "|" "DONE(d!/!)" "CANCELLED(c@/!)")
+        (sequence "OPEN(o)" "|" "WON (w@)" "LOST(l@)")))
 
 ;; TODO faces
 (setq org-todo-keyword-faces
@@ -141,7 +148,9 @@
         ("WAITING" . (:foreground "orange" :weight bold))
         ("CANCELLED" . (:foreground "forest green" :weight bold))
         ("DONE" .(:foreground "forest green" :weight bold))
-        ("CALL" . (:foreground "forest green" :weight bold))))
+        ("OPEN" . (:foreground "red" :weight bold))
+        ("WON" . (:foreground "forest green" :weight bold))
+        ("LOST" . (:foreground "forest green" :weight bold))))
 
 ;; Allow changing TODO states with S-left/-right without the normal processing
 (setq org-treat-S-cursor-todo-selection-as-state-change nil)
@@ -149,9 +158,11 @@
 ;; Capture templates
 (setq org-capture-templates
       '(("t" "todo" entry (file (concat org-directory "/refile.org"))
-         "* TODO %?\n CREATED: %U")
+         "* TODO %?\nCREATED: %U")
         ("n" "note" entry (file (concat org-directory "/refile.org"))
-         "* %?\n CREATED: %U")
+         "* %?\nCREATED: %U")
+        ("o" "todo" entry (file (concat org-directory "/refile.org"))
+         "* OPEN %?\nCREATED: %U")
         ("l" "log" entry (file+datetree (concat org-directory "/log.org"))
          "* %U %?")))
 
