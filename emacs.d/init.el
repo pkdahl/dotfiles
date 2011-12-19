@@ -121,6 +121,9 @@
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
 (setq org-refile-use-outline-path t)
 
+;; New note at the beginning of an entry
+(setq org-reverse-note-order t)
+
 ;; Agenda files
 (setq org-agenda-files (file-expand-wildcards (concat org-directory "/*.org")))
 ;;(setq org-agenda-files (list (concat org-directory "/mcg.org")
