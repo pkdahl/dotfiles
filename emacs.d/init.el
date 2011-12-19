@@ -134,7 +134,22 @@
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-todo-list-sublevels t)       ; Check sublevels
-(setq org-agenda-tags-match-list-sublevels t) ; Match tags in sublevels
+;(setq org-agenda-tags-match-list-sublevels t) ; Match tags in sublevels
+(setq org-deadline-warning-days 7)
+
+;; Agenda cusom commands
+(setq org-agenda-custom-commands
+      '((" " "Agenda"
+         ((agenda "" ((org-agenda-ndays 1)))
+          (tags "+CATEGORY=\"Refile\""
+                ((org-agenda-overriding-header "Notes and Tasks to Refile")))
+          (tags-todo "+CATEGORY=\"Opportunities\""
+                ((org-agenda-overriding-header "Open opportunities")
+                 (org-tags-match-list-sublevels 'indented)
+                 (org-agenda-prefix-format "Co name: " )))
+          (todo "TODO|STARTED|WAITING"
+                ((org-agenda-overriding-header "Tasks")
+                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))))))))
 
 ;; TODO keywords
 (setq org-todo-keywords
@@ -157,17 +172,17 @@
 
 ;; Capture templates
 (setq org-capture-templates
-      '(("t" "todo" entry (file (concat org-directory "/refile.org"))
-         "* TODO %?\nCREATED: %U")
-        ("n" "note" entry (file (concat org-directory "/refile.org"))
-         "* %?\nCREATED: %U")
-        ("o" "todo" entry (file (concat org-directory "/refile.org"))
-         "* OPEN %?\nCREATED: %U")
+      '(("t" "Todo" entry (file (concat org-directory "/refile.org"))
+         "* TODO %?\nCreated: %U")
+        ("n" "Note" entry (file (concat org-directory "/refile.org"))
+         "* %?\nCreated: %U")
+        ("o" "Opportunity" entry (file (concat org-directory "/refile.org"))
+         "* OPEN %?\nCreated: %U")
         ("l" "log" entry (file+datetree (concat org-directory "/log.org"))
          "* %U %?")
-        ("r" "reference" entry (file (concat org-directory "/reference.org"))
+        ("r" "Reference" entry (file (concat org-directory "/reference.org"))
          "* %? %^g\n")
-        ("p" "reference with attachment" entry (file (concat org-directory "/reference.org"))
+        ("p" "Reference with attachment" entry (file (concat org-directory "/reference.org"))
          "* %? %^g\n:PROPERTIES:\n:ID: \n:ATTACH_DIR: \n:Date: \n:Filed: %<%Y-%m-%d %H:%M>\n:END:\n")))
 
 ;; Archiving
