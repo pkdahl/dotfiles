@@ -1,6 +1,6 @@
-;;--
-;; .emacs.d/init.el
-;;++
+;;;;
+;;;; .emacs.d/init.el
+;;;;
 
 ;; Do not display splash screen on startup
 (setq inhibit-splash-screen t)
@@ -17,9 +17,7 @@
 (if (file-directory-p "c:/bin/cygwin/bin")
     (add-to-list 'exec-path "c:/bin/cygwin/bin"))
 
-;;--
-;; Backup
-;;++
+;;; Backup
 
 ;; Put backup files in one directory
 (setq backup-directory-alist
@@ -81,9 +79,7 @@
 (set-keyboard-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
 
-;;--
-;; Org mode
-;;++
+;;; Org mode
 
 (require 'org-install)
 
@@ -100,7 +96,6 @@
 (setq org-log-into-drawer t)
 
 ;; Log time when DONE
-;; Is this superflous when we have DONE(d!/!)?
 (setq org-log-done t)
 
 ;; Want to create IDs manually
@@ -113,7 +108,7 @@
 (setq org-return-follows-link t)
 
 ;; Set org directories
-(setq org-directory (concat dropbox-directory "/Org"))
+(setq org-directory (concat dropbox-directory "/org"))
 (setq org-mobile-directory (concat dropbox-directory "/MobileOrg"))
 (message "Org directory is: %s" org-directory)
 (message "MobileOrg directory is: %s" org-mobile-directory)
@@ -128,13 +123,15 @@
 
 ;; Agenda files
 (setq org-agenda-files (file-expand-wildcards (concat org-directory "/*.org")))
-;(setq org-agenda-files (list (concat org-directory "/mcg.org")
-;                             (concat org-directory "/personal.org")
-;                             (concat org-directory "/log.org")))
+;;(setq org-agenda-files (list (concat org-directory "/mcg.org")
+;;                             (concat org-directory "/personal.org")
+;;                             (concat org-directory "/log.org")))
 
 ;; Agenda settings
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
+(setq org-agenda-todo-list-sublevels t)       ; Check sublevels
+(setq org-agenda-tags-match-list-sublevels t) ; Match tags in sublevels
 
 ;; TODO keywords
 (setq org-todo-keywords
@@ -164,7 +161,11 @@
         ("o" "todo" entry (file (concat org-directory "/refile.org"))
          "* OPEN %?\nCREATED: %U")
         ("l" "log" entry (file+datetree (concat org-directory "/log.org"))
-         "* %U %?")))
+         "* %U %?")
+        ("r" "reference" entry (file (concat org-directory "/reference.org"))
+         "* %? %^g\n")
+        ("p" "reference with attachment" entry (file (concat org-directory "/reference.org"))
+         "* %? %^g\n:PROPERTIES:\n:ID: \n:ATTACH_DIR: \n:Date: \n:Filed: %<%Y-%m-%d %H:%M>\n:END:\n")))
 
 ;; Archiving
 
