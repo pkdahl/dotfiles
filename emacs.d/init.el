@@ -136,8 +136,6 @@
 ;; Agenda settings
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
-;(setq org-agenda-todo-list-sublevels t)       ; Check sublevels
-;(setq org-agenda-tags-match-list-sublevels t) ; Match tags in sublevels
 (setq org-deadline-warning-days 7)
 (setq org-agenda-tags-column -105)
 (setq org-agenda-window-setup 'current-window)
@@ -149,14 +147,14 @@
           (tags "+CATEGORY=\"Refile\""
                 ((org-agenda-overriding-header "Notes and Tasks to Refile")))
           (tags-todo "+CATEGORY=\"Opportunities\""
-                ((org-agenda-overriding-header "Open opportunities")
-                 (org-tags-match-list-sublevels nil)
-                 (org-agenda-prefix-format "  %-12:(prin1 \"Opp'y:\")")))
+                     ((org-agenda-overriding-header "Open opportunities")
+                      (org-tags-match-list-sublevels nil)
+                      (org-agenda-prefix-format "  %-12:(prin1 \"Opp'y:\")")))
           (tags-todo "+CATEGORY=\"Appointments\""
                      ((org-agenda-overriding-header "Upcoming appointments")
                       (org-tags-match-list-sublevels nil)
                       (org-agenda-prefix-format "  %-12:(prin1 \"App't:\")")))
-          (tags "-CATEGORY=\"Opportunities\"-CATEGORY=\"Appointments\"/!-CANCELLED"
+          (tags "-CATEGORY=\"Opportunities\"-CATEGORY=\"Appointments\"/!-DONE"
                 ((org-agenda-overriding-header "Tasks")
                  (org-tags-match-list-sublevels nil)
                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))))))))
@@ -194,9 +192,9 @@
         ("l" "log" entry (file+datetree (concat org-directory "/log.org"))
          "* %U %?")
         ("r" "Reference" entry (file (concat org-directory "/reference.org"))
-         "* %? %^g\n" :prepend t)
+         "* %? %^g\n:PROPERTIES:\n:ID: \nCreated: %<%Y-%m-%d %H:%M>\nSource: \n:END:\n" :prepend t)
         ("p" "Reference with attachment" entry (file (concat org-directory "/reference.org"))
-         "* %? %^g\n:PROPERTIES:\n:ID: data-%<%Y%m%d-%H%M%S>\n:ATTACH_DIR: data/%<%Y-%m-%d>\n:Date: \n:Created: %<%Y-%m-%d %H:%M>\n:END:\n" :prepend t)))
+         "* %? %^g\n:PROPERTIES:\n:ID: data-%<%Y%m%d-%H%M%S>\n:ATTACH_DIR: data/%<%Y-%m-%d>\n:Date: \n:Created: %<%Y-%m-%d %H:%M>\nSource: \n:END:\n" :prepend t)))
 
 ;; Archiving
 
