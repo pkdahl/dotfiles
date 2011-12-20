@@ -151,8 +151,12 @@
           (tags-todo "+CATEGORY=\"Opportunities\""
                 ((org-agenda-overriding-header "Open opportunities")
                  (org-tags-match-list-sublevels nil)
-                 (org-agenda-prefix-format "Comp: " )))
-          (tags-todo "-CANCELLED-OPEN/!"
+                 (org-agenda-prefix-format "  %-12:(prin1 \"Opp'y:\")")))
+          (tags-todo "+CATEGORY=\"Appointments\""
+                     ((org-agenda-overriding-header "Upcoming appointments")
+                      (org-tags-match-list-sublevels nil)
+                      (org-agenda-prefix-format "  %-12:(prin1 \"App't:\")")))
+          (tags "-CATEGORY=\"Opportunities\"-CATEGORY=\"Appointments\"/!-CANCELLED"
                 ((org-agenda-overriding-header "Tasks")
                  (org-tags-match-list-sublevels nil)
                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))))))))
@@ -192,7 +196,7 @@
         ("r" "Reference" entry (file (concat org-directory "/reference.org"))
          "* %? %^g\n" :prepend t)
         ("p" "Reference with attachment" entry (file (concat org-directory "/reference.org"))
-         "* %? %^g\n:PROPERTIES:\n:ID: data-%<%Y%m%d-%H%M%S>\n:ATTACH_DIR: data/%<%Y-%m-%d>\n:Date: \n:Filed: %<%Y-%m-%d %H:%M>\n:END:\n" :prepend t)))
+         "* %? %^g\n:PROPERTIES:\n:ID: data-%<%Y%m%d-%H%M%S>\n:ATTACH_DIR: data/%<%Y-%m-%d>\n:Date: \n:Created: %<%Y-%m-%d %H:%M>\n:END:\n" :prepend t)))
 
 ;; Archiving
 
