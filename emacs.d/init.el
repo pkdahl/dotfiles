@@ -89,6 +89,9 @@
 (define-key global-map "\C-cb" 'org-iswitchchb)
 (define-key global-map "\C-cc" 'org-capture)
 
+;; Custom key bindings
+(global-set-key  (kbd "<f12>") 'org-agenda)
+
 ;; Cleaner outline view
 (setq org-startup-indented t)
 
@@ -133,9 +136,10 @@
 ;; Agenda settings
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
-(setq org-agenda-todo-list-sublevels t)       ; Check sublevels
+;(setq org-agenda-todo-list-sublevels t)       ; Check sublevels
 ;(setq org-agenda-tags-match-list-sublevels t) ; Match tags in sublevels
 (setq org-deadline-warning-days 7)
+(setq org-agenda-tags-column -105)
 
 ;; Agenda cusom commands
 (setq org-agenda-custom-commands
@@ -145,24 +149,28 @@
                 ((org-agenda-overriding-header "Notes and Tasks to Refile")))
           (tags-todo "+CATEGORY=\"Opportunities\""
                 ((org-agenda-overriding-header "Open opportunities")
-                 (org-tags-match-list-sublevels 'indented)
-                 (org-agenda-prefix-format "Co name: " )))
-          (todo "TODO|STARTED|WAITING"
+                 (org-tags-match-list-sublevels nil)
+                 (org-agenda-prefix-format "Comp: " )))
+          (tags-todo "-CANCELLED-OPEN/!"
                 ((org-agenda-overriding-header "Tasks")
+                 (org-tags-match-list-sublevels nil)
                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))))))))
 
 ;; TODO keywords
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s!)" "WAITING(w@/@)" "|" "DONE(d!/!)" "CANCELLED(c@/!)")
-        (sequence "OPEN(o)" "|" "WON (w@)" "LOST(l@)")))
+      '((sequence "TODO(t)" "NEXT(n)" "STARTED(s)" "|" "DONE(d/!)")
+        (sequence "WAITING(w@/@)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")
+        (sequence "OPEN(o)" "|" "WON (w@/!)" "LOST(l@/!)")))
 
 ;; TODO faces
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "red" :weight bold))
+        ("NEXT" . (:foreground "blue" :weight bold))
         ("STARTED" . (:foreground "blue" :weight bold))
-        ("WAITING" . (:foreground "orange" :weight bold))
-        ("CANCELLED" . (:foreground "forest green" :weight bold))
         ("DONE" .(:foreground "forest green" :weight bold))
+        ("WAITING" . (:foreground "orange" :weight bold))
+        ("HOLD" .(:foreground "magenta" :weight bold))
+        ("CANCELLED" . (:foreground "forest green" :weight bold))
         ("OPEN" . (:foreground "red" :weight bold))
         ("WON" . (:foreground "forest green" :weight bold))
         ("LOST" . (:foreground "forest green" :weight bold))))
@@ -173,17 +181,17 @@
 ;; Capture templates
 (setq org-capture-templates
       '(("t" "Todo" entry (file (concat org-directory "/refile.org"))
-         "* TODO %?\nCreated: %U")
+         "* TODO %?\n%U")
         ("n" "Note" entry (file (concat org-directory "/refile.org"))
-         "* %?\nCreated: %U")
+         "* %?\n%U")
         ("o" "Opportunity" entry (file (concat org-directory "/refile.org"))
-         "* OPEN %?\nCreated: %U")
+         "* OPEN %?\n%U")
         ("l" "log" entry (file+datetree (concat org-directory "/log.org"))
          "* %U %?")
         ("r" "Reference" entry (file (concat org-directory "/reference.org"))
-         "* %? %^g\n")
+         "* %? %^g\n" :prepend t)
         ("p" "Reference with attachment" entry (file (concat org-directory "/reference.org"))
-         "* %? %^g\n:PROPERTIES:\n:ID: \n:ATTACH_DIR: \n:Date: \n:Filed: %<%Y-%m-%d %H:%M>\n:END:\n")))
+         "* %? %^g\n:PROPERTIES:\n:ID: data-%<%Y%m%d-%H%M%S>\n:ATTACH_DIR: data/%<%Y-%m-%d>\n:Date: \n:Filed: %<%Y-%m-%d %H:%M>\n:END:\n" :prepend t)))
 
 ;; Archiving
 
