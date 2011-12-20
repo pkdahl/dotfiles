@@ -101,7 +101,7 @@
 ;; Log time when DONE
 (setq org-log-done t)
 
-;; Want to create IDs manually
+;; Use existing ID, do not create one
 (setq org-link-to-org-use-id 'use-existing)
 
 ;; Keep stored links after insertion
@@ -121,7 +121,7 @@
 (setq org-mobile-inbox-for-pull (concat org-directory "/refile.org"))
 
 ;; Refile targets
-(setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+(setq org-refile-targets '((org-agenda-files :maxlevel . 5)))
 (setq org-refile-use-outline-path t)
 
 ;; New note at the beginning of an entry
@@ -140,6 +140,7 @@
 ;(setq org-agenda-tags-match-list-sublevels t) ; Match tags in sublevels
 (setq org-deadline-warning-days 7)
 (setq org-agenda-tags-column -105)
+(setq org-agenda-window-setup 'current-window)
 
 ;; Agenda cusom commands
 (setq org-agenda-custom-commands
