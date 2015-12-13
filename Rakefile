@@ -28,8 +28,9 @@ def homebrew_self_update
 end
 
 def homebrew_install(formula, *args)
-  homebrew_self_update
   versions = `brew list #{formula} --versions`
+  return unless versions.empty?
+  homebrew_self_update
   # installing formula message...
   exec("brew install #{formula} #{args.join(' ')}") if versions.empty?
 end
@@ -45,9 +46,9 @@ def homebrew_cask_self_install
 end
 
 def homebrew_cask_install(formula, *options)
-  homebrew_self_update
   formula_info = `brew cask info #{formula}`
   return unless formula_info.include?("Not installed")
+  homebrew_self_update
   # installing formula message...
   exec("brew cask install #{formula} #{options.join(' ')}")
 end
