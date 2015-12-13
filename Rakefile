@@ -84,3 +84,8 @@ desc "Install XQuartz"
 task :xquartz => [:base] do
   homebrew_cask_install "xquartz"
 end
+
+desc "Setup finger"
+task :finger => [:base] do
+  stow_install "finger"
+end
