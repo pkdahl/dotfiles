@@ -1,4 +1,0 @@
-caption always
-#caption string "%{kw}%-w%{wr}%n %t%{-}%+w"
-#caption string "%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]"
-caption string "%3n %t%? (%u)%?%?: %h%?"

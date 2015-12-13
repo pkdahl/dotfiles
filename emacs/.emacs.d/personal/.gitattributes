@@ -1,0 +1,7 @@
+# emacs/.emacs.d/personal/.gitattributes
+
+calendar-config.el filter=git-crypt diff=git-crypt
+mail-config.el filter=git-crypt diff=git-crypt
+
+.gitattributes !filter !diff
+.gitignore !filter !diff

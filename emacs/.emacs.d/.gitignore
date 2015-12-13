@@ -1,0 +1,11 @@
+# directories
+cache/
+data/
+elpa/
+site-lisp/
+url/
+
+# files
+*~
+*.bak_*
+custom.el
