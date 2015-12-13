@@ -1,20 +1,19 @@
 ;;; org-config.el
 
-(eval-after-load 'org
-  `(progn
-     (setq org-directory "~/Documents/Org/")
-     (setq org-default-notes-file
-	   ,(concat org-directory "captures.org"))
-     (setq org-refile-targets
-	   '((nil :maxlevel . 5)
-	     (org-agenda-files :maxlevel . 5)))
-     (setq org-todo-keywords
-	   '((sequence "TODO(t)" "NEXT(n!)" "WAIT(w@/!)" "HOLD(h@/!)" "|"
-		       "DONE(d!)" "CXLD(c@)")))
-     (setq org-todo-keyword-faces
-	   '(("NEXT" :foreground "blue" :weight bold)
-	     ("WAIT" :foreground "orange" :weight bold)
-	     ("HOLD" :foreground "orange" :weight bold)))))
+(with-eval-after-load 'org
+  (setq org-directory "~/Documents/Org/")
+  (setq org-default-notes-file
+	(concat org-directory "captures.org"))
+  (setq org-refile-targets
+	'((nil :maxlevel . 5)
+	  (org-agenda-files :maxlevel . 5)))
+  (setq org-todo-keywords
+	'((sequence "TODO(t)" "NEXT(n!)" "WAIT(w@/!)" "HOLD(h@/!)" "|"
+		    "DONE(d!)" "CXLD(c@)")))
+  (setq org-todo-keyword-faces
+	'(("NEXT" :foreground "blue" :weight bold)
+	  ("WAIT" :foreground "orange" :weight bold)
+	  ("HOLD" :foreground "orange" :weight bold))))
 
 (eval-after-load 'org-agenda
   '(progn
