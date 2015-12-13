@@ -17,7 +17,10 @@ def homebrew_outdated?
 end
 
 def homebrew_self_install
-  exec("ruby -e", "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)") unless homebrew_available?
+  homebrew_install_command = "ruby - e \"$(curl -fsSL " \
+                             "https://raw.githubusercontent.com/" \
+                             "Homebrew/install/master/install)\""
+  exec("#{homebrew_install_command}") unless homebrew_available?
 end
 
 def homebrew_self_update
@@ -75,7 +78,8 @@ end
 
 desc "Setup Emacs"
 task :emacs => [:base, :xquartz] do
-  homebrew_install "emacs", "--with-cocoa", "--with-gnutls", "--with--imagemagick", "--with-x11"
+  homebrew_install "emacs", "--with-cocoa", "--with-gnutls",
+                   "--with--imagemagick", "--with-x11"
   stow_install "emacs"
   stow_install "authinfo"
 end
