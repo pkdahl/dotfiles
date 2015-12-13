@@ -93,3 +93,8 @@ desc "Setup finger"
 task :finger => [:base] do
   stow_install "finger"
 end
+
+desc "Setup Vim"
+task :vim => [:base] do
+  stow_install "vim"
+end
