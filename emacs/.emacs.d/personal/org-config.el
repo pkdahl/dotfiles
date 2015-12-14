@@ -28,11 +28,11 @@
 		      '(unless (org-agenda-skip-entry-if 'deadline)
 			 (or
 			  (org-agenda-skip-entry-if 'todo '("WAIT"))
-			  (org-agenda-skip-entry-if 'todo '("HOLD"))))))
-		    (todo "NEXT"
-			  ((org-agenda-overriding-header "Next actions (unscheduled)")
-			   (org-agenda-skip-function
-			    '(org-agenda-skip-entry-if 'scheduled 'deadline)))))))
+			  (org-agenda-skip-entry-if 'todo '("HOLD")))))))
+	    (todo "NEXT"
+		  ((org-agenda-overriding-header "Next actions (unscheduled)")
+		   (org-agenda-skip-function
+		    '(org-agenda-skip-entry-if 'scheduled 'deadline))))))
 	  ("i" "Inbox" tags "inbox"
 	   ((org-agenda-overriding-header "Inbox")))
 	  ("n" "Next actions" todo "NEXT"
