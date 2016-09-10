@@ -1,0 +1,12 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- link:
+    ~/.emacs.d: emacs
+    ~/.vimrc: vimrc
+
+- clean: ['~', '~/.config']
+
+- shell: []
