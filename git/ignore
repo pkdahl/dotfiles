@@ -1,0 +1,8 @@
+
+# Gloabal ignore file
+
+.com.apple.timemachine.supported
+.DS_Store
+\#*#
+*~
+.#*

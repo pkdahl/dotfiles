@@ -1,0 +1,30 @@
+[user]
+	name = pkdahl
+	email = pkdahl@gmail.com
+
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	lg = log --decorate=full
+
+[core]
+	excludesfile = ~/.config/git/ignore # which is the default now? git >= 1.7.12
+	eol = lf
+	editor = vim
+	autocrlf = input
+
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+
+[github]
+	user = pkdahl
+	token = UNKNOWN
+[push]
+	default = simple
+[annex]
+	diskreserve = 1 gb
