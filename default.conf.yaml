@@ -4,6 +4,8 @@
       relink: true
 
 - link:
+    ~/.bash_profile: bash/bash_profile
+    ~/.bashrc: bash/bashrc
     ~/.emacs.d: emacs
     ~/.vimrc: vimrc
 
