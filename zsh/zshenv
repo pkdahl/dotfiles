@@ -1,0 +1,19 @@
+# ~/.zshenv
+
+# export ZDOTDIR=${HOME}/.zsh
+
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# Homebrew openssl
+# if [[ -e "$(brew --prefix openssl)" ]]; then
+#     export CFLAGS="-I$(brew --prefix openssl)/include"
+#     export CPPFLAGS="-I$(brew --prefix openssl)/include"
+#     export LDFLAGS="-L$(brew --prefix openssl)/lib"
+# fi
+
+export LC_CTYPE="en_US.UTF-8"
+
+
+#-- Pyenv ----------------------------------------------------------------------
+
+# export PYENV_ROOT=${HOME}/.pyenv

@@ -9,6 +9,11 @@
     ~/.emacs.d: emacs
     ~/.config/git: git
     ~/.vimrc: vimrc
+    ~/.zprofile: zsh/zprofile
+    ~/.zshenv: zsh/zshenv
+    ~/.zshrc: zsh/zshrc
+    ~/.zsh/aliases.zsh: zsh/aliases.zsh
+    ~/.zsh/prompt.zsh: zsh/prompt.zsh
 
 - clean: ['~', '~/.config']
 
