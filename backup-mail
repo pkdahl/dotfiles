@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# http://blog.interlinked.org/tutorials/rsync_time_machine.html
+
+usage () {
+    echo "Usage: $0 PROJ TARGETDIR"
+    echo ""
+    echo "PROJ = gmail-pkdahl | pegis"
+    echo "TARGETDIR = banjo"
+    exit 1
+}
+
+# Check that what we try to backup exists
+
+chk_source () {
+    local proj=$1
+    if ! [[ -d "${HOME}/Mail/${proj}" ]] ; then
+	echo "Source ${HOME}/Mail/${proj} doesn't exist"
+	exit 1
+    fi
+}
+
+# Check that what target directory exists
+
+chk_target () {
+    local proj=$1
+    local disk=$2
+    if ! [ -d "/Volumes/${disk}/rsync-backup/mail-${proj}" ] ; then
+	echo "Target /Volumes/${disk}/rsync-backup/mail-${disk} doesn't exist"
+	exit 1
+    fi
+}
+
+backup_mail () {
+    local backuptime=`date "+%Y%m%dT%H%M%S"`
+    local proj=$1
+    local disk=$2
+    rsync -aP --link-dest=/Volumes/${disk}/rsync-backup/mail-${proj}/current ~/Mail/${proj}/ /Volumes/${disk}/rsync-backup/mail-${proj}/backup-${backuptime} \
+	&& cd /Volumes/${disk}/rsync-backup/mail-${proj} \
+	&& rm -f current \
+	&& ln -s backup-${backuptime} current \
+	&& cd -
+    echo "Backed up ~/Mail/${proj} ==> /Volumes/${disk}/rsync-backup/mail-${proj}/backup-${backuptime}"
+}
+
+main () {
+    if [ $# -ne 2 ] ; then
+	usage
+    else
+	chk_source $1
+	chk_target $1 $2
+	backup_mail $1 $2
+    fi
+}
+
+main "$@"
+exit 0
