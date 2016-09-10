@@ -12,8 +12,3 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # fi
 
 export LC_CTYPE="en_US.UTF-8"
-
-
-#-- Pyenv ----------------------------------------------------------------------
-
-# export PYENV_ROOT=${HOME}/.pyenv
