@@ -4,6 +4,7 @@
       relink: true
 
 - link:
+    ~/.authinfo.gpg: authinfo.gpg
     ~/.bash_profile: bash/bash_profile
     ~/.bashrc: bash/bashrc
     ~/.emacs.d: emacs
