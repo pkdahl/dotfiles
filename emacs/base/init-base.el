@@ -13,6 +13,7 @@
 
 (epa-file-enable)
 (setq epa-file-cache-passphrase-for-symmetric-encryption t)
+(setq epg-gpg-program "gpg1")
 
 ;; recentf
 
