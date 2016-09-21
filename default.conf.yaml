@@ -15,6 +15,10 @@
     ~/.zshrc: zsh/zshrc
     ~/.zsh/aliases.zsh: zsh/aliases.zsh
     ~/.zsh/prompt.zsh: zsh/prompt.zsh
+    # mail
+    ~/.mutt: mail/mutt
+    ~/.offlineimaprc: mail/offlineimap/offlineimaprc
+    ~/.offlineimap/offlineimap.py: mail/offlineimap/offlineimap.py
 
 - clean: ['~', '~/.config']
 
