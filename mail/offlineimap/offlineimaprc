@@ -1,6 +1,6 @@
 [general]
 accounts = uio
-ui = TTY.TTYUI
+ui = ttyui
 pythonfile = ~/.offlineimap/offlineimap.py
 
 [Account gmail]
@@ -24,8 +24,11 @@ realdelete = yes
 ssl = yes
 sslcacertfile = /usr/local/etc/openssl/cert.pem
 remotehost = imap.gmail.com
+oauth2_client_id_eval = get_keychain_pass(account="pkdahl@gmail.com", server="gmail_oauth2_client_id")
+oauth2_client_secret_eval = get_keychain_pass(account="pkdahl@gmail.com", server="gmail_oauth2_client_secret")
+oauth2_refresh_token_eval = get_keychain_pass(account="pkdahl@gmail.com", server="gmail_oauth2_refresh_token")
+oauth2_request_url = https://accounts.google.com/o/oauth2/token
 remoteuser = pkdahl@gmail.com
-# remotepasseval = get_keychain_pass(account="pkdahl@gmail.com", server="imap.gmail.com")
 nametrans = lambda folder: {'INBOX':             'inbox',
 			    '[Gmail]/All Mail':  'all',
 			    '[Gmail]/Sent Mail': 'sent',
@@ -58,6 +61,7 @@ maxconnections = 1
 remotehost = mail.uio.no
 remoteuser = perkda
 remotepasseval = get_keychain_pass(account="perkda", server="mail.uio.no")
+
 ssl = yes
 sslcacertfile = /usr/local/etc/openssl/cert.pem
 nametrans = lambda folder: {'Deleted Items':  'trash',

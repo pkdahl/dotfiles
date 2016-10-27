@@ -4,11 +4,3 @@
 set mbox = "+uio/received"
 set record = "+uio/sent"
 set postponed = "+uio/drafts"
-
-macro  index S ":set confirmappend=no delete=yes auto_tag=yes\n\
-<save-message>+uio/received\n<sync-mailbox>:set delete=ask-yes\n" \
-"archive messages"
-# macro index s ":set confirmappend=no delete=yes\n\
-# <save-message>+uio/received\n<sync-mailbox>:set delete=ask-yes\n" \
-# "archive message"
-# macro pager s "<copy-message>+uio/received\n<exit>\n<delete-message>"
