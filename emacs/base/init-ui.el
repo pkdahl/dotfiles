@@ -21,9 +21,8 @@
 			    (height . 50)))
 (setq split-width-threshold 100)
 
-(when (member "DejaVu Sans Mono" (font-family-list))
-  (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-12"))
-  (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-12")))
+(when (member "Source Code Pro" (font-family-list))
+  (set-default-font "Source Code Pro"))
 
 (req-package init-solarized-theme
   :config
