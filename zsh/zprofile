@@ -4,4 +4,4 @@
 
 typeset -U path # only unique entries
 
-path=("$HOME/bin" /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin "$path[@]")
+path=("$HOME/.local/bin" /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin "$path[@]")
