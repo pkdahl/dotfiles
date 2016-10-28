@@ -4,6 +4,9 @@
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+export NVM_DIR="$HOME/.nvm"
+  . "/usr/local/opt/nvm/nvm.sh"
+
 # Homebrew openssl
 # if [[ -e "$(brew --prefix openssl)" ]]; then
 #     export CFLAGS="-I$(brew --prefix openssl)/include"
