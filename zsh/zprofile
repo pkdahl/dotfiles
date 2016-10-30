@@ -5,3 +5,7 @@
 typeset -U path # only unique entries
 
 path=("$HOME/.local/bin" /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin "$path[@]")
+
+if [ -e /Users/pkdahl/.nix-profile/etc/profile.d/nix.sh ]; then
+   . /Users/pkdahl/.nix-profile/etc/profile.d/nix.sh;
+fi
