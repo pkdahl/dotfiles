@@ -19,6 +19,7 @@
     ~/.mutt: mail/mutt
     ~/.offlineimaprc: mail/offlineimap/offlineimaprc
     ~/.offlineimap/offlineimap.py: mail/offlineimap/offlineimap.py
+    ~/.local/bin/mailbkup: mail/mailbkup
 
 - clean: ['~', '~/.config']
 
