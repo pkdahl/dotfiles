@@ -1,26 +1,27 @@
 - defaults:
     link:
-      create: true
-      relink: true
+       create: true
+       relink: true
 
 - link:
-    ~/.authinfo.gpg: authinfo.gpg
-    ~/.bash_profile: bash/bash_profile
-    ~/.bashrc: bash/bashrc
-    ~/.emacs.d: emacs
-    ~/.config/git: git
-    ~/.vimrc: vimrc
-    ~/.zprofile: zsh/zprofile
-    ~/.zshenv: zsh/zshenv
-    ~/.zshrc: zsh/zshrc
-    ~/.zsh/aliases.zsh: zsh/aliases.zsh
-    ~/.zsh/prompt.zsh: zsh/prompt.zsh
-    # mail
-    ~/.mutt: mail/mutt
-    ~/.offlineimaprc: mail/offlineimap/offlineimaprc
-    ~/.offlineimap/offlineimap.py: mail/offlineimap/offlineimap.py
-    ~/.local/bin/mailbkup: mail/mailbkup
+    ~/.nix-defexpr/darwin:               nix/darwin
+    ~/.nixpkgs/darwin-configuration.nix: nix/darwin-configuration.nix
+    ~/.nixpkgs/config.nix:               nix/config.nix
+    ~/.bash_profile:                     bash/bash_profile
+    ~/.bashrc:                           bash/bashrc
+    ~/.zshenv:                           zsh/zshenv
+    ~/.zprofile:                         zsh/zprofile
+    ~/.zshrc:                            zsh/zshrc
+    ~/.config/zsh/aliases.zsh:           zsh/aliases.zsh
+    ~/.config/zsh/completion.zsh:        zsh/completion.zsh
+    ~/.config/zsh/history.zsh:           zsh/history.zsh
+    ~/.config/zsh/prompt.zsh:            zsh/prompt.zsh
+    ~/.config/git/config:                git/config
+    ~/.config/git/ignore:                git/ignore
+    ~/.emacs.d:                          emacs
+    ~/.vimrc:                            vim/vimrc
+
+- shell:
+  - [mkdir -p ~/.cache/zsh, Create directory for Zsh cache files]
 
 - clean: ['~', '~/.config']
-
-- shell: []

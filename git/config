@@ -1,5 +1,5 @@
 [user]
-	name = pkdahl
+	name = Per K. Dahl
 	email = pkdahl@gmail.com
 
 [alias]
@@ -10,7 +10,6 @@
 	lg = log --decorate=full
 
 [core]
-	excludesfile = ~/.config/git/ignore # which is the default now? git >= 1.7.12
 	eol = lf
 	editor = vim
 	autocrlf = input
@@ -21,10 +20,5 @@
 	interactive = auto
 	status = auto
 
-[github]
-	user = pkdahl
-	token = UNKNOWN
 [push]
 	default = simple
-[annex]
-	diskreserve = 1 gb

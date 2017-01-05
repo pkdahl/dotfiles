@@ -1,12 +1,11 @@
 # ~/.bashrc
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+# source the system wide bashrc if it exists
+if [ -e /etc/bash.bashrc ] ; then
+  source /etc/bash.bashrc
+fi
 
 # Aliases
-
-#--
-# Commands
-#++
 
 alias rm="rm -i"
 alias mv="mv -i"
@@ -18,17 +17,13 @@ alias l.="ls -A"
 alias l="ls -CF"
 alias lt="ls -lrt"
 
-alias pu="pushd"
-alias po="popd"
-alias dv="dirs -v"
+alias pu="pup"
+alias po="pop"
+alias ds="dirs -v"
 
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
-#--
-# Programs
-#++
 
 alias vi="vim"
 
@@ -46,22 +41,22 @@ Last_Command=$? # Must come first!
 
     PS1=""
 
-    # If it was successful, print a green check mark. Otherwise, print
-    # a red X.
+    # If it was successful, print a green check mark.
+    # Otherwise, print a red X.
     if [[ $Last_Command == 0 ]]; then
 	PS1+="$Green$Checkmark "
     else
 	PS1+="$Red$FancyX "
     fi
-    # If root, just print the host in red. Otherwise, print the current user
-    # and host in green.
+    # If root, just print the host in red.
+    # Otherwise, print the current user and host in green.
     if [[ $EUID == 0 ]]; then
 	PS1+="$Red\\h "
     else
 	PS1+="$Green\\u@\\h "
     fi
-    # Print the working directory and prompt marker in blue, and reset
-    # the text color to the default.
+    # Print the working directory and prompt marker in blue,
+    # and reset the text color to the default.
     PS1+="$Blue\\w \\\$$Reset "
 }
 

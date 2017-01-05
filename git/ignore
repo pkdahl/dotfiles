@@ -1,5 +1,4 @@
-
-# Gloabal ignore file
+# Global ignore file
 
 .com.apple.timemachine.supported
 .DS_Store

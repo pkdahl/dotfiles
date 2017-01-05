@@ -1,0 +1,28 @@
+{ config, lib, pkgs, ... }:
+{
+  system.defaults.dock.autohide = true;
+  system.defaults.dock.orientation = "left";
+
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  environment.systemPackages =
+    [ pkgs.git
+      pkgs.gnupg
+      pkgs.mosh
+      pkgs.nix-repl
+      pkgs.wget
+    ];
+
+  # Create /etc/bashrc that loads the nix-darwin environment.
+  # programs.bash.enable = true;
+  programs.zsh.enable = true;
+
+  # Recreate /run/current-system symlink after boot.
+  services.activate-system.enable = true;
+
+  # environment.variables.GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+  environment.variables.SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+
+
+  nixpkgs.config.allowUnfree = true;
+}
