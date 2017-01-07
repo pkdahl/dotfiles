@@ -4,6 +4,7 @@
   :config
   (setq	org-hide-emphasis-markers t
         org-hide-leading-stars t
+        org-log-done 'time
         org-startup-indented t)
 
   (add-hook 'org-mode-hook
