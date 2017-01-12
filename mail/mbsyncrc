@@ -1,0 +1,140 @@
+#-------------------------------------------------------------------------------
+# UiO
+#-------------------------------------------------------------------------------
+
+IMAPAccount uio
+Host mail.uio.no
+User perkda
+PassCmd "security find-generic-password -a uio -s mbsync-uio -w"
+AuthMechs LOGIN
+
+IMAPStore uio-remote
+Account uio
+
+
+MaildirStore uio-local
+Path ~/mail/uio/
+Inbox ~/mail/uio/inbox
+
+# INBOX
+Channel uio-inbox
+Master :uio-remote:"INBOX"
+Slave :uio-local:inbox
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# Deleted Items
+Channel uio-trash
+Master :uio-remote:"Deleted Items"
+Slave :uio-local:trash
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# Drafts
+Channel uio-drafts
+Master :uio-remote:"Drafts"
+Slave :uio-local:drafts
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# Received Items
+Channel uio-received
+Master :uio-remote:"Received Items"
+Slave :uio-local:received
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# Sent Items
+Channel uio-sent
+Master :uio-remote:"Sent Items"
+Slave :uio-local:sent
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+Group uio
+Channel uio-trash
+Channel uio-inbox
+Channel uio-drafts
+Channel uio-received
+Channel uio-sent
+
+#-------------------------------------------------------------------------------
+# Gmail
+#-------------------------------------------------------------------------------
+
+IMAPAccount gmail
+Host imap.gmail.com
+User pkdahl@gmail.com
+SSLType IMAPS
+PassCmd "security find-generic-password -a gmail -s mbsync-gmail -w"
+AuthMechs PLAIN
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+Path ~/mail/gmail/
+Inbox ~/mail/gmail/inbox
+
+# INBOX
+Channel gmail-inbox
+Master :gmail-remote:"INBOX"
+Slave :gmail-local:inbox
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# [Gmail]/Trash
+Channel gmail-trash
+Master :gmail-remote:"[Gmail]/Trash"
+Slave :gmail-local:trash
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# [Gmail]/All Mail
+Channel gmail-all
+Master :gmail-remote:"[Gmail]/All Mail"
+Slave :gmail-local:all
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# [Gmail]/Drafts
+Channel gmail-drafts
+Master :gmail-remote:"[Gmail]/Drafts"
+Slave :gmail-local:drafts
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# [Gmail]/Sent Mail
+Channel gmail-sent
+Master :gmail-remote:"[Gmail]/Sent Mail"
+Slave :gmail-local:sent
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+Group gmail
+Channel gmail-trash  # Trash must come first for Gmail to do the "right" thing
+Channel gmail-inbox
+Channel gmail-all
+Channel gmail-drafts
+Channel gmail-sent
+

@@ -10,6 +10,7 @@
 (require 'osx-setup)
 (require 'elm-setup)
 (require 'haskell-setup)
+(require 'mail-setup)
 (require 'markdown-setup)
 (require 'magit-setup)
 (require 'org-setup)

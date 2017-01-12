@@ -17,6 +17,9 @@
       pkgs.mosh
       pkgs.wget
 
+      pkgs.isync
+      pkgs.mu
+
       pkgs.ghc
       pkgs.cabal2nix
       pkgs.cabal-install

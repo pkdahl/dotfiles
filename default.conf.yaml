@@ -20,6 +20,7 @@
     ~/.config/git/ignore:                git/ignore
     ~/.emacs.d:                          emacs
     ~/.vimrc:                            vim/vimrc
+    ~/.mbsyncrc:                         mail/mbsyncrc
 
 - shell:
   - [mkdir -p ~/.cache/zsh, Create directory for Zsh cache files]

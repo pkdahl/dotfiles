@@ -29,5 +29,10 @@
 
 ;; Setup load-path
 
+;; Add Nix' site-lisp directory
+(let ((default-directory "/run/current-system/sw/share/emacs/site-lisp/"))
+  (when (file-directory-p default-directory)
+    (normal-top-level-add-subdirs-to-load-path)))
+
 (add-to-list 'load-path (concat user-emacs-directory "lisp/"))
 (add-to-list 'load-path config-dir)
