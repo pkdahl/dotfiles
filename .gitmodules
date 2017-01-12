@@ -4,3 +4,6 @@
 [submodule "nix-darwin"]
 	path = nix/darwin
 	url = https://github.com/LnL7/nix-darwin.git
+[submodule "dotbot-brew"]
+	path = dotbot-brew
+	url = https://github.com/d12frosted/dotbot-brew.git

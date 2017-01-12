@@ -20,6 +20,10 @@
       pkgs.isync
       pkgs.mu
 
+      #pkgs.texlive.collection-basic
+      #pkgs.texlive.collection-latexrecommended
+      #pkgs.texlive.collection-fontsrecommended
+
       pkgs.ghc
       pkgs.cabal2nix
       pkgs.cabal-install
@@ -32,6 +36,7 @@
   # Recreate /run/current-system symlink after boot.
   services.activate-system.enable = true;
 
+  environment.variables.HOMEBREW_CASK_OPTS = "--appdir=/Applications";
   # environment.variables.GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
   # environment.variables.SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
 
