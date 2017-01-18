@@ -20,13 +20,11 @@
       pkgs.isync
       pkgs.mu
 
-      #pkgs.texlive.collection-basic
-      #pkgs.texlive.collection-latexrecommended
-      #pkgs.texlive.collection-fontsrecommended
-
       pkgs.ghc
       pkgs.cabal2nix
       pkgs.cabal-install
+
+      pkgs.jdk
     ];
 
   # Create /etc/bashrc that loads the nix-darwin environment.
