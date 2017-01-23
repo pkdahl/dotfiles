@@ -26,6 +26,8 @@
       pkgs.cabal-install
 
       pkgs.jdk
+
+      pkgs.guile
     ];
 
   # Create /etc/bashrc that loads the nix-darwin environment.

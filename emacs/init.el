@@ -9,11 +9,13 @@
 (require 'ui-setup)
 (require 'osx-setup)
 (require 'elm-setup)
+(require 'geiser-setup)
 (require 'haskell-setup)
 (require 'mail-setup)
 (require 'markdown-setup)
 (require 'magit-setup)
 (require 'org-setup)
+(require 'paredit-setup)
 (require 'keybindings)
 
 (req-package-finish)
