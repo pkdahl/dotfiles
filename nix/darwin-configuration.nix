@@ -18,6 +18,7 @@
       pkgs.wget
 
       pkgs.isync
+      pkgs.msmtp
       pkgs.mu
 
       pkgs.ghc

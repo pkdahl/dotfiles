@@ -21,6 +21,7 @@
     ~/.emacs.d:                          emacs
     ~/.vimrc:                            vim/vimrc
     ~/.mbsyncrc:                         mail/mbsyncrc
+    ~/.msmtprc:                          mail/msmtprc
 
 - tap:
   - caskroom/cask

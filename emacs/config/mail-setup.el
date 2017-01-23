@@ -1,10 +1,26 @@
+;; (setq mu4e-header-skip duplicates t)
+;; (setq mu4e-headers-show-threads t)
+;; (setq mu4e-headers-date-format "%Y-%m-%d %H:%M:%S"
+;;       mu4e-headers-fields '((:date . 20)
+;;                          (:flags . 5)
+;;                          (:mailing-list . 10)
+;;                          (:from-or-to . 25)
+;;                          (:subject . nil)))
+;; (setq mu4e-view-show-addresses t)
+;; (setq message-kill-buffer-on-exit t
+;;       mu4e-sent-messages-behavior 'delete)
+
 (req-package mu4e
   :ensure nil  ; provided by nixpkgs.mu
   :init
   (setq user-full-name "Per K. Dahl")
+  (setq message-send-mail-function 'message-send-mail-with-sendmail
+        sendmail-program (executable-find "msmtpq")
+        message-kill-buffer-on-exit t)
   (setq mu4e-maildir "~/mail"
         mu4e-change-filenames-when-moving t
-        mu4e-get-mail-command "true")
+        mu4e-get-mail-command "true"
+        mu4e-attachment-dir "~/Downloads")
   :config
   (setq mu4e-contexts
         `( ,(make-mu4e-context
@@ -14,11 +30,12 @@
              :match-func (lambda (msg)
                            (when msg
                              (string= (mu4e-message-field msg :maildir) "/gmail")))
-             :vars '( ( user-mail-address  . "pkdahl@gmail.com" )
-                      ( mu4e-sent-folder   . "/gmail/sent" )
-                      ( mu4e-drafts-folder . "/gmail/drafts" )
-                      ( mu4e-trash-folder  . "/gmail/trash" )
-                      ( mu4e-refile-folder . "/gmail/all")))
+             :vars '( ( user-mail-address           . "pkdahl@gmail.com" )
+                      ( mu4e-sent-folder            . "/gmail/sent" )
+                      ( mu4e-drafts-folder          . "/gmail/drafts" )
+                      ( mu4e-trash-folder           . "/gmail/trash" )
+                      ( mu4e-refile-folder          . "/gmail/all")
+                      ( mu4e-sent-messages-behavior . 'delete )))
            ,(make-mu4e-context
              :name "UiO"
              :enter-func (lambda () (mu4e-message "Switch to UiO context"))
