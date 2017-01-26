@@ -366,15 +366,18 @@
 
 ;;;;; Outshine
 
-;; enable org-mode like folding in emacs-lisp-mode
+;; Enable org-mode-like folding in emacs-lisp-mode
+
 (use-package outshine
   :pin melpa
   :ensure t
   :diminish outline-minor-mode
   :init
-  (setq outshine-use-speed-commands t)
   (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
-  (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode))
+  (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
+  :config
+  (setq outshine-startup-folded-p t
+        outshine-use-speed-commands t))
 
 ;;;; Markdown
 
