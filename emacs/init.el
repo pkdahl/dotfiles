@@ -42,11 +42,11 @@
 
 ;;;; Bootstrap `req-package' from Mepla stable
 
-(let ((package-archives '(("melpa-stable" . "http://stable.melpa.org/packages/"))))
-  (unless (package-installed-p 'req-package)
-    (progn
-      (package-refresh-contents)
-      (package-install 'req-package))))
+(unless (package-installed-p 'req-package)
+  (let ((package-archives '(("melpa-stable" . "http://stable.melpa.org/packages/"))))
+      (progn
+        (package-refresh-contents)
+        (package-install 'req-package))))
 (require 'req-package)
 
 ;;;; Setup `load-path'
@@ -73,8 +73,8 @@
 ;;;; Frames and Windows
 
 (dolist (mode '(blink-cursor-mode
-		scroll-bar-mode
-		tool-bar-mode))
+                scroll-bar-mode
+                tool-bar-mode))
   (when (fboundp mode)
     (funcall mode -1)))
 
@@ -83,7 +83,7 @@
   (menu-bar-mode -1))
 
 (setq default-frame-alist '((width . 120)
-			    (height . 50))
+                            (height . 50))
       split-width-threshold 100)
 
 ;;;; Mode Line
@@ -117,10 +117,10 @@
 ;; - Right option key is =alt=
 (when (string-equal system-type "darwin")
   (setq ns-function-modifier 'hyper
-	ns-option-modifier 'nil          ; ns-alternate-modifier
-	ns-command-modifier 'meta        ; mac-command-modifier
-	ns-right-command-modifier 'super ; mac-right-command-modifier
-	ns-right-option-modifier 'alt))
+        ns-option-modifier 'nil          ; ns-alternate-modifier
+        ns-command-modifier 'meta        ; mac-command-modifier
+        ns-right-command-modifier 'super ; mac-right-command-modifier
+        ns-right-option-modifier 'alt))
 
 ;;; Convenience
 
@@ -203,47 +203,9 @@
 
 (setq url-configuration-directory (concat cache-dir "url/"))
 
-;;; Multimedia
-
-(setq image-dired-dir (concat cache-dir "image-dired/"))
-
 ;;; Games
 
 (setq tetris-score-file (concat cache-dir "tetris-scores"))
-
-;;; Programming
-
-;;;; Languages
-
-;;;;; Elm
-
-(req-package elm-mode
-  :pin melpa-stable
-  :mode "\\.elm\\'")
-
-;;;;; Haskell
-
-(req-package haskell-mode
-  :pin melpa-stable
-  :mode "\\.hs\\'"
-  :init
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
-
-;;;;; Scheme
-
-(req-package geiser
-  :pin melpa-stable
-  :config
-  (setq geiser-active-implementations '(guile)))
-
-;;;; Tools
-
-;;;;; Magit
-
-(req-package magit
-  :pin melpa-stable
-  :bind ("C-x g" . magit-status))
 
 ;;; Mail
 
@@ -261,7 +223,7 @@
 
 (req-package mu4e
   ;; Provided by nixpkgs.mu
-  :ensure nil  
+  :ensure nil
   :init
   (setq user-full-name "Per K. Dahl")
   (setq message-send-mail-function 'message-send-mail-with-sendmail
@@ -312,11 +274,54 @@
 (req-package org-mu4e
   :require (mu4e org-mode))
 
+;;; Multimedia
+
+(setq image-dired-dir (concat cache-dir "image-dired/"))
+
+;;; Programming
+
+;;;; Languages
+
+;;;;; Elm
+
+(req-package elm-mode
+  :pin melpa-stable
+  :mode "\\.elm\\'")
+
+;;;;; Haskell
+
+(req-package haskell-mode
+  :pin melpa-stable
+  :mode "\\.hs\\'"
+  :init
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
+
+;;;;; Scheme
+
+(req-package geiser
+  :pin melpa-stable
+  :config
+  (setq geiser-active-implementations '(guile)))
+
+;;;; Tools
+
+;;;;; Magit
+
+(req-package magit
+  :pin melpa-stable
+  :bind ("C-x g" . magit-status))
+
 ;;; Text
 
 ;;;; Outlines
 
 ;;;;; Org
+
+(unless (package-installed-p 'org-plus-contrib)
+  (let ((package-archives '(("org" . "http://orgmode.org/elpa/"))))
+    (progn (package-refresh-contents)
+           (package-install 'org-plus-contrib))))
 
 (req-package org
   :bind (("C-c l"   . org-store-link)
@@ -355,6 +360,11 @@
   :config
   (setq org-id-locations-file (concat cache-dir "org-id-location")))
 
+(req-package org-mac-link
+  :require org
+  :if (string-equal system-type "darwin")
+  :bind ("C-c m" . org-mac-grab-link))
+
 ;;;;; Outshine
 
 ;; enable org-mode like folding in emacs-lisp-mode
@@ -389,5 +399,3 @@
 
 (load custom-file 'noerror)
 (req-package-finish)
-
-
