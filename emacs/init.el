@@ -324,14 +324,14 @@
            (package-install 'org-plus-contrib))))
 
 (req-package org
-  :bind (("C-c l"   . org-store-link)
-         ("C-c C-l" . org-insert-link))
+  :bind
+  (("C-c l"   . org-store-link)
+   ("C-c C-l" . org-insert-link))
   :config
   (setq	org-hide-emphasis-markers t
         org-hide-leading-stars t
         org-log-done 'time
         org-startup-indented t)
-
   (add-hook 'org-mode-hook
             (lambda ()
               (add-hook 'before-save-hook
@@ -339,7 +339,11 @@
                           (whitespace-cleanup)))))
 
   (when (file-exists-p "~/notes/.emacs.el")
-    (load-file "~/notes/.emacs.el")))
+    (load-file "~/notes/.emacs.el"))
+
+  (use-package org-mac-link
+  :if (string-equal system-type "darwin")
+  :bind ("C-c m" . org-mac-grab-link)))
 
 (req-package org-agenda
   :require org
@@ -359,11 +363,6 @@
   :require org
   :config
   (setq org-id-locations-file (concat cache-dir "org-id-location")))
-
-(req-package org-mac-link
-  :require org
-  :if (string-equal system-type "darwin")
-  :bind ("C-c m" . org-mac-grab-link))
 
 ;;;;; Outshine
 
