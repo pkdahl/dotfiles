@@ -283,6 +283,14 @@
 
 ;;;; Languages
 
+(use-package prog-mode
+  :init
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook
+                        (lambda ()
+                          (whitespace-cleanup))))))
+
 ;;;;; Elm
 
 (req-package elm-mode
