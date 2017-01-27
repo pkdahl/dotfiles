@@ -224,6 +224,7 @@
 (req-package mu4e
   ;; Provided by nixpkgs.mu
   :ensure nil
+  :bind ("<f12>" . mu4e)
   :init
   (setq user-full-name "Per K. Dahl")
   (setq message-send-mail-function 'message-send-mail-with-sendmail
