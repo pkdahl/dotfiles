@@ -31,7 +31,10 @@
                          ("melpa-stable" . "https://stable.melpa.org/packages/")
                          ("melpa"        . "https://melpa.org/packages/"))
       package-pinned-packages nil
-      package-user-dir (concat data-dir "site-lisp"))
+      package-user-dir (concat data-dir "site-lisp")
+      package-archive-priorities '(("melpa-stable" . 10)
+                                   ("gnu"     . 5)
+                                   ("melpa"        . 0)))
 (package-initialize)
 
 ;;;; Bootstrap `req-package' from Mepla stable
@@ -133,6 +136,25 @@
 
 (bind-key "C-x B" 'ibuffer)
 
+;;;; ivy and counsel
+
+(use-package ivy
+  :pin melpa-stable
+  :ensure t
+  :diminish (ivy-mode . "")
+  :bind ("C-x b" . ivy-switch-buffer)
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t))
+
+(use-package counsel
+  :pin melpa-stable
+  :ensure t
+  :bind* (("M-x"     . counsel-M-x)
+          ("C-x C-f" . counsel-find-file))
+  :config
+  (setq counsel-find-file-ignore-regexp "\\.DS_Store\\|.git"))
+
 ;;; Files
 
 (setq recentf-save-file (concat cache-dir "recentf"))
@@ -177,6 +199,11 @@
 ;;;; Matching
 
 (show-paren-mode 1)
+
+(use-package swiper
+  :pin melpa-stable
+  :ensure t
+  :bind ("C-s" . swiper))
 
 ;;;; Smartparens
 
