@@ -32,12 +32,6 @@
                          ("melpa"        . "https://melpa.org/packages/"))
       package-pinned-packages nil
       package-user-dir (concat data-dir "site-lisp"))
-
-;; package-archive-priorities
-;; '(("melpa-stable" . 10)
-;;   ("gnu"          .  5)
-;;   ("melpa"        .  0)))
-
 (package-initialize)
 
 ;;;; Bootstrap `req-package' from Mepla stable
@@ -122,9 +116,20 @@
         ns-right-command-modifier 'super ; mac-right-command-modifier
         ns-right-option-modifier 'alt))
 
+;;; Help
+
+;;;; which-key
+
+(use-package which-key
+  :pin melpa-stable
+  :ensure t
+  :config
+  (which-key-mode)
+  (setq which-key-idle-delay 0.5))
+
 ;;; Convenience
 
-;;;; iBuffer
+;;;; ibuffer
 
 (bind-key "C-x B" 'ibuffer)
 
