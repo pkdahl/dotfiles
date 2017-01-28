@@ -157,10 +157,13 @@
 
 ;;; Files
 
-(setq recentf-save-file (concat cache-dir "recentf"))
-(setq recentf-max-menu-items 100
-      recentf-exclude '("/.git/"))
-(recentf-mode 1)
+(use-package recentf
+  :commands (recentf-mode
+             counsel-recentf)
+  :config
+  (setq recentf-save-file (concat cache-dir "recentf")
+        recentf-max-menu-items 50
+        recentf-exclude '("/.git/")))
 
 (setq auto-save-list-file-prefix (concat cache-dir "auto-save-list/saves-"))
 
