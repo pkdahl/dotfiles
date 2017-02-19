@@ -22,6 +22,7 @@
     ~/.vimrc:                            vim/vimrc
     ~/.mbsyncrc:                         mail/mbsyncrc
     ~/.msmtprc:                          mail/msmtprc
+    ~/.local/bin/mailbkup:               mail/mailbkup
 
 - tap:
   - caskroom/cask
