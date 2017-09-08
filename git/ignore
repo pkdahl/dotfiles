@@ -5,3 +5,6 @@
 \#*#
 *~
 .#*
+
+# Java class files
+*.class
