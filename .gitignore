@@ -2,4 +2,6 @@
 private/
 private.tar
 
+emacs/custom.el
+
 *.pyc
