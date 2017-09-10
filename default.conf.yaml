@@ -4,9 +4,6 @@
        relink: true
 
 - link:
-    ~/.nix-defexpr/darwin:               nix/darwin
-    ~/.nixpkgs/darwin-configuration.nix: nix/darwin-configuration.nix
-    ~/.nixpkgs/config.nix:               nix/config.nix
     ~/.bash_profile:                     bash/bash_profile
     ~/.bashrc:                           bash/bashrc
     ~/.zshenv:                           zsh/zshenv
