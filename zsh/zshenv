@@ -7,4 +7,5 @@ export XDG_DATA_HOME=$HOME/.local/share
 export ZSH_CONFIG_HOME=$XDG_CONFIG_HOME/zsh
 export ZSH_CACHE_HOME=$XDG_CACHE_HOME/zsh
 
+export HOMEBREW_NO_GITHUB_API=1
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
