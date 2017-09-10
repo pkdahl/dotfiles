@@ -24,13 +24,6 @@
     ~/.msmtprc:                          mail/msmtprc
     ~/.local/bin/mailbkup:               mail/mailbkup
 
-- tap:
-  - caskroom/cask
-
-- cask:
-  - basictex
-  - google-chrome
-
 - shell:
   - [mkdir -p ~/.cache/zsh, Create directory for Zsh cache files]
 

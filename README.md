@@ -20,7 +20,8 @@ git submodule update --init --recursive
 ./install
 ```
 
-# Future
+# Private settings
 
-- [Dotbot brew plugin](https://github.com/d12frosted/dotbot-brew)
-- [Multiple targets](https://github.com/anishathalye/dotbot/pull/11#issuecomment-73082152)
+`gpg -d private.tar.gpg -o private.tar`
+`tar -xvf private.tar`
+`rm private.tar`
