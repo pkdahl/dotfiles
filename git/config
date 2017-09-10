@@ -1,24 +1,23 @@
-[user]
-	name = Per K. Dahl
-	email = pkdahl@gmail.com
+[core]
+        eol = lf
+        editor = vim
+        autocrlf = input
+
+[include]
+        path = private
 
 [alias]
-	st = status
-	ci = commit
-	co = checkout
-	br = branch
-	lg = log --decorate=full
-
-[core]
-	eol = lf
-	editor = vim
-	autocrlf = input
+        st = status
+        ci = commit
+        co = checkout
+        br = branch
+        lg = log --decorate=full
 
 [color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
+        branch = auto
+        diff = auto
+        interactive = auto
+        status = auto
 
 [push]
-	default = simple
+        default = simple

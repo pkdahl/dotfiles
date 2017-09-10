@@ -1,1 +1,5 @@
+# files with private information
+private/
+private.tar
+
 *.pyc
