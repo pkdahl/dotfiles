@@ -1,0 +1,119 @@
+* Homebrew
+
+** Core
+
+*** programming languages
+
+- [X] Standard ML
+  =brew install smlnj=
+
+- [X] Python 3
+  =brew install python3=
+  =pip3 install --upgrade pip setuptools wheel=
+
+*** mail
+
+- [X] Emacs
+  =brew install emacs --wtih-gnutls=
+  =brew cask install emacs=
+
+- [X] Mu
+  =brew install mu --with-emacs=
+
+- [X] isync a.k.a. mbsync
+  =brew install isync=
+
+- [ ] msmtp
+  =brew install mstmp=
+
+** Casks
+
+- Google Chrome
+  =brew cask install google-chrome=
+
+- BasicTex
+  =brew cask install basictex=
+  =tlmgr update --self=
+  =tlmgr update --all=
+  =tlmgr install collection-fontsrecommended collection-latexextra collection-fontsextra=
+
+- Quicklook plugins
+  =brew cask install qlcolorcode qlmarkdown qlstephen=
+
+- XQuartz
+  =brew cask install xquartz=
+
+- Java
+  =brew cask install java=
+
+- iTerm2
+  =brew cask install iterm2=
+
+*** Fonts
+
+=brew tap caskroom/fonts=
+=brew search /font-source-code/=
+=brew cask install=
+- font-source-code-pro
+- font-dejavu-sans
+
+* Notes
+
+** Nix
+
+[[http://www.cse.chalmers.se/~bernardy/nix.html][Nix for Haskell Development: HOWTO]]
+
+=nix-channel --update=
+
+*** How to nuke Nix
+
+Remove directories:
+- /nix
+- /etc/nix
+
+*** How to setup nix-darwin
+
+- =curl https://nixos.org/nix/install | sh=
+- =nix-env -iA nixpkgs.nix=
+- =sudo ln -s /private/var/run /run=
+- =mkdir -p ~/.nixpkgs=
+- =ln -s ~/.dotfiles/nix/darwin-configuration.nix ~/.nixpkgs=
+
+*** After nix-darwin configuration change
+
+- =darwin-rebuild build= and =darwin-rebuild switch=
+- Clean up system: =nix-collect-garbage -d=
+
+* Links
+
+** Mail
+
+- [[http://stevelosh.com/blog/2012/10/the-homely-mutt/#how-i-use-email][Steve Losh's mutt article]]
+
+- [[http://www.lorenzogil.com/blog/2010/08/21/managing-email-the-unix-way/][Managing email, the Unix way]]
+  Example with notifications in OS X
+
+- [[https://pbrisbin.com/posts/two_accounts_in_mutt/][Using Two IMAP Accounts in Mutt]]
+
+- [[https://github.com/gregf/dotfiles/blob/master/mutt/muttrc.bindings][mutt keybindings]]
+
+- [[https://github.com/mavam/dotfiles/blob/master/.mutt/keys][more mutt keybindings]]
+
+- [[http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html][Reading IMAP Mail in Emacs on OSX | Adolfo Villafiorita]]
+  mbsync, mu, mu4e, msmtp
+
+- [[https://github.com/kzar/davemail][kzar/davemail: My email configuration, using mbsync, notmuch, msmtp, msmtpq, pgp, emacs and gnus-alias]]
+
+- [[https://github.com/stig/dot-files/tree/master/emacs.d][dot-files/emacs.d at master · stig/dot-files
+  ]]mu4e setup
+
+- [[https://github.com/raamdev/dotfiles][raamdev/dotfiles: See `sh-bootstrap/` for setup scripts.
+  ]]mu4e setup
+
+** Shells
+
+- [[http://mikebuss.com/2014/02/02/a-beautiful-productive-terminal-experience][A Beautifully Productive Terminal Experience]]
+
+** Make
+
+https://github.com/flazzarini/dotfiles/blob/master/Makefile
