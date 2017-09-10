@@ -246,60 +246,25 @@
 
 ;;; Mail
 
-;; (setq mu4e-header-skip duplicates t)
-;; (setq mu4e-headers-show-threads t)
-;; (setq mu4e-headers-date-format "%Y-%m-%d %H:%M:%S"
-;;       mu4e-headers-fields '((:date . 20)
-;;                          (:flags . 5)
-;;                          (:mailing-list . 10)
-;;                          (:from-or-to . 25)
-;;                          (:subject . nil)))
-;; (setq mu4e-view-show-addresses t)
-;; (setq message-kill-buffer-on-exit t
-;;       mu4e-sent-messages-behavior 'delete)
-
 (req-package mu4e
-  ;; Provided by nixpkgs.mu
+  ;; provided by mu
   :ensure nil
   :bind ("<f12>" . mu4e)
   :init
-  (setq user-full-name "Per K. Dahl")
+  (setq mu4e-headers-date-format "%Y-%m-%d %H:%M"
+        mu4e-headers-fields '( (:date       . 17)
+                               (:flags      . 5)
+                               (:from-or-to . 25)
+                               (:subject    . nil)))
   (setq message-send-mail-function 'message-send-mail-with-sendmail
         sendmail-program (executable-find "msmtpq")
-        message-kill-buffer-on-exit t)
-  (setq mu4e-maildir "~/mail"
+        message-kill-buffer-on-exit t
         mu4e-change-filenames-when-moving t
-        mu4e-get-mail-command "true"
-        mu4e-attachment-dir "~/Downloads")
+        ;; don't retrieve mail with mu4e
+        mu4e-get-mail-command "true")
   :config
-  (setq mu4e-contexts
-        `( ,(make-mu4e-context
-             :name "Gmail"
-             :enter-func (lambda () (mu4e-message "Entering Gmail context"))
-             :leave-func (lambda () (mu4e-message "Leaving Gmail context"))
-             :match-func (lambda (msg)
-                           (when msg
-                             (string= (mu4e-message-field msg :maildir) "/gmail")))
-             :vars '( ( user-mail-address           . "pkdahl@gmail.com" )
-                      ( mu4e-sent-folder            . "/gmail/sent" )
-                      ( mu4e-drafts-folder          . "/gmail/drafts" )
-                      ( mu4e-trash-folder           . "/gmail/trash" )
-                      ( mu4e-refile-folder          . "/gmail/all")
-                      ( mu4e-sent-messages-behavior . 'delete )))
-           ,(make-mu4e-context
-             :name "UiO"
-             :enter-func (lambda () (mu4e-message "Switch to UiO context"))
-             :leave-func (lambda () (mu4e-message "Leaving UiO context"))
-             :match-func (lambda (msg)
-                           (when msg
-                             (string= (mu4e-message-field msg :maildir) "/uio")))
-             :vars '( ( user-mail-address  . "perkda@ifi.uio.no" )
-                      ( mu4e-sent-folder   . "/uio/sent" )
-                      ( mu4e-drafts-folder . "/uio/drafts" )
-                      ( mu4e-trash-folder  . "/uio/trash" )
-                      ( mu4e-refile-folder . "/uio/received" )))))
-  ;; Don't apply trashed flag, just move
-  ;; FIX We get code for trash twice in the list
+  ;; don't apply trashed flag, just move
+  ;; FIX we get code for trash twice in the list
   (add-to-list 'mu4e-marks
                '(trash :char ("d" . "▼")
                        :prompt "dtrash"
@@ -444,9 +409,9 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (unless (file-exists-p custom-file)
   (write-region "" nil custom-file))
-(load custom-file)
 
 ;;; Finalize
 
+(load (expand-file-name "private.el" user-emacs-directory))
 (load custom-file 'noerror)
 (req-package-finish)
