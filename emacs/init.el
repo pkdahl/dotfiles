@@ -49,8 +49,9 @@
 ;;;; Setup `load-path'
 
 ;; Add Homebrew site-lisp direcotry to load-path if present
-(when (file-directory-p "/usr/local/share/emacs/site-lisp/")
-    (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/"))
+(let ((default-directory  "/usr/local/share/emacs/site-lisp/"))
+  (when (file-directory-p default-directory)
+    (normal-top-level-add-subdirs-to-load-path)))
 
 ;; Add packages provided by Nix to load-path
 (let ((default-directory "/run/current-system/sw/share/emacs/site-lisp/"))
