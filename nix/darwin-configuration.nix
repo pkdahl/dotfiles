@@ -13,6 +13,7 @@
       pkgs.nix-repl
 
       pkgs.git
+      pkgs.git-lfs
       pkgs.gnupg
       pkgs.mosh
       pkgs.wget
@@ -21,12 +22,21 @@
       pkgs.msmtp
       pkgs.mu
 
+      # Elm
+      pkgs.elmPackages.elm
+
+      # Haskell
       pkgs.ghc
       pkgs.cabal2nix
       pkgs.cabal-install
 
+      # Node
+      pkgs.nodejs
+
+      # Java
       pkgs.jdk
 
+      # Scheme
       pkgs.guile
     ];
 
@@ -41,5 +51,6 @@
   # environment.variables.GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
   # environment.variables.SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
 
+  nixpkgs.config.allowBroken = true;
   nixpkgs.config.allowUnfree = true;
 }
