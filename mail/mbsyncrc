@@ -1,72 +1,140 @@
 #-------------------------------------------------------------------------------
-# UiO
+# UiO - perkda
 #-------------------------------------------------------------------------------
 
-IMAPAccount uio
+IMAPAccount uio-perkda
 Host mail.uio.no
 User perkda
-PassCmd "security find-generic-password -a uio -s mbsync-uio -w"
+PassCmd "security find-generic-password -a uio-perkda -s mbsync-uio-perkda -w"
 AuthMechs LOGIN
 
-IMAPStore uio-remote
-Account uio
+IMAPStore uio-perkda-remote
+Account uio-perkda
 
-
-MaildirStore uio-local
-Path ~/mail/uio/
-Inbox ~/mail/uio/inbox
+MaildirStore uio-perkda-local
+Path ~/mail/uio-perkda/
+Inbox ~/mail/uio-perkda/inbox
 
 # INBOX
-Channel uio-inbox
-Master :uio-remote:"INBOX"
-Slave :uio-local:inbox
+Channel uio-perkda-inbox
+Master :uio-perkda-remote:"INBOX"
+Slave :uio-perkda-local:inbox
 Create Slave
 Expunge Both
 Sync All
 SyncState *
 
 # Deleted Items
-Channel uio-trash
-Master :uio-remote:"Deleted Items"
-Slave :uio-local:trash
+Channel uio-perkda-trash
+Master :uio-perkda-remote:"Deleted Items"
+Slave :uio-perkda-local:trash
 Create Slave
 Expunge Both
 Sync All
 SyncState *
 
 # Drafts
-Channel uio-drafts
-Master :uio-remote:"Drafts"
-Slave :uio-local:drafts
+Channel uio-perkda-drafts
+Master :uio-perkda-remote:"Drafts"
+Slave :uio-perkda-local:drafts
 Create Slave
 Expunge Both
 Sync All
 SyncState *
 
 # Received Items
-Channel uio-received
-Master :uio-remote:"Received Items"
-Slave :uio-local:received
+Channel uio-perkda-received
+Master :uio-perkda-remote:"Received Items"
+Slave :uio-perkda-local:received
 Create Slave
 Expunge Both
 Sync All
 SyncState *
 
 # Sent Items
-Channel uio-sent
-Master :uio-remote:"Sent Items"
-Slave :uio-local:sent
+Channel uio-perkda-sent
+Master :uio-perkda-remote:"Sent Items"
+Slave :uio-perkda-local:sent
 Create Slave
 Expunge Both
 Sync All
 SyncState *
 
-Group uio
-Channel uio-trash
-Channel uio-inbox
-Channel uio-drafts
-Channel uio-received
-Channel uio-sent
+Group uio-perkda
+Channel uio-perkda-trash
+Channel uio-perkda-inbox
+Channel uio-perkda-drafts
+Channel uio-perkda-received
+Channel uio-perkda-sent
+
+#-------------------------------------------------------------------------------
+# UiO - pkdahl
+#-------------------------------------------------------------------------------
+
+IMAPAccount uio-pkdahl
+Host mail.uio.no
+User pkdahl
+PassCmd "security find-generic-password -a uio-pkdahl -s mbsync-uio-pkdahl -w"
+AuthMechs LOGIN
+
+IMAPStore uio-pkdahl-remote
+Account uio-pkdahl
+
+MaildirStore uio-pkdahl-local
+Path ~/mail/uio-pkdahl/
+Inbox ~/mail/uio-pkdahl/inbox
+
+# INBOX
+Channel uio-pkdahl-inbox
+Master :uio-pkdahl-remote:"INBOX"
+Slave :uio-pkdahl-local:inbox
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# Deleted Items
+Channel uio-pkdahl-trash
+Master :uio-pkdahl-remote:"Deleted Items"
+Slave :uio-pkdahl-local:trash
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# INBOX.Drafts
+Channel uio-pkdahl-drafts
+Master :uio-pkdahl-remote:"INBOX.Drafts"
+Slave :uio-pkdahl-local:drafts
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# Received Items
+Channel uio-pkdahl-received
+Master :uio-pkdahl-remote:"Received Items"
+Slave :uio-pkdahl-local:received
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# INBOX.Sent
+Channel uio-pkdahl-sent
+Master :uio-pkdahl-remote:"INBOX.Sent"
+Slave :uio-pkdahl-local:sent
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+Group uio-pkdahl
+Channel uio-pkdahl-inbox
+Channel uio-pkdahl-trash
+Channel uio-pkdahl-drafts
+Channel uio-pkdahl-received
+Channel uio-pkdahl-sent
 
 #-------------------------------------------------------------------------------
 # Gmail
@@ -137,4 +205,3 @@ Channel gmail-inbox
 Channel gmail-all
 Channel gmail-drafts
 Channel gmail-sent
-
