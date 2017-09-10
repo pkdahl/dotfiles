@@ -22,6 +22,8 @@ git submodule update --init --recursive
 
 # Private settings
 
-`gpg -d private.tar.gpg -o private.tar`
-`tar -xvf private.tar`
-`rm private.tar`
+```bash
+gpg -d private.tar.gpg -o private.tar
+tar -xvf private.tar
+rm private.tar
+```
