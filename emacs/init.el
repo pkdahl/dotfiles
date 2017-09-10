@@ -349,9 +349,6 @@
                         (lambda ()
                           (whitespace-cleanup)))))
 
-  (when (file-exists-p "~/notes/.emacs.el")
-    (load-file "~/notes/.emacs.el"))
-
   (use-package org-mac-link
   :if (string-equal system-type "darwin")
   :bind ("C-c m" . org-mac-grab-link)))
