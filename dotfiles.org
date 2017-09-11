@@ -104,11 +104,11 @@ Remove directories:
 
 - [[https://github.com/kzar/davemail][kzar/davemail: My email configuration, using mbsync, notmuch, msmtp, msmtpq, pgp, emacs and gnus-alias]]
 
-- [[https://github.com/stig/dot-files/tree/master/emacs.d][dot-files/emacs.d at master · stig/dot-files
-  ]]mu4e setup
+- [[https://github.com/stig/dot-files/tree/master/emacs.d][dot-files/emacs.d at master · stig/dot-files]] <- mu4e setup
 
-- [[https://github.com/raamdev/dotfiles][raamdev/dotfiles: See `sh-bootstrap/` for setup scripts.
-  ]]mu4e setup
+- [[https://github.com/raamdev/dotfiles][raamdev/dotfiles: See `sh-bootstrap/` for setup scripts.]] <-  mu4e setup
+
+- [[https://github.com/stig/dot-files/blob/master/emacs.d/Email.org][dot-files/Email.org at master · stig/dot-files]] <- mu4e setup
 
 ** Shells
 
