@@ -8,3 +8,6 @@
 
 # Java class files
 *.class
+
+# Python
+__pycache__/
