@@ -1,0 +1,8 @@
+# Denne filen utf√|res n√}r et loginshell (bash) avslutter.
+
+# Utf|r f|rst den globale logoutfilen, IKKE kopier den filen, da er du
+# n√¶rmest garantert at ting vil slutte√• virke om det blir √∏dvendig√
+# gj√∏re endringer.
+
+source /local/lib/setupfiles/bash_logout
+

@@ -5,6 +5,10 @@ if [ -e /etc/bash.bashrc ] ; then
   source /etc/bash.bashrc
 fi
 
+if [ -e /local/lib/setupfiles/bashrc ] ; then
+	source /local/lib/setupfiles/bashrc
+fi
+
 # Aliases
 
 alias rm="rm -i"
