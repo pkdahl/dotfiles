@@ -1,9 +1,5 @@
 # ~/.bash_profile: executed by bash for login shells.
 
-export BASH_CACHE_HOME=$HOME/.cache/bash      # && mkdir -p ${BASH_CACHE_HOME}
-export BASH_CONFIG_HOME=$HOME/.config/bash
-export BASH_DATA_HOME=$HOME/.local/share/bash # && mkdir -p ${BASH_DATA_HOME}
-
 # export PS1="\u@\h:\w \$ "
 
 # export EDITOR=vim
