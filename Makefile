@@ -10,6 +10,7 @@ bash_install:
 	ln -sf $(DOTFILES)/bash/bashrc       $(HOME)/.bashrc
 	ln -sf $(DOTFILES)/bash/bash_login   $(HOME)/.bash_login
 	ln -sf $(DOTFILES)/bash/bash_logout  $(HOME)/.bash_logout
+	ln -sf $(DOTFILES)/bash/aliases.bash $(BASH_CONFIG_HOME)/aliases.bash
 	ln -sf $(DOTFILES)/bash/env.bash     $(BASH_CONFIG_HOME)/env.bash
 	ln -sf $(DOTFILES)/bash/prompt.bash  $(BASH_CONFIG_HOME)/prompt.bash
 

@@ -15,29 +15,11 @@ if [ -e ${HOME}/.config/bash/env.bash ] ; then
 fi
 
 # Aliases
-
-alias rm="rm -i"
-alias mv="mv -i"
-
-alias ls="ls -G" # Colours
-alias ll="ls -l"
-alias ll.="ls -lA"
-alias l.="ls -A"
-alias l="ls -CF"
-alias lt="ls -lrt"
-
-alias pu="pup"
-alias po="pop"
-alias ds="dirs -v"
-
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-
-alias vi="vim"
+if [ -e ${BASH_CONFIG_HOME}/aliases.bash ] ; then
+    source ${BASH_CONFIG_HOME}/aliases.bash
+fi
 
 # Prompt
-
 if [ -e ${BASH_CONFIG_HOME}/prompt.bash ] ; then
     source ${BASH_CONFIG_HOME}/prompt.bash
 fi
