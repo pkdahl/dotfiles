@@ -4,12 +4,15 @@
 
 *** programming languages
 
-- [X] Standard ML
-  =brew install smlnj=
+- [X] Haskell
+  =brew install ghc=
 
 - [X] Python 3
   =brew install python3=
   =pip3 install --upgrade pip setuptools wheel=
+
+- [X] Standard ML
+  =brew install smlnj=
 
 *** mail
 
