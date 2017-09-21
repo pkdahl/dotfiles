@@ -47,6 +47,16 @@ irssi_install:
 irssi_clean:
 	rm -rf $(HOME)/.irssi
 
+mail_install:
+	mkdir -p $(HOME)/.local/bin
+	ln -sf $(DOTFILES)/mail/mailbkup $(HOME)/.local/bin/mailbkup
+	ln -sf $(DOTFILES)/mail/mbsynrc $(HOME)/.mbsyncrc
+
+mail_clean:
+	rm -f $(HOME)/.local./bin/mailbkup
+	rmdir -p $(HOME)/.local/bin
+	rm -f $(HOME)/.mbsyncrc
+
 vim_install:
 	ln -sf $(DOTFILES)/vim/vimrc $(HOME)/.vimrc
 
