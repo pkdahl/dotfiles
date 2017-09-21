@@ -3,21 +3,14 @@ dotfiles
 
 # Install
 
-Clone the repository, install the submodule(s) and install the symlinks.
-
+To install some settings, e.g. git, then do
 ```bash
-git clone https://github.com/pkdahl/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-git submodule update --init --recursive
-./install
+make git_install
 ```
 
-# Update
-
-```bash
-git pull
-git submodule update --init --recursive
-./install
+To later remove the settings
+``` bash
+make git_clean
 ```
 
 # Private settings
