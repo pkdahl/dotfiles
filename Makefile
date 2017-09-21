@@ -2,7 +2,7 @@ DOTFILES=`pwd`
 DOT_BASH=$(DOTFILES)/bash
 BASH_CONFIG_HOME=$(HOME)/.config/bash
 
-.PHONY: bash_clean git_clean
+.PHONY: bash_clean git_clean irssi_clean
 
 bash_install:
 	mkdir -p $(BASH_CONFIG_HOME)
@@ -28,4 +28,11 @@ git_install:
 	ln -sf $(DOTFILES)/private/git/private $(HOME)/.config/git/private
 
 git_clean:
-	rm -rf $(DOTFILES)/.config/git
+	rm -rf $(HOME)/.config/git
+
+irssi_install:
+	mkdir -p $(HOME)/.irssi
+	ln -sf $(DOTFILES)/private/irssi/config $(HOME)/.irssi/config
+
+irssi_clean:
+	rm -rf $(HOME)/.irssi
