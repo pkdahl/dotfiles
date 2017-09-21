@@ -42,3 +42,9 @@ irssi_install:
 
 irssi_clean:
 	rm -rf $(HOME)/.irssi
+
+vim_install:
+	ln -sf $(DOTFILES)/vim/vimrc $(HOME)/.vimrc
+
+vim_clean:
+	rm -f $(HOME)/.vimrc
