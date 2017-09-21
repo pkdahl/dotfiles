@@ -1,6 +1,10 @@
 DOTFILES=`pwd`
 DOT_BASH=$(DOTFILES)/bash
 BASH_CONFIG_HOME=$(HOME)/.config/bash
+DOT_ZSH=$(DOTFILES)/zsh
+ZSH_CACHE_HOME=$(HOME)/.cache/zsh
+ZSH_CONFIG_HOME=$(HOME)/.config/zsh
+
 
 .PHONY: bash_clean git_clean irssi_clean
 
@@ -48,3 +52,21 @@ vim_install:
 
 vim_clean:
 	rm -f $(HOME)/.vimrc
+
+zsh_install:
+	mkdir -p $(ZSH_CACHE_HOME)
+	mkdir -p $(ZSH_CONFIG_HOME)
+	ln -sf $(DOT_ZSH)/zshenv         $(HOME)/.zshenv
+	ln -sf $(DOT_ZSH)/zprofile       $(HOME)/.zprofile
+	ln -sf $(DOT_ZSH)/zshrc          $(HOME)/.zshrc
+	ln -sf $(DOT_ZSH)/aliases.zsh    $(ZSH_CONFIG_HOME)/aliases.zsh
+	ln -sf $(DOT_ZSH)/completion.zsh $(ZSH_CONFIG_HOME)/completion.zsh
+	ln -sf $(DOT_ZSH)/history.zsh    $(ZSH_CONFIG_HOME)/history.zsh
+	ln -sf $(DOT_ZSH)/prompt.zsh     $(ZSH_CONFIG_HOME)/prompt.zsh
+
+zsh_clean:
+	rm -rf $(ZSH_CACHE_HOME)
+	rm -rf $(ZSH_CONFIG_HOME)
+	rm -f $(HOME)/.zshenv
+	rm -f $(HOME)/.zprofile
+	rm -f $(HOME)/.zshrc
