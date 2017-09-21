@@ -21,6 +21,12 @@ bash_clean:
 	rm -f $(HOME)/.bash_logout
 	rm -rf $(BASH_CONFIG_HOME)
 
+emacs_install:
+	ln -sf $(DOTFILES)/emacs $(HOME)/emacs.d
+
+emacs_clean:
+	rm -f $(HOME)/emacs.d
+
 git_install:
 	mkdir -p $(HOME)/.config/git
 	ln -sf $(DOTFILES)/git/config          $(HOME)/.config/git/config
