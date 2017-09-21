@@ -102,8 +102,9 @@
 ;;;; Theme
 
 (req-package leuven
-  :pin melpa-stable
   :init
+  (setq leuven-scale-outline-headlines nil
+        leuven-scale-org-agenda-structure nil)
   (load-theme 'leuven t))
 
 ;;;; OS X keys
