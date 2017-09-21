@@ -1,5 +1,5 @@
 set nocompatible
-" set viminfo+=n~/.cache/vim/viminfo
+set viminfo+=n~/.cache/vim/viminfo
 set ruler
 set tabstop=4
 set shiftwidth=4
@@ -12,5 +12,5 @@ set foldmethod=marker "Allow backspacing in insert mode
 set bs=2
 
 if &t_Co > 2 || has("gui_running")
-	syntax on
+        syntax on
 endif

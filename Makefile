@@ -58,10 +58,12 @@ mail_clean:
 	rm -f $(HOME)/.mbsyncrc
 
 vim_install:
+	mkdir -p $(HOME)/.cache/vim
 	ln -sf $(DOTFILES)/vim/vimrc $(HOME)/.vimrc
 
 vim_clean:
 	rm -f $(HOME)/.vimrc
+	rm -rf $(HOME)/.cache/vim
 
 zsh_install:
 	mkdir -p $(ZSH_CACHE_HOME)
