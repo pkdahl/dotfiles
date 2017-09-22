@@ -43,6 +43,7 @@ git_clean:
 irssi_install:
 	mkdir -p $(HOME)/.irssi
 	ln -sf $(DOTFILES)/private/irssi/config $(HOME)/.irssi/config
+	ln -sf $(DOTFILES)/irssi/startup        $(HOME)/.irssi/startup
 
 irssi_clean:
 	rm -rf $(HOME)/.irssi
