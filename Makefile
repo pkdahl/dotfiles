@@ -26,10 +26,10 @@ bash_clean:
 	rm -rf $(BASH_CONFIG_HOME)
 
 emacs_install:
-	ln -sf $(DOTFILES)/emacs $(HOME)/emacs.d
+	ln -sf $(DOTFILES)/emacs $(HOME)/.emacs.d
 
 emacs_clean:
-	rm -f $(HOME)/emacs.d
+	rm -f $(HOME)/.emacs.d
 
 git_install:
 	mkdir -p $(HOME)/.config/git
