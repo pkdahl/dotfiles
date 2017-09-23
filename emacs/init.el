@@ -174,6 +174,14 @@
 
 (global-auto-revert-mode 1)
 
+;;; External
+
+;;;; EasyPG
+
+(use-package epa
+  :init
+  (setq epa-pinentry-mode 'loopback))
+
 ;;; Editing
 
 ;; Turn on disabled functions
