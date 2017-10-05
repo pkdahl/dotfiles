@@ -104,7 +104,7 @@ SyncState *
 
 # INBOX.Drafts
 Channel uio-pkdahl-drafts
-Master :uio-pkdahl-remote:"INBOX.Drafts"
+Master :uio-pkdahl-remote:"Drafts"
 Slave :uio-pkdahl-local:drafts
 Create Slave
 Expunge Both
@@ -122,7 +122,7 @@ SyncState *
 
 # INBOX.Sent
 Channel uio-pkdahl-sent
-Master :uio-pkdahl-remote:"INBOX.Sent"
+Master :uio-pkdahl-remote:"Sent Items"
 Slave :uio-pkdahl-local:sent
 Create Slave
 Expunge Both
