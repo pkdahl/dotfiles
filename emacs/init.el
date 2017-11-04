@@ -297,10 +297,18 @@
 (use-package prog-mode
   :init
   (add-hook 'prog-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook
-                        (lambda ()
-                          (whitespace-cleanup))))))
+			(lambda ()
+			  (add-hook 'before-save-hook
+						(lambda ()
+						  (whitespace-cleanup))))))
+
+;;;;; CC mode (C, C++, Java etc.)
+
+(use-package cc-mode
+  :init
+  (setq-default c-basic-offset 4
+				tab-width 4
+				indent-tabs-mode t))
 
 ;;;;; Elm
 
