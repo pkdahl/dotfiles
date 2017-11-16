@@ -1,3 +1,4 @@
+# -*- mode: sh-mode; fill-column: 72; -*-
 # ~/.bashrc
 
 # source the system wide bashrc if it exists
@@ -6,20 +7,22 @@ if [ -e /etc/bash.bashrc ] ; then
 fi
 
 if [ -e /local/lib/setupfiles/bashrc ] ; then
-        source /local/lib/setupfiles/bashrc
+		source /local/lib/setupfiles/bashrc
 fi
 
 # Load environment variables
 if [ -e ${HOME}/.config/bash/env.bash ] ; then
-    source ${HOME}/.config/bash/env.bash
+	source ${HOME}/.config/bash/env.bash
 fi
 
 # Aliases
 if [ -e ${BASH_CONFIG_HOME}/aliases.bash ] ; then
-    source ${BASH_CONFIG_HOME}/aliases.bash
+	source ${BASH_CONFIG_HOME}/aliases.bash
 fi
 
 # Prompt
 if [ -e ${BASH_CONFIG_HOME}/prompt.bash ] ; then
-    source ${BASH_CONFIG_HOME}/prompt.bash
+	source ${BASH_CONFIG_HOME}/prompt.bash
 fi
+
+which direnv &> /dev/null && eval "$(direnv hook bash)"

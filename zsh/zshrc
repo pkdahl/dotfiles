@@ -1,3 +1,4 @@
+# -*- mode: sh-mode; fill-column: 72; -*-
 # ~/.zshrc is sourced in interactive shells.
 
 bindkey -e # Emacs keybindings
@@ -10,3 +11,5 @@ source $ZSH_CONFIG_HOME/aliases.zsh
 source $ZSH_CONFIG_HOME/completion.zsh
 source $ZSH_CONFIG_HOME/history.zsh
 source $ZSH_CONFIG_HOME/prompt.zsh
+
+which direnv &> /dev/null && eval "$(direnv hook zsh)"
