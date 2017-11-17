@@ -20,9 +20,10 @@ if [ -e ${BASH_CONFIG_HOME}/aliases.bash ] ; then
 	source ${BASH_CONFIG_HOME}/aliases.bash
 fi
 
-# Prompt
-if [ -e ${BASH_CONFIG_HOME}/prompt.bash ] ; then
-	source ${BASH_CONFIG_HOME}/prompt.bash
+# Liquidpromt
+if [ -f /usr/local/share/liquidprompt ]; then
+	[[ $- = *i* ]] && source /usr/local/share/liquidprompt
 fi
 
+# Load direnv
 which direnv &> /dev/null && eval "$(direnv hook bash)"

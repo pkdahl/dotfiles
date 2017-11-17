@@ -1,4 +1,5 @@
 DOTFILES=`pwd`
+CONFIG_HOME=$(HOME)/.config
 DOT_BASH=$(DOTFILES)/bash
 BASH_CONFIG_HOME=$(HOME)/.config/bash
 DOT_ZSH=$(DOTFILES)/zsh
@@ -17,6 +18,8 @@ bash_install:
 	ln -sf $(DOTFILES)/bash/aliases.bash $(BASH_CONFIG_HOME)/aliases.bash
 	ln -sf $(DOTFILES)/bash/env.bash     $(BASH_CONFIG_HOME)/env.bash
 	ln -sf $(DOTFILES)/bash/prompt.bash  $(BASH_CONFIG_HOME)/prompt.bash
+	ln -sf $(DOTFILES/liquidprompt/liquidpromptrc $(CONFIG_HOME)/liquidprompt
+	ln -sf $(DOTFILES)/liquidprompt/pkdahl.ps1 $(CONFIG_HOME)/liquidprompt/pkdahl.ps1
 
 bash_clean:
 	rm -f $(HOME)/.bash_profile
@@ -76,6 +79,8 @@ zsh_install:
 	ln -sf $(DOT_ZSH)/completion.zsh $(ZSH_CONFIG_HOME)/completion.zsh
 	ln -sf $(DOT_ZSH)/history.zsh    $(ZSH_CONFIG_HOME)/history.zsh
 	ln -sf $(DOT_ZSH)/prompt.zsh     $(ZSH_CONFIG_HOME)/prompt.zsh
+	ln -sf $(DOTFILES/liquidprompt/liquidpromptrc $(CONFIG_HOME)/liquidpromptrc
+	ln -sf $(DOTFILES)/liquidprompt/pkdahl.ps1 $(CONFIG_HOME)/liquidprompt/pkdahl.ps1
 
 zsh_clean:
 	rm -rf $(ZSH_CACHE_HOME)
