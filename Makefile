@@ -1,5 +1,5 @@
 DOTFILES=`pwd`
-CACHE_HOME=$(HOME)/.cahce
+CACHE_HOME=$(HOME)/.cache
 CONFIG_HOME=$(HOME)/.config
 DATA_HOME=$(HOME)/.local/share
 DOT_BASH=$(DOTFILES)/bash
@@ -18,8 +18,6 @@ bash_install:
 	ln -sf $(DOTFILES)/bash/bash_login   $(HOME)/.bash_login
 	ln -sf $(DOTFILES)/bash/bash_logout  $(HOME)/.bash_logout
 	ln -sf $(DOTFILES)/bash/aliases.bash $(BASH_CONFIG_HOME)/aliases.bash
-	ln -sf $(DOTFILES)/bash/env.bash     $(BASH_CONFIG_HOME)/env.bash
-	ln -sf $(DOTFILES)/bash/prompt.bash  $(BASH_CONFIG_HOME)/prompt.bash
 
 bash_clean:
 	rm -f $(HOME)/.bash_profile
@@ -73,7 +71,7 @@ mail_clean:
 	rm -f $(HOME)/.mbsyncrc
 
 vim_install:
-	mkdir -p $(CAHCE_HOME)/vim
+	mkdir -p $(CACHE_HOME)/vim
 	ln -sf $(DOTFILES)/vim/vimrc $(HOME)/.vimrc
 
 vim_clean:
