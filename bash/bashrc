@@ -1,4 +1,4 @@
-# -*- mode: sh-mode; fill-column: 72; -*-
+# -*- mode: shell-script; fill-column: 72; -*-
 # ~/.bashrc
 
 # source the system wide bashrc if it exists
@@ -10,19 +10,16 @@ if [ -e /local/lib/setupfiles/bashrc ] ; then
 		source /local/lib/setupfiles/bashrc
 fi
 
-# Load environment variables
-if [ -e ${HOME}/.config/bash/env.bash ] ; then
-	source ${HOME}/.config/bash/env.bash
-fi
-
 # Aliases
 if [ -e ${BASH_CONFIG_HOME}/aliases.bash ] ; then
 	source ${BASH_CONFIG_HOME}/aliases.bash
 fi
 
-# Liquidpromt
+# Liquid Prompt
 if [ -f /usr/local/share/liquidprompt ]; then
-	[[ $- = *i* ]] && source /usr/local/share/liquidprompt
+	[[ $- = *i* ]] && source /usr/local/share/liquidprompt;
+elif [ -f ${XDG_DATA_HOME}/liquidprompt ]; then
+	[[ $- = *i* ]] && source ${XDG_DATA_HOME}/liquidprompt;
 fi
 
 # Load direnv
