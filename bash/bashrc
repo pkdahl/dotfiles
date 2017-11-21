@@ -3,11 +3,11 @@
 
 # source the system wide bashrc if it exists
 if [ -e /etc/bash.bashrc ] ; then
-  source /etc/bash.bashrc
+	source /etc/bash.bashrc
 fi
 
 if [ -e /local/lib/setupfiles/bashrc ] ; then
-		source /local/lib/setupfiles/bashrc
+	source /local/lib/setupfiles/bashrc
 fi
 
 # Aliases
