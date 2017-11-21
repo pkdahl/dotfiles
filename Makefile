@@ -1,10 +1,12 @@
 DOTFILES=`pwd`
+CACHE_HOME=$(HOME)/.cahce
 CONFIG_HOME=$(HOME)/.config
+DATA_HOME=$(HOME)/.local/share
 DOT_BASH=$(DOTFILES)/bash
-BASH_CONFIG_HOME=$(HOME)/.config/bash
+BASH_CONFIG_HOME=$(CONFIG_HOME)/bash
 DOT_ZSH=$(DOTFILES)/zsh
-ZSH_CACHE_HOME=$(HOME)/.cache/zsh
-ZSH_CONFIG_HOME=$(HOME)/.config/zsh
+ZSH_CACHE_HOME=$(CACHE_HOME)/zsh
+ZSH_CONFIG_HOME=$(CONFIG_HOME)/zsh
 
 
 .PHONY: bash_clean git_clean irssi_clean
@@ -18,8 +20,6 @@ bash_install:
 	ln -sf $(DOTFILES)/bash/aliases.bash $(BASH_CONFIG_HOME)/aliases.bash
 	ln -sf $(DOTFILES)/bash/env.bash     $(BASH_CONFIG_HOME)/env.bash
 	ln -sf $(DOTFILES)/bash/prompt.bash  $(BASH_CONFIG_HOME)/prompt.bash
-	ln -sf $(DOTFILES/liquidprompt/liquidpromptrc $(CONFIG_HOME)/liquidprompt
-	ln -sf $(DOTFILES)/liquidprompt/pkdahl.ps1 $(CONFIG_HOME)/liquidprompt/pkdahl.ps1
 
 bash_clean:
 	rm -f $(HOME)/.bash_profile
@@ -35,13 +35,19 @@ emacs_clean:
 	rm -f $(HOME)/.emacs.d
 
 git_install:
-	mkdir -p $(HOME)/.config/git
-	ln -sf $(DOTFILES)/git/config          $(HOME)/.config/git/config
-	ln -sf $(DOTFILES)/git/ignore          $(HOME)/.config/git/ignore
-	ln -sf $(DOTFILES)/private/git/private $(HOME)/.config/git/private
+	mkdir -p $(CONFIG_HOME)/git
+	ln -sf $(DOTFILES)/git/config          $(CONFIG_HOME)/git/config
+	ln -sf $(DOTFILES)/git/ignore          $(CONFIG_HOME)/git/ignore
+	ln -sf $(DOTFILES)/private/git/private $(CONFIG_HOME)/git/private
 
 git_clean:
-	rm -rf $(HOME)/.config/git
+	rm -rf $(CONFIG_HOME)/git
+
+hammerspoon_install:
+	ln -sf $(DOTFILES)/hammerspoon $(HOME)/.hammerspoon
+
+hammerspoon_clean:
+	rm -f $(HOME)/.hammerspoon
 
 irssi_install:
 	mkdir -p $(HOME)/.irssi
@@ -51,10 +57,15 @@ irssi_install:
 irssi_clean:
 	rm -rf $(HOME)/.irssi
 
+liquidprompt_install:
+	mkdir -p $(HOME)/.local/share
+	ln -sf $(DOTFILES)/lib/liquidprompt/liquidprompt $(DATA_HOME)/liquidprompt
+	ln -sf $(DOTFILES)/liquidprompt/liquidpromptrc   $(CONFIG_HOME)/liquidpromptrc
+
 mail_install:
 	mkdir -p $(HOME)/.local/bin
 	ln -sf $(DOTFILES)/mail/mailbkup $(HOME)/.local/bin/mailbkup
-	ln -sf $(DOTFILES)/mail/mbsynrc $(HOME)/.mbsyncrc
+	ln -sf $(DOTFILES)/mail/mbsynrc  $(HOME)/.mbsyncrc
 
 mail_clean:
 	rm -f $(HOME)/.local./bin/mailbkup
@@ -62,12 +73,12 @@ mail_clean:
 	rm -f $(HOME)/.mbsyncrc
 
 vim_install:
-	mkdir -p $(HOME)/.cache/vim
+	mkdir -p $(CAHCE_HOME)/vim
 	ln -sf $(DOTFILES)/vim/vimrc $(HOME)/.vimrc
 
 vim_clean:
 	rm -f $(HOME)/.vimrc
-	rm -rf $(HOME)/.cache/vim
+	rm -rf $(CACHE_HOME)/vim
 
 zsh_install:
 	mkdir -p $(ZSH_CACHE_HOME)
@@ -79,8 +90,6 @@ zsh_install:
 	ln -sf $(DOT_ZSH)/completion.zsh $(ZSH_CONFIG_HOME)/completion.zsh
 	ln -sf $(DOT_ZSH)/history.zsh    $(ZSH_CONFIG_HOME)/history.zsh
 	ln -sf $(DOT_ZSH)/prompt.zsh     $(ZSH_CONFIG_HOME)/prompt.zsh
-	ln -sf $(DOTFILES/liquidprompt/liquidpromptrc $(CONFIG_HOME)/liquidpromptrc
-	ln -sf $(DOTFILES)/liquidprompt/pkdahl.ps1 $(CONFIG_HOME)/liquidprompt/pkdahl.ps1
 
 zsh_clean:
 	rm -rf $(ZSH_CACHE_HOME)
