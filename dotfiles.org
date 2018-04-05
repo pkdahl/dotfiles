@@ -87,6 +87,14 @@ Remove directories:
 - =darwin-rebuild build= and =darwin-rebuild switch=
 - Clean up system: =nix-collect-garbage -d=
 
+** Installing Org mode on older Emacs
+ - start Emacs without initalizing anything =emacs -Q=
+ - install Org mode with package
+
+** tar
+- =tar cvf private.tar private
+- =gpg -c private.tar=
+
 * Links
 
 ** Mail
@@ -125,3 +133,9 @@ Remove directories:
 ** Make
 
 https://github.com/flazzarini/dotfiles/blob/master/Makefile
+
+** direnv
+
+https://direnv.net/
+
+Installation on Ifi machine: Download from https://dl.equinox.io/zimbatm/direnv/stable

@@ -8,7 +8,7 @@
                                  "USERNAME"
                                "USER")))
 
-(defvar config-dir (concat user-emacs-directory "config/")
+(defvar config-dir (concat user-emacs-directory "settings/")
   "Directory for emacs configuration files.")
 
 (defvar cache-dir "~/.cache/emacs/"
@@ -29,12 +29,14 @@
 (setq package-enable-at-startup nil
       package-archives '(("gnu"          . "https://elpa.gnu.org/packages/")
                          ("melpa-stable" . "https://stable.melpa.org/packages/")
-                         ("melpa"        . "https://melpa.org/packages/"))
+                         ("melpa"        . "https://melpa.org/packages/")
+                         ("org"          . "http://orgmode.org/elpa/"))
       package-pinned-packages nil
       package-user-dir (concat data-dir "site-lisp")
       package-archive-priorities '(("melpa-stable" . 10)
-                                   ("gnu"     . 5)
+                                   ("gnu"          . 5)
                                    ("melpa"        . 0)))
+
 (package-initialize)
 
 ;;;; Bootstrap `req-package' from Mepla stable
@@ -102,6 +104,8 @@
 ;;;; Theme
 
 (req-package leuven
+  :ensure leuven-theme
+  :pin melpa-stable
   :init
   (setq leuven-scale-outline-headlines nil
         leuven-scale-org-agenda-structure nil)
@@ -125,13 +129,14 @@
 
 ;;;; which-key
 
-(use-package which-key
-  :pin melpa-stable
-  :ensure t
-  :diminish which-key-mode
-  :config
-  (which-key-mode)
-  (setq which-key-idle-delay 0.5))
+(unless (string< emacs-version "24.4")
+  (use-package which-key
+    :ensure t
+    :pin melpa-stable
+    :diminish which-key-mode
+    :config
+    (which-key-mode)
+    (setq which-key-idle-delay 0.5)))
 
 ;;; Convenience
 
@@ -142,7 +147,6 @@
 ;;;; ivy and counsel
 
 (use-package ivy
-  :pin melpa-stable
   :ensure t
   :diminish (ivy-mode . "")
   :bind ("C-x b" . ivy-switch-buffer)
@@ -151,10 +155,9 @@
   (setq ivy-use-virtual-buffers t))
 
 (use-package counsel
-  :pin melpa-stable
   :ensure t
   :bind* (("M-x"     . counsel-M-x)
-          ("C-x C-f" . counsel-find-file))
+      ("C-x C-f" . counsel-find-file))
   :config
   (setq counsel-find-file-ignore-regexp "\\.DS_Store\\|.git"))
 
@@ -215,7 +218,7 @@
 (show-paren-mode 1)
 
 (use-package swiper
-  :pin melpa-stable
+  ;; :pin melpa-stable
   :ensure t
   :bind ("C-s" . swiper))
 
@@ -255,8 +258,9 @@
 
 ;;; Mail
 
-(req-package mu4e
+(use-package mu4e
   ;; provided by mu
+  :if (executable-find "mu")
   :ensure nil
   :bind ("<f12>" . mu4e)
   :init
@@ -283,8 +287,11 @@
                                  (mu4e~proc-move docid
                                    (mu4e~mark-check-target target) "-N")))))
 
-(req-package org-mu4e
-  :require (mu4e org-mode))
+(use-package org-mu4e
+  :after (mu4e org-mode))
+
+(use-package mu4e-setup
+  :after (mu4e))
 
 ;;; Multimedia
 
@@ -297,18 +304,18 @@
 (use-package prog-mode
   :init
   (add-hook 'prog-mode-hook
-			(lambda ()
-			  (add-hook 'before-save-hook
-						(lambda ()
-						  (whitespace-cleanup))))))
+            (lambda ()
+              (add-hook 'before-save-hook
+                        (lambda ()
+                          (whitespace-cleanup))))))
 
 ;;;;; CC mode (C, C++, Java etc.)
 
 (use-package cc-mode
   :init
   (setq-default c-basic-offset 4
-				tab-width 4
-				indent-tabs-mode t))
+                tab-width 4
+                indent-tabs-mode t))
 
 ;;;;; Elm
 
@@ -346,12 +353,7 @@
 
 ;;;;; Org
 
-(unless (package-installed-p 'org-plus-contrib)
-  (let ((package-archives '(("org" . "http://orgmode.org/elpa/"))))
-    (progn (package-refresh-contents)
-           (package-install 'org-plus-contrib))))
-
-(req-package org
+(use-package org
   :bind
   (("C-c l"   . org-store-link)
    ("C-c C-l" . org-insert-link))
@@ -364,45 +366,49 @@
             (lambda ()
               (add-hook 'before-save-hook
                         (lambda ()
-                          (whitespace-cleanup)))))
+                          (whitespace-cleanup))))))
 
-  (use-package org-mac-link
+(use-package org-mac-link
   :if (string-equal system-type "darwin")
-  :bind ("C-c m" . org-mac-grab-link)))
+  :after (org)
+  :bind ("C-c m" . org-mac-grab-link))
 
-(req-package org-agenda
-  :require org
+(use-package org-agenda
+  :after (org)
   :bind
   ("C-c a" . org-agenda)
   :config
   (setq org-agenda-start-on-weekday nil
         org-agenda-time-leading-zero t))
 
-(req-package org-capture
-  :require org
+(use-package org-capture
+  :after (org)
   :demand t
   :bind
   ("C-c c" . org-capture))
 
-(req-package org-id
-  :require org
+(use-package org-id
+  :after (org)
   :config
   (setq org-id-locations-file (concat cache-dir "org-id-location")))
+
+(use-package org-setup
+  :after (org))
 
 ;;;;; Outshine
 
 ;; Enable org-mode-like folding in emacs-lisp-mode
 
-(use-package outshine
-  :pin melpa
-  :ensure t
-  :diminish outline-minor-mode
-  :init
-  (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
-  (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
-  :config
-  (setq outshine-startup-folded-p t
-        outshine-use-speed-commands t))
+;; (use-package outshine
+;;   :pin melpa
+;;   :ensure t
+;;   :diminish outline-minor-mode
+;;   :init
+;;   (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+;;   (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
+;;   :config
+;;   (setq outshine-startup-folded-p t
+;;         outshine-use-speed-commands t))
 
 ;;;; Markdown
 
@@ -426,6 +432,6 @@
 
 ;;; Finalize
 
-(load (expand-file-name "private.el" user-emacs-directory))
+;; (load (expand-file-name "private.el" user-emacs-directory))
 (load custom-file 'noerror)
 (req-package-finish)
