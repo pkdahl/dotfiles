@@ -437,6 +437,5 @@
 
 ;;; Finalize
 
-;; (load (expand-file-name "private.el" user-emacs-directory))
 (load custom-file 'noerror)
 (req-package-finish)
