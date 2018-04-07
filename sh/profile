@@ -1,0 +1,25 @@
+# -*- mode: shell-script; fill-column: 72; -*-
+# ~/.profile
+
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+
+export BASH_CACHE_HOME=$XDG_CACHE_HOME/bash
+export BASH_CONFIG_HOME=$XDG_CONFIG_HOME/bash
+export ZSH_CACHE_HOME=$XDG_CACHE_HOME/zsh
+export ZSH_CONFIG_HOME=$XDG_CONFIG_HOME/zsh
+
+export GOPATH=$HOME/go
+
+# PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+# Set PATH so it includes user's private bin if it exists
+if [ -d "${HOME}/bin" ] ; then
+   PATH=${HOME}/bin:${PATH}
+fi
+
+if [ -d "${HOME}/.local/bin" ]; then
+   PATH=${HOME}/.local/bin:${PATH}
+fi

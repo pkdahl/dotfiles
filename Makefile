@@ -13,6 +13,7 @@ ZSH_CONFIG_HOME=$(CONFIG_HOME)/zsh
 
 bash_install:
 	mkdir -p $(BASH_CONFIG_HOME)
+	ln -sf $(DOTFILES)/sh/profile        $(HOME)/.profile
 	ln -sf $(DOTFILES)/bash/bash_profile $(HOME)/.bash_profile
 	ln -sf $(DOTFILES)/bash/bashrc       $(HOME)/.bashrc
 	ln -sf $(DOTFILES)/bash/bash_login   $(HOME)/.bash_login
@@ -20,6 +21,7 @@ bash_install:
 	ln -sf $(DOTFILES)/bash/aliases.bash $(BASH_CONFIG_HOME)/aliases.bash
 
 bash_clean:
+	rm -f $(HOME)/.profile
 	rm -f $(HOME)/.bash_profile
 	rm -f $(HOME)/.bashrc
 	rm -f $(HOME)/.bash_login
