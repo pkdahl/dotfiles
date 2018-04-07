@@ -92,8 +92,13 @@ Remove directories:
  - install Org mode with package
 
 ** tar
+
 - =tar cvf private.tar private
 - =gpg -c private.tar=
+
+- =gpg -d private.tar.gpg -o private.tar=
+- =rm -rf private/=
+- =tar xvf private.tar=
 
 * Links
 
