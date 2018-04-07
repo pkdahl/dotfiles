@@ -39,14 +39,16 @@
 
 (package-initialize)
 
-;;;; Bootstrap `req-package' from Mepla stable
+;;;; Bootstrap `use-package' from Melpa stable
 
-(unless (package-installed-p 'req-package)
-  (let ((package-archives '(("melpa-stable" . "http://stable.melpa.org/packages/"))))
-	  (progn
-		(package-refresh-contents)
-		(package-install 'req-package))))
-(require 'req-package)
+(unless (package-installed-p 'use-package)
+  (let ((package-archives '(("melpa-stable" . "https://stable.melpa.org/packages/"))))
+	(progn
+	  (package-refresh-contents)
+	  (package-install 'use-package))))
+
+(eval-when-compile
+  (require 'use-package))
 
 ;;;; Setup `load-path'
 
@@ -63,9 +65,9 @@
 (add-to-list 'load-path (concat user-emacs-directory "lisp/"))
 (add-to-list 'load-path config-dir)
 
-(req-package exec-path-from-shell
-  :pin melpa-stable
+(use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
+  :pin melpa-stable
   :init (exec-path-from-shell-initialize))
 
 ;;; Environment
@@ -103,7 +105,7 @@
 
 ;;;; Theme
 
-(req-package leuven
+(use-package leuven
   :ensure leuven-theme
   :pin melpa-stable
   :init
@@ -231,9 +233,9 @@
 
 ;; https://ebzzry.github.io/emacs-pairs.html
 
-(req-package smartparens
-  :require smartparens-config
+(use-package smartparens
   :pin melpa-stable
+  :after smartparens-config
   :init
   (add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
   (add-hook 'scheme-mode-hook #'smartparens-mode)
@@ -324,13 +326,13 @@
 
 ;;;;; Elm
 
-(req-package elm-mode
+(use-package elm-mode
   :pin melpa-stable
   :mode "\\.elm\\'")
 
 ;;;;; Haskell
 
-(req-package haskell-mode
+(use-package haskell-mode
   :pin melpa-stable
   :mode "\\.hs\\'"
   :init
@@ -358,7 +360,7 @@
 
 ;;;;; Magit
 
-(req-package magit
+(use-package magit
   :pin melpa-stable
   :bind ("C-x g" . magit-status))
 
@@ -427,7 +429,7 @@
 
 ;;;; Markdown
 
-(req-package markdown-mode
+(use-package markdown-mode
   :pin melpa-stable
   :mode
   (("README\\.md\\'" . gfm-mode)
@@ -448,4 +450,3 @@
 ;;; Finalize
 
 (load custom-file 'noerror)
-(req-package-finish)
