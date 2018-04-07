@@ -337,9 +337,19 @@
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
 
+;;;;; Python
+
+(use-package elpy
+  :pin melpa-stable
+  :init
+  (setq elpy-rpc-python-command "python3"
+		python-shell-interpreter "python3")
+  :config
+  (elpy-enable))
+
 ;;;;; Scheme
 
-(req-package geiser
+(use-package geiser
   :pin melpa-stable
   :config
   (setq geiser-active-implementations '(guile)))
