@@ -5,8 +5,8 @@
 (setq inhibit-startup-message t)
 
 (defvar current-user (getenv (if (equal system-type 'windows-nt)
-                                 "USERNAME"
-                               "USER")))
+								 "USERNAME"
+							   "USER")))
 
 (defvar config-dir (concat user-emacs-directory "settings/")
   "Directory for emacs configuration files.")
@@ -27,15 +27,15 @@
 
 (require 'package)
 (setq package-enable-at-startup nil
-      package-archives '(("gnu"          . "https://elpa.gnu.org/packages/")
-                         ("melpa-stable" . "https://stable.melpa.org/packages/")
-                         ("melpa"        . "https://melpa.org/packages/")
-                         ("org"          . "http://orgmode.org/elpa/"))
-      package-pinned-packages nil
-      package-user-dir (concat data-dir "site-lisp")
-      package-archive-priorities '(("melpa-stable" . 10)
-                                   ("gnu"          . 5)
-                                   ("melpa"        . 0)))
+	  package-archives '(("gnu"          . "https://elpa.gnu.org/packages/")
+						 ("melpa-stable" . "https://stable.melpa.org/packages/")
+						 ("melpa"        . "https://melpa.org/packages/")
+						 ("org"          . "http://orgmode.org/elpa/"))
+	  package-pinned-packages nil
+	  package-user-dir (concat data-dir "site-lisp")
+	  package-archive-priorities '(("melpa-stable" . 10)
+								   ("gnu"          . 5)
+								   ("melpa"        . 0)))
 
 (package-initialize)
 
@@ -43,9 +43,9 @@
 
 (unless (package-installed-p 'req-package)
   (let ((package-archives '(("melpa-stable" . "http://stable.melpa.org/packages/"))))
-      (progn
-        (package-refresh-contents)
-        (package-install 'req-package))))
+	  (progn
+		(package-refresh-contents)
+		(package-install 'req-package))))
 (require 'req-package)
 
 ;;;; Setup `load-path'
@@ -53,12 +53,12 @@
 ;; Add Homebrew site-lisp direcotry to load-path if present
 (let ((default-directory  "/usr/local/share/emacs/site-lisp/"))
   (when (file-directory-p default-directory)
-    (normal-top-level-add-subdirs-to-load-path)))
+	(normal-top-level-add-subdirs-to-load-path)))
 
 ;; Add packages provided by Nix to load-path
 (let ((default-directory "/run/current-system/sw/share/emacs/site-lisp/"))
   (when (file-directory-p default-directory)
-    (normal-top-level-add-subdirs-to-load-path)))
+	(normal-top-level-add-subdirs-to-load-path)))
 
 (add-to-list 'load-path (concat user-emacs-directory "lisp/"))
 (add-to-list 'load-path config-dir)
@@ -73,18 +73,18 @@
 ;;;; Frames and Windows
 
 (dolist (mode '(blink-cursor-mode
-                scroll-bar-mode
-                tool-bar-mode))
+				scroll-bar-mode
+				tool-bar-mode))
   (when (fboundp mode)
-    (funcall mode -1)))
+	(funcall mode -1)))
 
 ;; Turn of menu-bar-mode too, unless we are on OS X
 (unless (memq window-system '(mac ns))
   (menu-bar-mode -1))
 
 (setq default-frame-alist '((width . 120)
-                            (height . 50))
-      split-width-threshold 100)
+							(height . 50))
+	  split-width-threshold 100)
 
 ;;;; Mode Line
 
@@ -108,7 +108,7 @@
   :pin melpa-stable
   :init
   (setq leuven-scale-outline-headlines nil
-        leuven-scale-org-agenda-structure nil)
+		leuven-scale-org-agenda-structure nil)
   (load-theme 'leuven t))
 
 ;;;; OS X keys
@@ -120,10 +120,10 @@
 ;; - Right option key is =alt=
 (when (string-equal system-type "darwin")
   (setq ns-function-modifier 'hyper
-        ns-option-modifier 'nil          ; ns-alternate-modifier
-        ns-command-modifier 'meta        ; mac-command-modifier
-        ns-right-command-modifier 'super ; mac-right-command-modifier
-        ns-right-option-modifier 'alt))
+		ns-option-modifier 'nil          ; ns-alternate-modifier
+		ns-command-modifier 'meta        ; mac-command-modifier
+		ns-right-command-modifier 'super ; mac-right-command-modifier
+		ns-right-option-modifier 'alt))
 
 ;;; Help
 
@@ -131,14 +131,19 @@
 
 (unless (string< emacs-version "24.4")
   (use-package which-key
-    :ensure t
-    :pin melpa-stable
-    :diminish which-key-mode
-    :config
-    (which-key-mode)
-    (setq which-key-idle-delay 0.5)))
+	:ensure t
+	:pin melpa-stable
+	:diminish which-key-mode
+	:config
+	(which-key-mode)
+	(setq which-key-idle-delay 0.5)))
 
 ;;; Convenience
+
+;;;; Abbreviations
+
+(setq abbrev-file-name (concat config-dir "abbrev_defs")
+	  save-abbrevs t)
 
 ;;;; ibuffer
 
@@ -157,7 +162,7 @@
 (use-package counsel
   :ensure t
   :bind* (("M-x"     . counsel-M-x)
-      ("C-x C-f" . counsel-find-file))
+	  ("C-x C-f" . counsel-find-file))
   :config
   (setq counsel-find-file-ignore-regexp "\\.DS_Store\\|.git"))
 
@@ -165,11 +170,11 @@
 
 (use-package recentf
   :commands (recentf-mode
-             counsel-recentf)
+			 counsel-recentf)
   :config
   (setq recentf-save-file (concat cache-dir "recentf")
-        recentf-max-menu-items 50
-        recentf-exclude '("/.git/")))
+		recentf-max-menu-items 50
+		recentf-exclude '("/.git/")))
 
 (setq auto-save-list-file-prefix (concat cache-dir "auto-save-list/saves-"))
 
@@ -233,20 +238,20 @@
   (add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
   (add-hook 'scheme-mode-hook #'smartparens-mode)
   (bind-keys :map smartparens-mode-map
-             ("C-M-a"     . sp-beginning-of-sexp)
-             ("C-M-e"     . sp-end-of-sexp)
+			 ("C-M-a"     . sp-beginning-of-sexp)
+			 ("C-M-e"     . sp-end-of-sexp)
 
-             ("C-<down>"  . sp-down-sexp)
-             ("C-<up>"    . sp-up-sexp)
-             ("M-<down>"  . sp-backward-down-sexp)
-             ("M-<up>"    . sp-backward-up-sexp)
+			 ("C-<down>"  . sp-down-sexp)
+			 ("C-<up>"    . sp-up-sexp)
+			 ("M-<down>"  . sp-backward-down-sexp)
+			 ("M-<up>"    . sp-backward-up-sexp)
 
-             ("C-<right>" . sp-forward-slurp-sexp)
-             ("M-<right>" . sp-forward-barf-sexp)
-             ("C-<left>"  . sp-backward-slurp-sexp)
-             ("M-<right>" . sp-backward-barf-sexp)
+			 ("C-<right>" . sp-forward-slurp-sexp)
+			 ("M-<right>" . sp-forward-barf-sexp)
+			 ("C-<left>"  . sp-backward-slurp-sexp)
+			 ("M-<right>" . sp-backward-barf-sexp)
 
-             ("C-M-d"     . delete-sexp)))
+			 ("C-M-d"     . delete-sexp)))
 
 ;;; Communication
 
@@ -265,27 +270,27 @@
   :bind ("<f12>" . mu4e)
   :init
   (setq mu4e-headers-date-format "%Y-%m-%d %H:%M"
-        mu4e-headers-fields '( (:date       . 17)
-                               (:flags      . 5)
-                               (:from-or-to . 25)
-                               (:subject    . nil)))
+		mu4e-headers-fields '( (:date       . 17)
+							   (:flags      . 5)
+							   (:from-or-to . 25)
+							   (:subject    . nil)))
   (setq message-send-mail-function 'message-send-mail-with-sendmail
-        sendmail-program (executable-find "msmtpq")
-        message-kill-buffer-on-exit t
-        mu4e-change-filenames-when-moving t
-        ;; don't retrieve mail with mu4e
-        mu4e-get-mail-command "true")
+		sendmail-program (executable-find "msmtpq")
+		message-kill-buffer-on-exit t
+		mu4e-change-filenames-when-moving t
+		;; don't retrieve mail with mu4e
+		mu4e-get-mail-command "true")
   :config
   ;; don't apply trashed flag, just move
   ;; FIX we get code for trash twice in the list
   (add-to-list 'mu4e-marks
-               '(trash :char ("d" . "▼")
-                       :prompt "dtrash"
-                       :dyn-target (lambda (target msg)
-                                     (mu4e-get-trash-folder msg))
-                       :action (lambda (docid msg target)
-                                 (mu4e~proc-move docid
-                                   (mu4e~mark-check-target target) "-N")))))
+			   '(trash :char ("d" . "▼")
+					   :prompt "dtrash"
+					   :dyn-target (lambda (target msg)
+									 (mu4e-get-trash-folder msg))
+					   :action (lambda (docid msg target)
+								 (mu4e~proc-move docid
+								   (mu4e~mark-check-target target) "-N")))))
 
 (use-package org-mu4e
   :after (mu4e org-mode))
@@ -304,18 +309,18 @@
 (use-package prog-mode
   :init
   (add-hook 'prog-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook
-                        (lambda ()
-                          (whitespace-cleanup))))))
+			(lambda ()
+			  (add-hook 'before-save-hook
+						(lambda ()
+						  (whitespace-cleanup))))))
 
 ;;;;; CC mode (C, C++, Java etc.)
 
 (use-package cc-mode
   :init
   (setq-default c-basic-offset 4
-                tab-width 4
-                indent-tabs-mode t))
+				tab-width 4
+				indent-tabs-mode t))
 
 ;;;;; Elm
 
@@ -359,14 +364,14 @@
    ("C-c C-l" . org-insert-link))
   :config
   (setq	org-hide-emphasis-markers t
-        org-hide-leading-stars t
-        org-log-done 'time
-        org-startup-indented t)
+		org-hide-leading-stars t
+		org-log-done 'time
+		org-startup-indented t)
   (add-hook 'org-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook
-                        (lambda ()
-                          (whitespace-cleanup))))))
+			(lambda ()
+			  (add-hook 'before-save-hook
+						(lambda ()
+						  (whitespace-cleanup))))))
 
 (use-package org-mac-link
   :if (string-equal system-type "darwin")
@@ -379,7 +384,7 @@
   ("C-c a" . org-agenda)
   :config
   (setq org-agenda-start-on-weekday nil
-        org-agenda-time-leading-zero t))
+		org-agenda-time-leading-zero t))
 
 (use-package org-capture
   :after (org)
@@ -420,9 +425,9 @@
    ("\\.markdown\\'" . markdown-mode))
   :init
   (add-hook 'markdown-mode-hook
-            (lambda ()
-              (auto-fill-mode 0)
-              (visual-line-mode 1))))
+			(lambda ()
+			  (auto-fill-mode 0)
+			  (visual-line-mode 1))))
 
 ;;; Customize
 
