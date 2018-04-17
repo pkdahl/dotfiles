@@ -3,7 +3,12 @@
 alias rm="rm -i"
 alias mv="mv -i"
 
-alias ls="ls -G" # Colours
+# ls
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	alias ls="ls --color"
+else
+	alias ls="alias ls -G" # Colours
+fi
 alias ll="ls -l"
 alias ll.="ls -lA"
 alias l.="ls -A"

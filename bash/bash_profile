@@ -1,6 +1,12 @@
 # -*- mode: shell-script; fill-column: 72; -*-
 # ~/.bash_profile: executed by bash for login shells.
 
+echo "Loading bash_profile..."
+
+if [ -e "${HOME}/.profile" ] ; then
+	. ${HOME}/.profile
+fi
+
 # export EDITOR=vim
 # export VISUAL=vim
 # export PAGER=less
@@ -8,34 +14,14 @@
 # export LC_CTYPE=en_US.UTF-8
 # export LC_ALL=en_US.UTF-8
 
-# Set PATH so it includes user's private bin if it exists
-if [ -d "${HOME}/bin" ] ; then
-   PATH=${HOME}/bin:${PATH}
-fi
-
-if [ -d "${HOME}/.local/bin" ]; then
-   PATH=${HOME}/.local/bin:${PATH}
-fi
-
-# Set MANPATH so it includes users' private man if it exists
-if [ -d "${HOME}/man" ]; then
-  MANPATH=${HOME}/man:${MANPATH}
-fi
-
-# Set INFOPATH so it includes users' private info if it exists
-if [ -d "${HOME}/info" ]; then
-  INFOPATH=${HOME}/info:${INFOPATH}
-fi
-
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-   . $HOME/.nix-profile/etc/profile.d/nix.sh;
-fi
-
 # History
 #HISTFILE=${BASH_CACHE_HOME}/bash_history
 
 # source the users bashrc if it exists
 if [ -e "${HOME}/.bashrc" ]; then
-  source "${HOME}/.bashrc"
+  . "${HOME}/.bashrc"
 fi
-if [ -e /Users/pkdahl/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/pkdahl/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then
+   . ${HOME}/.nix-profile/etc/profile.d/nix.sh;
+fi

@@ -1,6 +1,8 @@
 # -*- mode: shell-script; fill-column: 72; -*-
 # ~/.bashrc
 
+echo "Loading bashrc..."
+
 # source the system wide bashrc if it exists
 if [ -e /etc/bash.bashrc ] ; then
 	source /etc/bash.bashrc

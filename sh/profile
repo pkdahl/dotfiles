@@ -1,6 +1,8 @@
 # -*- mode: shell-script; fill-column: 72; -*-
 # ~/.profile
 
+echo "Loading profile..."
+
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
@@ -26,4 +28,14 @@ fi
 
 if [ -d "${HOME}/.local/opt/anaconda3/bin" ]; then
 	PATH=${HOME}/.local/opt/anaconda3/bin:${PATH}
+fi
+
+# Set MANPATH so it includes users' private man if it exists
+if [ -d "${HOME}/man" ]; then
+  MANPATH=${HOME}/man:${MANPATH}
+fi
+
+# Set INFOPATH so it includes users' private info if it exists
+if [ -d "${HOME}/info" ]; then
+  INFOPATH=${HOME}/info:${INFOPATH}
 fi
