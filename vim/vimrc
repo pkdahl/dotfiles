@@ -12,5 +12,9 @@ set foldmethod=marker "Allow backspacing in insert mode
 set bs=2
 
 if &t_Co > 2 || has("gui_running")
-        syntax on
+	syntax on
 endif
+
+augroup filetypedetect
+	au BufNewFile,BufRead *.maude setf maude
+augroup END

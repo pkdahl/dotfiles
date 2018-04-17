@@ -74,10 +74,9 @@ mail_clean:
 
 vim_install:
 	mkdir -p $(CACHE_HOME)/vim
-	ln -sf $(DOTFILES)/vim/vimrc $(HOME)/.vimrc
-
+	ln -sf $(DOTFILES)/vim       $(HOME)/.vim
 vim_clean:
-	rm -f $(HOME)/.vimrc
+	rm -f $(HOME)/.vim
 	rm -rf $(CACHE_HOME)/vim
 
 zsh_install:
