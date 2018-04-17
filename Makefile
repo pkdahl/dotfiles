@@ -1,4 +1,4 @@
-DOTFILES=`pwd`
+DOTFILES=$(PWD)
 CACHE_HOME=$(HOME)/.cache
 CONFIG_HOME=$(HOME)/.config
 DATA_HOME=$(HOME)/.local/share
