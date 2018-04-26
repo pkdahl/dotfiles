@@ -1,8 +1,6 @@
 # -*- mode: shell-script; fill-column: 72; -*-
 # ~/.bash_profile: executed by bash for login shells.
 
-echo "Loading bash_profile..."
-
 if [ -e "${HOME}/.profile" ] ; then
 	. ${HOME}/.profile
 fi

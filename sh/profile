@@ -1,8 +1,6 @@
 # -*- mode: shell-script; fill-column: 72; -*-
 # ~/.profile
 
-echo "Loading profile..."
-
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
