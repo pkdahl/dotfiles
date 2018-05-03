@@ -19,3 +19,6 @@ elif [ -f ${XDG_DATA_HOME}/liquidprompt ]; then
 fi
 
 which direnv &> /dev/null && eval "$(direnv hook zsh)"
+
+# OPAM configuration
+. /Users/pkdahl/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
