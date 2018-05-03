@@ -339,6 +339,41 @@
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
 
+;;;;; OCaml
+
+(use-package tuareg
+  :pin melpa-stable
+  :ensure t
+  :mode (("\\.ml[ily]?$" . tuareg-mode)
+		 ("\\.topml$" . tuareg-mode))
+  :config
+  (add-to-list 'load-path (concat
+						   (replace-regexp-in-string
+							"\n$"
+							""
+							(shell-command-to-string
+							 "opam config var share"))
+						   "/emacs/site-lisp"))
+  (require 'ocp-indent))
+
+(use-package merlin
+  :pin melpa-stable
+  :ensure t
+  :config
+  (add-hook 'tuareg-mode-hook #'merlin-mode)
+  (add-hook 'caml-mode-hook #'merlin-mode)
+  (setq merlin-command 'opam
+		merlin-use-auto-complete-mode t
+		merlin-error-after-save nil))
+
+(use-package utop
+  :pin melpa-stable
+  :ensure t
+  :config
+  (add-hook 'tuareg-mode-hook #'utop-minor-mode)
+  (if (executable-find "opam")
+	  (setq utop-command "opam config exec -- utop -emacs")))
+
 ;;;;; Python
 
 (use-package elpy
