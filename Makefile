@@ -28,6 +28,13 @@ bash_clean:
 	rm -f $(HOME)/.bash_logout
 	rm -rf $(BASH_CONFIG_HOME)
 
+direnv_install:
+	mkdir -p $(CONFIG_HOME)/dienv
+	ln -sf $(DOTFILES)/direnv/direnvrc $(CONFIG_HOME)/direnv/direnvrc
+
+direnv_clean:
+	rm -rf $(CONFIG_HOME)/direnv
+
 emacs_install:
 	ln -sf $(DOTFILES)/emacs $(HOME)/.emacs.d
 
