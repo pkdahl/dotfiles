@@ -1,0 +1,1 @@
+../../private/emacs/register-setup.el

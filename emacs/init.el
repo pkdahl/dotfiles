@@ -147,6 +147,11 @@
 (setq abbrev-file-name (concat config-dir "abbrev_defs")
 	  save-abbrevs t)
 
+;;;; Register
+
+(use-package register-setup
+  :after (register))
+
 ;;;; ibuffer
 
 (bind-key "C-x B" 'ibuffer)
