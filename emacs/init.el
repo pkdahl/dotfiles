@@ -156,7 +156,7 @@
 
 (bind-key "C-x B" 'ibuffer)
 
-;;;; ivy and counsel
+;;;; ivy, counsel & avy
 
 (use-package ivy
   :ensure t
