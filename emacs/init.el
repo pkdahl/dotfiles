@@ -204,7 +204,9 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-(bind-key "M-;" 'comment-or-uncomment-region)
+;; package is newcomment.el
+(bind-key "C-," 'comment-line)
+(bind-key "M-," 'comment-or-uncomment-region)
 
 ;;;; Bookmark
 
