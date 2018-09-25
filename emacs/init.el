@@ -150,7 +150,7 @@
 ;;;; Register
 
 (use-package register-setup
-  :after (register))
+  :after register)
 
 ;;;; ibuffer
 
@@ -169,11 +169,72 @@
 (use-package counsel
   :ensure t
   :bind* (("M-x"     . counsel-M-x)
-	  ("C-x C-f" . counsel-find-file))
+		  ("C-x C-f" . counsel-find-file))
   :config
   (setq counsel-find-file-ignore-regexp "\\.DS_Store\\|.git"))
 
+(use-package avy
+  :bind (("M-g l n" . avy-goto-line-below)
+		 ("M-g l p" . avy-goto-line-above)
+		 ("M-g l c" . avy-goto-char-in-line)
+		 ("M-g w"   . avy-goto-word-or-subword-1)))
+
+;;;; RYO modal
+
+(use-package ryo-modal
+  :ensure t
+  :commands ryo-modal-mode
+  :bind ("C-z" . ryo-modal-mode)
+  :config
+  (ryo-modal-key
+   "m" '(("." ryo-modal-repeat)
+		 ("h" backward-char)
+		 ("j" next-line)
+		 ("k" previous-line)
+		 ("l" forward-char)
+		 ("q" ryo-modal-mode))))
+
+(use-package hydra
+  :ensure t
+  :config
+  (setq hydra-is-helpful t)
+
+  (defhydra hydra-move
+	(:color pink :hint nil)
+"
+_n_ext line      _a_: beg of line  _<_: top
+_p_rev line      _e_: end of line  _>_: bottom
+_f_orward char   _[_: scroll up    _l_: recenter
+_b_ackward char  _]_: scroll down  _q_: quit
+"
+	("n" next-line)
+	("p" previous-line)
+	("f" forward-char)
+	("b" backward-char)
+	("a" beginning-of-line)
+	("e" move-end-of-line)
+	("[" scroll-up-command)
+	("]" scroll-down-command)
+	("l" recenter-top-bottom)
+	("<" beginning-of-buffer)
+	(">" end-of-buffer)
+
+	("jl" goto-line)
+	("jw" avy-goto-word-or-subword-1)
+
+	("t" (if (equal linum-mode t) (linum-mode -1) (linum-mode t))
+	 "toggle linum-mode")
+
+	("q" nil)
+	("ESC" nil)))
+
+  ;; define other hydras
+  ;; goto line
+  ;; jump to
+  ;; add mark stuff...
+
 ;;; Files
+
 
 (use-package recentf
   :commands (recentf-mode
@@ -363,6 +424,10 @@
 						   "/emacs/site-lisp"))
   (require 'ocp-indent))
 
+
+;; (add-to-list 'load-path "/Users/pkdahl/.opam/4.06.1/share/emacs/site-lisp")
+;;      (require 'ocp-indent)
+
 (use-package merlin
   :pin melpa-stable
   :ensure t
@@ -380,6 +445,14 @@
   (add-hook 'tuareg-mode-hook #'utop-minor-mode)
   (if (executable-find "opam")
 	  (setq utop-command "opam config exec -- utop -emacs")))
+
+;;;;; ReasonML
+
+;; https://github.com/reasonml-editor/reason-mode
+
+(use-package reason-mode
+  :pin melpa-stable
+  :mode ("\\.re\\'" "\\.rei\\'"))
 
 ;;;;; Python
 
@@ -417,7 +490,8 @@
   (("C-c l"   . org-store-link)
    ("C-c C-l" . org-insert-link))
   :config
-  (setq	org-hide-emphasis-markers t
+  (setq org-archive-location "archive/%s_archive::"
+		org-hide-emphasis-markers t
 		org-hide-leading-stars t
 		org-log-done 'time
 		org-startup-indented t)
