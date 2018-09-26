@@ -1,3 +1,6 @@
 [submodule "lib/liquidprompt"]
 	path = lib/liquidprompt
 	url = https://github.com/nojhan/liquidprompt.git
+[submodule "lib/spaceship-prompt"]
+	path = lib/spaceship-prompt
+	url = git@github.com:denysdovhan/spaceship-prompt.git
