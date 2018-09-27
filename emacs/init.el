@@ -68,7 +68,9 @@
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
   :pin melpa-stable
-  :init (exec-path-from-shell-initialize))
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
 
 ;;; Environment
 
@@ -100,14 +102,39 @@
 
 ;;;; Faces
 
-(when (member "Source Code Pro" (font-family-list))
-  (set-default-font "Source Code Pro"))
+;; (when (member "Source Code Pro" (font-family-list))
+;;   (set-default-font "Source Code Pro"))
+
+;; (when (member "Fira Code" (font-family-list))
+;;   (set-default-font "Fira Code"))
+
+(when (member "DejaVu Sans Mono" (font-family-list))
+  (set-default-font "DejaVu Sans Mono"))
+
+;; (when (member "mononoki Nerd Font" (font-family-list))
+;;   (set-default-font "mononoki Nerd Font"))
 
 ;;;; Theme
 
-(use-package leuven
-  :ensure leuven-theme
+(use-package color-theme-sanityinc-solarized
   :pin melpa-stable
+  :init
+  (when (member "Fira Code" (font-family-list))
+	(set-default-font "Fira Code"))
+  (load-theme 'sanityinc-solarized-dark t))
+
+(use-package dracula-theme
+  :disable t
+  :pin melpa-stable
+  :init
+  (when (member "Fira Code" (font-family-list))
+	(set-default-font "Fira Code"))
+  (load-theme 'dracula t))
+
+(use-package leuven
+  :disable t
+  :pin melpa-stable
+  :ensure leuven-theme
   :init
   (setq leuven-scale-outline-headlines nil
 		leuven-scale-org-agenda-structure nil)
@@ -133,8 +160,8 @@
 
 (unless (string< emacs-version "24.4")
   (use-package which-key
-	:ensure t
 	:pin melpa-stable
+	:ensure t
 	:diminish which-key-mode
 	:config
 	(which-key-mode)
@@ -234,7 +261,6 @@ _b_ackward char  _]_: scroll down  _q_: quit
   ;; add mark stuff...
 
 ;;; Files
-
 
 (use-package recentf
   :commands (recentf-mode
@@ -359,8 +385,10 @@ _b_ackward char  _]_: scroll down  _q_: quit
 					   :dyn-target (lambda (target msg)
 									 (mu4e-get-trash-folder msg))
 					   :action (lambda (docid msg target)
-								 (mu4e~proc-move docid
-								   (mu4e~mark-check-target target) "-N")))))
+								 (mu4e~proc-move
+								  docid
+								  (mu4e~mark-check-target target)
+								  "-N")))))
 
 (use-package org-mu4e
   :after (mu4e org-mode))
@@ -411,17 +439,18 @@ _b_ackward char  _]_: scroll down  _q_: quit
 
 (use-package tuareg
   :pin melpa-stable
-  :ensure t
   :mode (("\\.ml[ily]?$" . tuareg-mode)
 		 ("\\.topml$" . tuareg-mode))
   :config
-  (add-to-list 'load-path (concat
-						   (replace-regexp-in-string
-							"\n$"
-							""
-							(shell-command-to-string
-							 "opam config var share"))
-						   "/emacs/site-lisp"))
+  (add-to-list
+   'load-path
+   (concat
+	(replace-regexp-in-string
+	 "\n$"
+	 ""
+	 (shell-command-to-string
+	  "opam config var share"))
+	"/emacs/site-lisp"))
   (require 'ocp-indent))
 
 
@@ -430,7 +459,6 @@ _b_ackward char  _]_: scroll down  _q_: quit
 
 (use-package merlin
   :pin melpa-stable
-  :ensure t
   :config
   (add-hook 'tuareg-mode-hook #'merlin-mode)
   (add-hook 'caml-mode-hook #'merlin-mode)
@@ -440,7 +468,6 @@ _b_ackward char  _]_: scroll down  _q_: quit
 
 (use-package utop
   :pin melpa-stable
-  :ensure t
   :config
   (add-hook 'tuareg-mode-hook #'utop-minor-mode)
   (if (executable-find "opam")
@@ -486,9 +513,8 @@ _b_ackward char  _]_: scroll down  _q_: quit
 ;;;;; Org
 
 (use-package org
-  :bind
-  (("C-c l"   . org-store-link)
-   ("C-c C-l" . org-insert-link))
+  :bind (("C-c l"   . org-store-link)
+		 ("C-c C-l" . org-insert-link))
   :config
   (setq org-archive-location "archive/%s_archive::"
 		org-hide-emphasis-markers t
@@ -496,10 +522,10 @@ _b_ackward char  _]_: scroll down  _q_: quit
 		org-log-done 'time
 		org-startup-indented t)
   (add-hook 'org-mode-hook
+		(lambda ()
+		  (add-hook 'before-save-hook
 			(lambda ()
-			  (add-hook 'before-save-hook
-						(lambda ()
-						  (whitespace-cleanup))))))
+			  (whitespace-cleanup))))))
 
 (use-package org-mac-link
   :if (string-equal system-type "darwin")
@@ -508,8 +534,7 @@ _b_ackward char  _]_: scroll down  _q_: quit
 
 (use-package org-agenda
   :after (org)
-  :bind
-  ("C-c a" . org-agenda)
+  :bind ("C-c a" . org-agenda)
   :config
   (setq org-agenda-start-on-weekday nil
 		org-agenda-time-leading-zero t))
@@ -553,9 +578,9 @@ _b_ackward char  _]_: scroll down  _q_: quit
    ("\\.markdown\\'" . markdown-mode))
   :init
   (add-hook 'markdown-mode-hook
-			(lambda ()
-			  (auto-fill-mode 0)
-			  (visual-line-mode 1))))
+		(lambda ()
+		  (auto-fill-mode 0)
+		  (visual-line-mode 1))))
 
 ;;; Customize
 
