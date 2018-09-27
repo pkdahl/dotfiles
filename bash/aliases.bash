@@ -4,10 +4,10 @@ alias rm="rm -i"
 alias mv="mv -i"
 
 # ls
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	alias ls="ls --color"
-else
+if [[ "$OSTYPE" == darwin* ]]; then
 	alias ls="ls -G"
+else
+	alias ls="ls --color"
 fi
 alias ll="ls -l"
 alias ll.="ls -lA"
