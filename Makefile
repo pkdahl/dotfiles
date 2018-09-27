@@ -7,7 +7,7 @@ BASH_CONFIG_HOME=$(CONFIG_HOME)/bash
 DOT_ZSH=$(DOTFILES)/zsh
 ZSH_CACHE_HOME=$(CACHE_HOME)/zsh
 ZSH_CONFIG_HOME=$(CONFIG_HOME)/zsh
-
+ZSH_DATA_HOME=$(DATA_HOME)/zsh
 
 .PHONY: bash_clean git_clean irssi_clean
 
@@ -89,13 +89,14 @@ vim_clean:
 zsh_install:
 	mkdir -p $(ZSH_CACHE_HOME)
 	mkdir -p $(ZSH_CONFIG_HOME)
+	mkdir -p $(ZSH_DATA_HOME)
 	ln -sf $(DOT_ZSH)/zshenv         $(HOME)/.zshenv
 	ln -sf $(DOT_ZSH)/zprofile       $(HOME)/.zprofile
 	ln -sf $(DOT_ZSH)/zshrc          $(HOME)/.zshrc
 	ln -sf $(DOT_ZSH)/aliases.zsh    $(ZSH_CONFIG_HOME)/aliases.zsh
 	ln -sf $(DOT_ZSH)/completion.zsh $(ZSH_CONFIG_HOME)/completion.zsh
 	ln -sf $(DOT_ZSH)/history.zsh    $(ZSH_CONFIG_HOME)/history.zsh
-	ln -sf $(DOT_ZSH)/prompt.zsh     $(ZSH_CONFIG_HOME)/prompt.zsh
+#    ln -sf $(DOT_ZSH)/prompt.zsh     $(ZSH_CONFIG_HOME)/prompt.zsh
 
 zsh_clean:
 	rm -rf $(ZSH_CACHE_HOME)

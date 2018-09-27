@@ -11,14 +11,12 @@ source $ZSH_CONFIG_HOME/aliases.zsh
 source $ZSH_CONFIG_HOME/completion.zsh
 source $ZSH_CONFIG_HOME/history.zsh
 
-# Liquid Prompt
-if [ -f /usr/local/share/liquidprompt ]; then
-	[[ $- = *i* ]] && source /usr/local/share/liquidprompt;
-elif [ -f ${XDG_DATA_HOME}/liquidprompt ]; then
-	[[ $- = *i* ]] && source ${XDG_DATA_HOME}/liquidprompt;
-fi
+autoload -U promptinit; promptinit
+prompt spaceship
 
 which direnv &> /dev/null && eval "$(direnv hook zsh)"
+
+which rbenv &> /dev/null && eval "$(rbenv init -)"
 
 # OPAM configuration
 . /Users/pkdahl/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

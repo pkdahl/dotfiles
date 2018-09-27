@@ -3,6 +3,13 @@
 typeset -U path # Only unique entries
 path=("$HOME/.local/bin" /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin "$path[@]")
 
+if [[ -d "$HOME/.rbenv" ]]; then
+   path=("$HOME/.rbenv/shims" $path)
+fi
+
+typeset -U fpath
+fpath=("$ZSH_DATA_HOME/site-functions" $fpath)
+
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
    . $HOME/.nix-profile/etc/profile.d/nix.sh;
 fi

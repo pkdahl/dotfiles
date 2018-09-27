@@ -10,21 +10,29 @@ alias rm='nocorrect rm -i'
 alias mkdir='nocorrect mkdir'
 
 # ls
-alias ls='ls -G'           # always colours
+if [[ "$OSTYPE" == darwin* ]]; then
+	alias ls="ls -G"
+else
+	alias ls="ls --color"
+fi
+
 alias ll='ls -l'
 alias l.='ls -A'
 alias ll.='ls -Al'
 alias lsd='ls -ld *(-/DN)' # list only dirs
+
+if $(which colorls &> /dev/null); then
+	alias lc="colorls --gs"
+	alias lc.="lc -A"
+	alias lcl="lc -l"
+	alias lcl.="lcl -A"
+fi
 
 # misc
 alias df='df -h'
 alias du='du -h'
 
 # directories
-alias prj='cd ${HOME}/projects'
-alias 1060='cd ${HOME}/projects/uio-inf1060'
-alias 1300='cd ${HOME}/projects/uio-inf1300'
-alias 2220='cd ${HOME}/projects/uio-inf2220'
-alias 3110='cd ${HOME}/projects/uio-inf3110'
-alias 3331='cd ${HOME}/projects/uio-inf3331'
-alias 4171='cd ${HOME}/projects/uio-inf4171'
+alias prj="cd $HOME/Projects"
+alias 4490="cd $HOME/Project/inf4490"
+alias 4171="cd $HOME/Projects/inf4171"
