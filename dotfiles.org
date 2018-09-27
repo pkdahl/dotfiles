@@ -105,6 +105,55 @@ Remove directories:
 - =rm -rf private/=
 - =tar xvf private.tar=
 
+* Setup September 2018
+
+- Setup SSH keys
+- Download dotfiles
+
+- macOS settings
+
+- Install homebrew
+- Install gnupg
+  =brew install gnupg=
+- Install pass
+  =brew install pass=
+- Install emacs
+  =brew cask install emacs=
+- Install direnv
+  =brew install direnv=
+- Vim settings
+- Install Python 3
+  =brew install python=
+- iTerm 2
+  =brew cask install iterm2=
+  Color theme: https://github.com/mnk400/dot-files/blob/master/termnk.itermcolors
+- Fonts
+  =brew tap homebrew/cask-fonts=
+  =brew cask install font-dejavu-sans=
+  =brew cask install font-dejavusansmono-nerd-font=
+  =brew cask install font-fira-code=
+  =brew cask install font-firacode-nerd-font=
+  =brew cask install font-hack=
+  =brew cask install font-inconsolata=
+  =brew cask install font-source-code-pro=
+  =brew cask install font-mononoki-nerd-font=
+- [[https://github.com/athityakumar/colorls][colorls]]
+  =brew install ruby rbenv=
+  =eval "$(rbenv init -)"=
+  =rbenv install 2.5.1=
+  =rbenv global 2.5.1=
+  =gem install colorls=
+
+
+- Zsh
+#
+mkdir -p ZSH_DATA_HOME/site-functions
+ls -sf DOTDIR/lib/spaceship-prompt/spaceship.zsh ZSH_DATA_HOME/prompt_spaceship_setup
+## Remove prompt.zsh
+
+- Wget
+  =brew install wget=
+
 * Links
 
 ** Mail
