@@ -23,9 +23,9 @@ alias lsd='ls -ld *(-/DN)' # list only dirs
 
 if $(which colorls &> /dev/null); then
 	alias lc="colorls --gs"
-	alias lc.="lc -A"
-	alias lcl="lc -l"
-	alias lcl.="lcl -A"
+	alias l.c="lc -A"
+	alias llc="lc -l"
+	alias ll.c="lcl -A"
 fi
 
 # misc
