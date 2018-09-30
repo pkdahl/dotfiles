@@ -117,6 +117,7 @@
 ;;;; Theme
 
 (use-package color-theme-sanityinc-solarized
+  :disabled t
   :pin melpa-stable
   :init
   (when (member "Fira Code" (font-family-list))
@@ -124,7 +125,7 @@
   (load-theme 'sanityinc-solarized-dark t))
 
 (use-package dracula-theme
-  :disable t
+  :disabled t
   :pin melpa-stable
   :init
   (when (member "Fira Code" (font-family-list))
@@ -132,13 +133,21 @@
   (load-theme 'dracula t))
 
 (use-package leuven
-  :disable t
+  :disabled t
   :pin melpa-stable
   :ensure leuven-theme
   :init
   (setq leuven-scale-outline-headlines nil
 		leuven-scale-org-agenda-structure nil)
   (load-theme 'leuven t))
+
+(use-package zenburn-theme
+  :pin melpa-stable
+  :init
+  (when (member "Fira Code" (font-family-list))
+	(set-default-font "Fira Code"))
+  (load-theme 'zenburn t))
+
 
 ;;;; OS X keys
 
@@ -328,6 +337,7 @@ _b_ackward char  _]_: scroll down  _q_: quit
 ;; https://ebzzry.github.io/emacs-pairs.html
 
 (use-package smartparens
+  :disabled t
   :pin melpa-stable
   :after smartparens-config
   :init
