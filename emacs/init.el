@@ -161,7 +161,7 @@
 		ns-option-modifier 'nil          ; ns-alternate-modifier
 		ns-command-modifier 'meta        ; mac-command-modifier
 		ns-right-command-modifier 'super ; mac-right-command-modifier
-		ns-right-option-modifier 'alt))
+		ns-right-option-modifier 'nil))
 
 ;;; Help
 
