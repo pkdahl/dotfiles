@@ -108,6 +108,9 @@ Remove directories:
 * Setup September 2018
 
 - Setup SSH keys
+  =ssh-keygen -t rsa -b 4096 -C "user@host"=
+  =ssh-copy-id -i ~/.ssh/id_rsa.pub user@remote_host=
+
 - Download dotfiles
 
 - macOS settings
@@ -143,7 +146,6 @@ Remove directories:
   =rbenv install 2.5.1=
   =rbenv global 2.5.1=
   =gem install colorls=
-
 
 - Zsh
 #
