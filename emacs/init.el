@@ -430,6 +430,15 @@ _b_ackward char  _]_: scroll down  _q_: quit
 				tab-width 4
 				indent-tabs-mode t))
 
+;;;;; Coq
+(use-package proof-site
+  :mode ("\\.v\\'" . coq-mode)
+  :load-path (lambda ()
+			   (let ((cmd (concat "printf %s \"$(find "
+								  package-user-dir
+								  " -name generic)\"")))
+				 (shell-command-to-string cmd))))
+
 ;;;;; Elm
 
 (use-package elm-mode
