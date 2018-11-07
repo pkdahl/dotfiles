@@ -576,16 +576,17 @@ _b_ackward char  _]_: scroll down  _q_: quit
 
 ;; Enable org-mode-like folding in emacs-lisp-mode
 
-;; (use-package outshine
-;;   :pin melpa
-;;   :ensure t
-;;   :diminish outline-minor-mode
-;;   :init
-;;   (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
-;;   (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
-;;   :config
-;;   (setq outshine-startup-folded-p t
-;;         outshine-use-speed-commands t))
+(use-package outshine
+  :if (> emacs-major-version 24)
+  :pin melpa-stable
+  :ensure t
+  :diminish outline-minor-mode
+  :init
+  (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+  (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
+  :config
+  (setq outshine-startup-folded-p t
+		outshine-use-speed-commands t))
 
 ;;;; Markdown
 
