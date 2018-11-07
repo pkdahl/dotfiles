@@ -445,6 +445,11 @@ _b_ackward char  _]_: scroll down  _q_: quit
   :pin melpa-stable
   :mode "\\.elm\\'")
 
+;;;;; Maude
+
+(use-package maude-mode
+  :mode "\\.maude\\'")
+
 ;;;;; Haskell
 
 (use-package haskell-mode
