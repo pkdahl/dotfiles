@@ -589,6 +589,7 @@ _b_ackward char  _]_: scroll down  _q_: quit
   :init
   (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
   (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
+  (add-hook 'ruby-mode-hook 'outline-minor-mode)
   :config
   (setq outshine-startup-folded-p t
 		outshine-use-speed-commands t))
