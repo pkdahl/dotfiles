@@ -461,28 +461,26 @@ _b_ackward char  _]_: scroll down  _q_: quit
 
 ;;;;; OCaml
 
+(defvar opam-lisp-dir
+  (if (executable-find "opam")
+	  (let* ((opam-share-dir (replace-regexp-in-string "\n$" "" (shell-command-to-string "opam config var share")))
+			 (opam-lisp-dir (concat opam-share-dir "/emacs/site-lisp")))
+		(unless (member opam-lisp-dir load-path)
+		  (add-to-list 'load-path opam-lisp-dir))
+		opam-lisp-dir)
+	nil)
+  "opam directory for Emacs files")
+
 (use-package tuareg
-  :pin melpa-stable
+  :if (when opam-lisp-dir)
+  :ensure nil
   :mode (("\\.ml[ily]?$" . tuareg-mode)
 		 ("\\.topml$" . tuareg-mode))
-  :config
-  (add-to-list
-   'load-path
-   (concat
-	(replace-regexp-in-string
-	 "\n$"
-	 ""
-	 (shell-command-to-string
-	  "opam config var share"))
-	"/emacs/site-lisp"))
-  (require 'ocp-indent))
-
-
-;; (add-to-list 'load-path "/Users/pkdahl/.opam/4.06.1/share/emacs/site-lisp")
-;;      (require 'ocp-indent)
+  :config (require 'ocp-indent))
 
 (use-package merlin
-  :pin melpa-stable
+  :if (when opam-lisp-dir)
+  :ensure nil
   :config
   (add-hook 'tuareg-mode-hook #'merlin-mode)
   (add-hook 'caml-mode-hook #'merlin-mode)
@@ -491,7 +489,8 @@ _b_ackward char  _]_: scroll down  _q_: quit
 		merlin-error-after-save nil))
 
 (use-package utop
-  :pin melpa-stable
+  :if (when opam-lisp-dir)
+  :ensure nil
   :config
   (add-hook 'tuareg-mode-hook #'utop-minor-mode)
   (if (executable-find "opam")
