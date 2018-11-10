@@ -4,6 +4,18 @@ require 'rake'
 DOTFILES_DIR = File.dirname(__FILE__)
 HOME_DIR = ENV['HOME']
 CONFIG_DIR = HOME_DIR + "/.config"
+DATA_DIR = HOME_DIR + "/.local/share"
+CACHE_DIR = HOME_DIR + "/.cache"
+
+desc "Test"
+task :test do
+  zsh = Zsh.new
+  zsh.remove
+end
+
+# * Emacs
+
+# * Zsh
 
 desc "Setup Zsh"
 task :zsh do
@@ -11,50 +23,98 @@ task :zsh do
   zsh.setup
 end
 
+desc "Remove Zsh"
+task :zsh_remove do
+  zsh = Zsh.new
+  zsh.remove
+end
+
 class Zsh
 
   def initialize
-    @symlinks = set_symlinks
+    @source_dir = "#{DOTFILES_DIR}/zsh"
+
+    @config_dir = "#{CONFIG_DIR}/zsh"
+    @data_dir = "#{DATA_DIR}/zsh"
+    @cache_dir = "#{CACHE_DIR}/zsh"
+
+    @symlinks = Hash.new
+    @dirs = Array.new
+
+    @dirs << @config_dir << @data_dir << @cache_dir
+    add_startup_files
+    add_spaceship_prompt
    end
 
-  def set_symlinks
-    symlinks = Hash.new
-    source_dir  = "#{DOTFILES_DIR}/zsh"
-    target_dir = "#{CONFIG_DIR}/zsh"
-
-    Dir.entries(source_dir).reject{ |f| f =~ /^.{1,2}$/ }.each do |f|
-      if File.fnmatch("*.zsh", f)
-        symlinks[:"#{source_dir}/#{f}"] = "#{target_dir}/#{f}"
-      else
-        symlinks[:"#{source_dir}/#{f}"] = "#{HOME_DIR}/.#{f}"
-      end
-    end
-
-    return symlinks
-  end
-
   def setup
-    len = @symlinks.keys.map{|k| k.length}.max - 2
-
-    @symlinks.each do |source, target|
-      if !File.exist?(target)
-        puts sprintf("linking %-#{len}s -> %s", target, source)
-        File.symlink("#{source}", "#{target}")
-      else
-        puts sprintf("link    %-#{len}s    already exists", target)
-      end
-    end
+    mk_dirs(@dirs)
+    mk_links(@symlinks)
   end
 
   def remove
-    @symlinks.each do |_, target|
-      if File.exists?(target)
-        puts "unlinking #{target}"
-        File.delete(target)
+    rm_links(@symlinks)
+    rm_dirs(@dirs.reverse)
+  end
+
+  def add_startup_files
+    Dir.entries(@source_dir).reject{ |f| f =~ /^.{1,2}$/ }.each do |f|
+      if File.fnmatch("*.zsh", f)
+        @symlinks[:"#{@source_dir}/#{f}"] = "#{@config_dir}/#{f}"
+      else
+        @symlinks[:"#{@source_dir}/#{f}"] = "#{HOME_DIR}/.#{f}"
       end
     end
   end
+  
+  def add_spaceship_prompt
+    target_dir = "#{@data_dir}/site-functions"
+    target = "#{target_dir}/prompt_spaceship_setup"
+    source = "#{DOTFILES_DIR}/lib/spaceship-prompt/spaceship.zsh"
 
+    @dirs << target_dir
+    @symlinks[source] = target
+  end
+  
+end
+
+# * Auxiliary methods
+
+def mk_dirs(dirs)
+  dirs.each do |d|
+    if !File.exists?(d)
+      puts "making directory #{d}"
+      FileUtils.mkdir_p(d)
+    end
+  end
+end
+
+def rm_dirs(dirs)
+  dirs.each do |d|
+    if File.exists?(d)
+      puts "removing directory #{d}"
+      FileUtils.rmdir(d)
+    end
+  end
+end
+
+def mk_links(links)
+  len = links.keys.map{|k| k.length}.max - 2
+
+  links.each do |source, target|
+    if !File.exist?(target)
+      puts sprintf("linking %-#{len}s -> %s", target, source)
+      File.symlink("#{source}", "#{target}")
+    end
+  end
+end
+
+def rm_links(links)
+  links.each do |_, target|
+    if File.exists?(target)
+      puts "unlinking #{target}"
+      File.delete(target)
+    end
+  end
 end
 
 def installed?(pkg)
