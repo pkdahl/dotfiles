@@ -3,7 +3,6 @@
 
 bindkey -e # Emacs keybindings
 
-setopt AUTO_PUSHD         # Any directory changing command is treated as pushd
 DIRSTACKSIZE=8
 setopt NO_BEEP            # Never beep
 

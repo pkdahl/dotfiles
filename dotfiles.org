@@ -1,6 +1,6 @@
 * Tasks
 
-** TODO Remove AUTO_PUSHD in Zsh
+** DONE Remove AUTO_PUSHD in Zsh
 
 ** DONE Git setup in Rakefile
 
