@@ -169,6 +169,10 @@ Remove directories:
 
 * Links
 
+** Rake
+
+[[https://www.stuartellis.name/articles/rake/][Using Rake to Automate Tasks · Field Notes]]
+
 ** Mail
 
 - [[http://stevelosh.com/blog/2012/10/the-homely-mutt/#how-i-use-email][Steve Losh's mutt article]]
