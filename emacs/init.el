@@ -431,13 +431,13 @@ _b_ackward char  _]_: scroll down  _q_: quit
 				indent-tabs-mode t))
 
 ;;;;; Coq
+
 (use-package proof-site
+  :if (package-installed-p 'proof-general)
   :mode ("\\.v\\'" . coq-mode)
-  :load-path (lambda ()
-			   (let ((cmd (concat "printf %s \"$(find "
-								  package-user-dir
-								  " -name generic)\"")))
-				 (shell-command-to-string cmd))))
+  :init (when (package-installed-p 'proof-general)
+		  (add-to-list 'load-path (let ((cmd (concat "printf %s \"$(find " package-user-dir " -name generic)\"")))
+									(shell-command-to-string cmd)))))
 
 ;;;;; Elm
 
