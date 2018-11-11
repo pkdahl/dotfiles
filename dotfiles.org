@@ -1,3 +1,9 @@
+* Tasks
+
+** TODO Remove AUTO_PUSHD in Zsh
+
+** TODO Git setup in Rakefile
+
 * Homebrew
 
 ** Core
@@ -121,6 +127,8 @@ Remove directories:
   =brew install gnupg=
 
 - Install pass
+  pass depends on gnupg
+
   =brew install pass=
 
 - Install emacs

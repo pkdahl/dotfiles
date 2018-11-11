@@ -15,6 +15,46 @@ end
 
 # * Emacs
 
+desc "Setup Emacs"
+task :emacs do
+  emacs = Emacs.new
+  emacs.setup
+end
+
+desc "Remove Emacs"
+task :emacs_remove do
+  emacs = Emacs.new
+  emacs.remove
+end
+
+class Emacs
+
+  def initialize
+    @source_dir = "#{DOTFILES_DIR}/emacs"
+
+    @config_dir = "#{HOME_DIR}/emacs"
+    @data_dir = "#{DATA_DIR}/emacs"
+    @cache_dir = "#{CACHE_DIR}/emacs"
+
+    @links = Hash.new
+    @dirs = Array.new
+
+    @links[@source_dir] = @config_dir
+    @dirs << @data_dir << @cache_dir
+  end
+
+  def setup
+    mk_dirs(@dirs)
+    mk_links(@links)
+  end
+
+  def remove
+    rm_links(@links)
+    rm_dirs(@dirs.reverse)
+  end
+    
+end
+
 # * Zsh
 
 desc "Setup Zsh"
