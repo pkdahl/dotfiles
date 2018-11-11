@@ -2,7 +2,7 @@
 
 ** TODO Remove AUTO_PUSHD in Zsh
 
-** TODO Git setup in Rakefile
+** DONE Git setup in Rakefile
 
 * Homebrew
 
@@ -107,7 +107,7 @@ Remove directories:
 - =tar cvf private.tar private
 - =gpg -c private.tar=
 
-- =gpg -d private.tar.gpg -o private.tar=
+- =gpg --decrypt private.tar.gpg > private.tar=
 - =rm -rf private/=
 - =tar xvf private.tar=
 

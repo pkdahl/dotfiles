@@ -55,6 +55,42 @@ class Emacs
     
 end
 
+# * Git
+
+desc "Setup Git"
+task :git do
+  git = Git.new
+  git.setup
+end
+
+desc "Remove Git"
+task :git_remove do
+  git = Git.new
+  git.remove
+end
+
+class Git
+
+  def initialize
+    @source_dir = "#{DOTFILES_DIR}/git"
+
+    @config_dir = "#{CONFIG_DIR}/git"
+
+    @links = Hash.new
+
+    @links[@source_dir] = @config_dir
+  end
+
+  def setup
+    mk_links(@links)
+  end
+
+  def remove
+    rm_links(@links)
+  end
+  
+end
+
 # * Zsh
 
 desc "Setup Zsh"
