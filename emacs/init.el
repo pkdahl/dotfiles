@@ -461,25 +461,24 @@ _b_ackward char  _]_: scroll down  _q_: quit
 
 ;;;;; OCaml
 
-(defvar opam-lisp-dir
-  (if (executable-find "opam")
-	  (let* ((opam-share-dir (replace-regexp-in-string "\n$" "" (shell-command-to-string "opam config var share")))
-			 (opam-lisp-dir (concat opam-share-dir "/emacs/site-lisp")))
-		(unless (member opam-lisp-dir load-path)
-		  (add-to-list 'load-path opam-lisp-dir))
-		opam-lisp-dir)
-	nil)
-  "opam directory for Emacs files")
+(defvar opam-share
+  (let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
+	(when (and opam-share (file-directory-p opam-share))
+	  ;; Register Merlin
+	  (let ((opam-lisp (expand-file-name "emacs/site-lisp" opam-share)))
+		(unless (member opam-lisp load-path)
+		  (add-to-list 'load-path opam-lisp)))
+	  opam-share))
+  "opam share directory")
 
 (use-package tuareg
-  :if (when opam-lisp-dir)
+  :if opam-share
   :ensure nil
-  :mode (("\\.ml[ily]?$" . tuareg-mode)
-		 ("\\.topml$" . tuareg-mode))
-  :config (require 'ocp-indent))
+  :mode (("\\.ml[ilpy]?$" . tuareg-mode)
+		 ("\\.topml$" . tuareg-mode)))
 
 (use-package merlin
-  :if (when opam-lisp-dir)
+  :if opam-share
   :ensure nil
   :config
   (add-hook 'tuareg-mode-hook #'merlin-mode)
@@ -488,8 +487,16 @@ _b_ackward char  _]_: scroll down  _q_: quit
 		merlin-use-auto-complete-mode t
 		merlin-error-after-save nil))
 
+(use-package ocamlformat
+  :if opam-share
+  :config
+  (add-hook 'tuareg-mode-hook
+			(lambda ()
+			  (define merlin-mode-map (kbd "C-M-<tab>") 'ocamlformat)
+			  (add-hook 'before-save-hook 'ocamlformat-before-save))))
+
 (use-package utop
-  :if (when opam-lisp-dir)
+  :if opam-share
   :ensure nil
   :config
   (add-hook 'tuareg-mode-hook #'utop-minor-mode)
