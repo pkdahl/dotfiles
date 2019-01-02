@@ -7,6 +7,10 @@ if [[ -d "$HOME/.rbenv" ]]; then
    path=("$HOME/.rbenv/shims" $path)
 fi
 
+if [[ -d "$HOME/.cargo/bin" ]]; then
+   path=("$HOME/.cargo/bin" $path)
+fi
+
 typeset -U fpath
 fpath=("$ZSH_DATA_HOME/site-functions" $fpath)
 
