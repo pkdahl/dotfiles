@@ -33,6 +33,13 @@ alias df='df -h'
 alias du='du -h'
 
 # directories
-alias prj="cd $HOME/Projects"
+if [[ -d "$HOME/Projects" ]]; then
+	alias prj="cd $HOME/Projects"
+fi
+
 alias 4490="cd $HOME/Project/inf4490"
 alias 4171="cd $HOME/Projects/inf4171"
+
+if [[ -d "$HOME/Documents" ]]; then
+	alias docs="cd $HOME/Documents"
+fi
