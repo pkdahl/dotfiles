@@ -73,6 +73,14 @@
 
 * Notes
 
+** Installing Python package
+
+set environment variable PYTHONUSERBASE to ~/.local
+now doing =pip3 install --user [package]= will install package to ~/.local/lib/python/site-pacakges
+and any binaries to ~/.local/bin
+
+python module =site= have function getuserbase()
+
 ** Nix
 
 [[http://www.cse.chalmers.se/~bernardy/nix.html][Nix for Haskell Development: HOWTO]]

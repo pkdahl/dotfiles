@@ -12,3 +12,5 @@ export HOMEBREW_NO_GITHUB_API=1
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 export MAUDE_LIB=$HOME/.local/opt/maude
+
+export PYTHONUSERBASE=$HOME/.local
