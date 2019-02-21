@@ -3,10 +3,6 @@
 typeset -U path # Only unique entries
 path=("$HOME/.local/bin" /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin "$path[@]")
 
-if [[ -d "$HOME/.rbenv" ]]; then
-   path=("$HOME/.rbenv/shims" $path)
-fi
-
 if [[ -d "$HOME/.cargo/bin" ]]; then
    path=("$HOME/.cargo/bin" $path)
 fi
