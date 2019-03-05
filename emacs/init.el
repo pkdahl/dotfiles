@@ -556,7 +556,12 @@ _b_ackward char  _]_: scroll down  _q_: quit
 		org-hide-emphasis-markers t
 		org-hide-leading-stars t
 		org-log-done 'time
-		org-startup-indented t)
+		org-startup-indented t
+		org-todo-keywords '((sequence "TODO" "|" "DONE")
+							(sequence "WAITING" "|" "CANCELLED"))
+		org-todo-keyword-faces '(("WAITING" :foreground "orange" :weight bold))
+		org-modules '(org-bbdb org-bibtex org-docview org-gnus org-habit
+					  org-info org-irc org-mhe org-rmail org-w3m))
   (add-hook 'org-mode-hook
 		(lambda ()
 		  (add-hook 'before-save-hook
@@ -573,7 +578,17 @@ _b_ackward char  _]_: scroll down  _q_: quit
   :bind ("C-c a" . org-agenda)
   :config
   (setq org-agenda-start-on-weekday nil
-		org-agenda-time-leading-zero t))
+		org-agenda-time-leading-zero t)
+  (setq org-agenda-custom-commands
+		'(("c" "Agenda"
+		   ((tags "PRIORITY=\"A\""
+				  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+				   (org-agenda-overriding-header "High-priority tasks:")))
+			(agenda ""
+					((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))))
+			(tags-todo "-TODO=\"WAITING\"-PRIORITY=\"A\"-PRIORITY=\"C\""
+					   ((org-agenda-skip-function '(org-agenda-skip-if nil '(scheduled deadline)))
+						(org-agenda-overriding-header "Normal-priority tasks:"))))))))
 
 (use-package org-capture
   :after (org)
