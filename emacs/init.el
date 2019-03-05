@@ -94,6 +94,12 @@
 
 (column-number-mode 1)
 
+;;;; Minibuffer > Savehist
+
+(use-package savehist-mode
+  :init
+  (setq savehist-file (concat cache-dir "history")))
+
 ;;;; I18n
 
 (set-language-environment "UTF-8")
