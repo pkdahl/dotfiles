@@ -112,7 +112,7 @@ Remove directories:
 
 ** tar
 
-- =tar cvf private.tar private
+- =tar cvf private.tar private=
 - =gpg -c private.tar=
 
 - =gpg --decrypt private.tar.gpg > private.tar=
