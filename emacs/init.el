@@ -573,6 +573,7 @@ _b_ackward char  _]_: scroll down  _q_: quit
 		org-hide-emphasis-markers t
 		org-hide-leading-stars t
 		org-log-done 'time
+		org-log-into-drawer t
 		org-startup-indented t
 		org-todo-keywords '((sequence "TODO" "|" "DONE")
 							(sequence "WAITING" "|" "CANCELLED"))
