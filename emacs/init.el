@@ -549,8 +549,25 @@ _b_ackward char  _]_: scroll down  _q_: quit
 ;;;;; Org
 
 (use-package org
-  :bind (("C-c l"   . org-store-link)
-		 ("C-c C-l" . org-insert-link))
+
+  :bind
+  (("C-c l"   . org-store-link)
+   ("C-c C-l" . org-insert-link))
+
+  :preface
+  (defface org-todo-keyword-waiting-face
+	'((((class color))
+	   (:foreground "orange" :weight bold))
+	  (t (:weight bold)))
+	"face to fontify Org TODO keyword WAITING"
+	:group 'org)
+  (defface org-todo-keyword-cancelled-face
+	'((((class color))
+	   (:foreground "yellow" :weight bold))
+	  (t (:weight bold)))
+	"face to fontify Org TODO keyword CANCELLED"
+	:group 'org)
+
   :config
   (setq org-archive-location "archive/%s_archive::"
 		org-hide-emphasis-markers t
@@ -559,9 +576,8 @@ _b_ackward char  _]_: scroll down  _q_: quit
 		org-startup-indented t
 		org-todo-keywords '((sequence "TODO" "|" "DONE")
 							(sequence "WAITING" "|" "CANCELLED"))
-		org-todo-keyword-faces '(("WAITING" :foreground "orange" :weight bold))
-		org-modules '(org-bbdb org-bibtex org-docview org-gnus org-habit
-					  org-info org-irc org-mhe org-rmail org-w3m))
+		org-todo-keyword-faces '(("WAITING" . org-todo-keyword-waiting-face)
+								 ("CANCELLED" . org-todo-keyword-cancelled-face)))
   (add-hook 'org-mode-hook
 		(lambda ()
 		  (add-hook 'before-save-hook
@@ -574,7 +590,7 @@ _b_ackward char  _]_: scroll down  _q_: quit
   :bind ("C-c m" . org-mac-grab-link))
 
 (use-package org-agenda
-  :after (org)
+  :after (org org-habit)
   :bind ("C-c a" . org-agenda)
   :config
   (setq org-agenda-start-on-weekday nil
@@ -595,6 +611,10 @@ _b_ackward char  _]_: scroll down  _q_: quit
   :demand t
   :bind
   ("C-c c" . org-capture))
+
+(use-package org-habit
+  :after (org)
+  :init (add-to-list 'org-modules 'org-habit))
 
 (use-package org-id
   :after (org)

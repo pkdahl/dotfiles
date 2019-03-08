@@ -119,6 +119,12 @@ Remove directories:
 - =rm -rf private/=
 - =tar xvf private.tar=
 
+** Emacs
+
+*** Org TODO keyword faces
+- [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Defining-Faces.html#Defining-Faces][Defining Faces - GNU Emacs Lisp Reference Manual]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Applying-Customizations.html#Applying-Customizations][Applying Customizations - GNU Emacs Lisp Reference Manual]]
+
 * Setup September 2018
 
 - Setup SSH keys
