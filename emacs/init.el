@@ -589,6 +589,11 @@ _b_ackward char  _]_: scroll down  _q_: quit
   :after (org)
   :bind ("C-c m" . org-mac-grab-link))
 
+(defun time-string-days-ago (n)
+  "Description"
+  (format-time-string "[%Y-%m-%d]"
+					  (time-subtract (current-time) (days-to-time n))))
+
 (use-package org-agenda
   :after (org org-habit)
   :bind ("C-c a" . org-agenda)
@@ -604,7 +609,10 @@ _b_ackward char  _]_: scroll down  _q_: quit
 					((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))))
 			(tags-todo "-TODO=\"WAITING\"-PRIORITY=\"A\"-PRIORITY=\"C\""
 					   ((org-agenda-skip-function '(org-agenda-skip-if nil '(scheduled deadline)))
-						(org-agenda-overriding-header "Normal-priority tasks:"))))))))
+						(org-agenda-overriding-header "Normal-priority tasks:")))))
+		  ("r" "Archivable tasks"
+		   ((tags (concat "CLOSED<\"" (time-string-days-ago 14) "\"")
+				  ((org-agenda-overriding-header "Archivable tasks:"))))))))
 
 (use-package org-capture
   :after (org)
