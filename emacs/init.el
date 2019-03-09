@@ -612,7 +612,10 @@ _b_ackward char  _]_: scroll down  _q_: quit
 						(org-agenda-overriding-header "Normal-priority tasks:")))))
 		  ("r" "Archivable tasks"
 		   ((tags (concat "CLOSED<\"" (time-string-days-ago 14) "\"")
-				  ((org-agenda-overriding-header "Archivable tasks:"))))))))
+				  ((org-agenda-overriding-header "Archivable tasks:")))
+			(tags (concat "TIMESTAMP<\"" (time-string-days-ago 14) "\"")
+				  ((org-agenda-overriding-header "Archivable entries:"))))
+		   ((org-agenda-compact-blocks t))))))
 
 (use-package org-capture
   :after (org)
