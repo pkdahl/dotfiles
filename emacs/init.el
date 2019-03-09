@@ -575,8 +575,7 @@ _b_ackward char  _]_: scroll down  _q_: quit
 		org-log-done 'time
 		org-log-into-drawer t
 		org-startup-indented t
-		org-todo-keywords '((sequence "TODO" "|" "DONE")
-							(sequence "WAITING" "|" "CANCELLED"))
+		org-todo-keywords '((sequence "TODO" "WAITING" "|" "CANCELLED" "DONE"))
 		org-todo-keyword-faces '(("WAITING" . org-todo-keyword-waiting-face)
 								 ("CANCELLED" . org-todo-keyword-cancelled-face)))
   (add-hook 'org-mode-hook
