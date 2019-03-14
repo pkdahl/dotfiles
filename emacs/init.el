@@ -575,7 +575,8 @@ _b_ackward char  _]_: scroll down  _q_: quit
 		org-log-done 'time
 		org-log-into-drawer t
 		org-startup-indented t
-		org-todo-keywords '((sequence "TODO" "WAITING" "|" "CANCELLED" "DONE"))
+		org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
+							(sequence "WAITING(w)" "|" "CANCELLED(c)"))
 		org-todo-keyword-faces '(("WAITING" . org-todo-keyword-waiting-face)
 								 ("CANCELLED" . org-todo-keyword-cancelled-face)))
   (add-hook 'org-mode-hook
@@ -624,8 +625,8 @@ _b_ackward char  _]_: scroll down  _q_: quit
   ("C-c c" . org-capture))
 
 (use-package org-habit
-  :after (org)
-  :init (add-to-list 'org-modules 'org-habit))
+  :preface (add-to-list 'org-modules 'org-habit)
+  :after (org))
 
 (use-package org-id
   :after (org)
