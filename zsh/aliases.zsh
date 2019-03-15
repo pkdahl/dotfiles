@@ -33,13 +33,18 @@ alias df='df -h'
 alias du='du -h'
 
 # directories
-if [[ -d "$HOME/Projects" ]]; then
-	alias prj="cd $HOME/Projects"
-fi
 
-alias 4490="cd $HOME/Project/inf4490"
-alias 4171="cd $HOME/Projects/inf4171"
+alias_cd_when_dir () {
+	if [[ -d "$2" ]]; then
+		alias $1="cd $2"
+	fi
+}
 
-if [[ -d "$HOME/Documents" ]]; then
-	alias docs="cd $HOME/Documents"
-fi
+alias_cd_when_dir prj $HOME/Projects
+alias_cd_when_dir 2100 $HOME/Projects/in2100
+alias_cd_when_dir 4060 $HOME/Projects/in4060
+alias_cd_when_dir docs $HOME/Documents
+
+# This files's absolute path's with trailing component removed twice,
+# I.e. zsh/aliases.sh is removed from absolute path.
+alias dotfiles="cd ${0:A:h:h}"
