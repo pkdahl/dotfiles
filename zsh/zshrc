@@ -1,6 +1,8 @@
 # -*- mode: shell-script; fill-column: 72; -*-
 # ~/.zshrc is sourced in interactive shells.
 
+autoload -U is-at-least
+
 bindkey -e # Emacs keybindings
 
 DIRSTACKSIZE=8
@@ -10,12 +12,15 @@ source $DOT_ZSH/aliases.zsh
 source $DOT_ZSH/completion.zsh
 source $DOT_ZSH/history.zsh
 
-autoload -U promptinit; promptinit
-prompt spaceship
+autoload -U promptinit
+if is-at-least 5.1; then
+	promptinit
+	prompt spaceship
+fi
 
 which direnv &> /dev/null && eval "$(direnv hook zsh)"
 
 which rbenv &> /dev/null && eval "$(rbenv init -)"
 
 # OPAM configuration
-. /Users/pkdahl/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+. ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
