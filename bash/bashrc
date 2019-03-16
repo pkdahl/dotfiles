@@ -3,7 +3,7 @@
 
 # source the system wide bashrc if it exists
 if [ -e /etc/bash.bashrc ] ; then
-	source /etc/bash.bashrc
+	. /etc/bash.bashrc
 fi
 
 if [ -e /local/lib/setupfiles/bashrc ] ; then
@@ -11,15 +11,13 @@ if [ -e /local/lib/setupfiles/bashrc ] ; then
 fi
 
 # Aliases
-if [ -e ${BASH_CONFIG_HOME}/aliases.bash ] ; then
-	source ${BASH_CONFIG_HOME}/aliases.bash
+if [ -e ${DOT_BASH}/aliases.bash ] ; then
+	. ${DOT_BASH}/aliases.bash
 fi
 
-# Liquid Prompt
-if [ -f /usr/local/share/liquidprompt ]; then
-	[[ $- = *i* ]] && source /usr/local/share/liquidprompt;
-elif [ -f ${XDG_DATA_HOME}/liquidprompt ]; then
-	[[ $- = *i* ]] && source ${XDG_DATA_HOME}/liquidprompt;
+# Prompt
+if [ -f $DOT_BASH/prompt.bash ]; then
+	. $DOT_BASH/bash/prompt.bash
 fi
 
 # Load direnv

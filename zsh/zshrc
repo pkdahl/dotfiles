@@ -6,9 +6,9 @@ bindkey -e # Emacs keybindings
 DIRSTACKSIZE=8
 setopt NO_BEEP            # Never beep
 
-source $ZSH_CONFIG_HOME/aliases.zsh
-source $ZSH_CONFIG_HOME/completion.zsh
-source $ZSH_CONFIG_HOME/history.zsh
+source $DOT_ZSH/aliases.zsh
+source $DOT_ZSH/completion.zsh
+source $DOT_ZSH/history.zsh
 
 autoload -U promptinit; promptinit
 prompt spaceship

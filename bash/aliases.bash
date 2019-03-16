@@ -1,4 +1,4 @@
-# ~/.config/bash/aliases.bash
+# ~/.dotfiles/bash/aliases.bash
 
 alias rm="rm -i"
 alias mv="mv -i"
@@ -9,6 +9,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 else
 	alias ls="ls --color"
 fi
+
 alias ll="ls -l"
 alias ll.="ls -lA"
 alias l.="ls -A"
@@ -18,9 +19,5 @@ alias lt="ls -lrt"
 alias pu="pushd"
 alias po="pop"
 alias d="dirs -v"
-
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
 
 alias vi="vim"

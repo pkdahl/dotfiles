@@ -7,10 +7,25 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 export BASH_CACHE_HOME=$XDG_CACHE_HOME/bash
 export BASH_CONFIG_HOME=$XDG_CONFIG_HOME/bash
+
 export ZSH_CACHE_HOME=$XDG_CACHE_HOME/zsh
 export ZSH_CONFIG_HOME=$XDG_CONFIG_HOME/zsh
+export ZSH_DATA_HOME=$XDG_DATA_HOME/zsh
 
-export GOPATH=$HOME/go
+export DOTFILES=$HOME/.dotfiles
+export DOT_BASH=$DOTFILES/bash
+export DOT_ZSH=$DOTFILES/zsh
+
+MAUDE_LIB=$HOME/.local/opt/maude
+[ -d $MAUDE_LIB ] && export MAUDE_LIB
+
+PYTHONUSERBASE=$HOME/.local
+[ -d $PYTHONUSERBASE ] && export PYTHONUSERBASE
+
+if [ -e /usr/local/bin/brew ]; then
+	export HOMEBREW_NO_GITHUB_API=1
+	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+fi
 
 # PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
@@ -26,18 +41,4 @@ fi
 
 if [ -d "${HOME}/.cargo/bin" ]; then
 	PATH=${HOME}/.cargo/bin:${PATH}
-fi
-
-# if [ -d "${HOME}/.local/opt/anaconda3/bin" ]; then
-# PATH=${HOME}/.local/opt/anaconda3/bin:${PATH}
-# fi
-
-# Set MANPATH so it includes users' private man if it exists
-if [ -d "${HOME}/man" ]; then
-	MANPATH=${HOME}/man:${MANPATH}
-fi
-
-# Set INFOPATH so it includes users' private info if it exists
-if [ -d "${HOME}/info" ]; then
-	INFOPATH=${HOME}/info:${INFOPATH}
 fi

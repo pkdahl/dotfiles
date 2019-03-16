@@ -4,6 +4,8 @@
 
 ** DONE Git setup in Rakefile
 
+** TODO Create bootstrap script
+
 * Homebrew
 
 ** Core
@@ -183,10 +185,6 @@ Remove directories:
 
 * Links
 
-** Rake
-
-[[https://www.stuartellis.name/articles/rake/][Using Rake to Automate Tasks · Field Notes]]
-
 ** Mail
 
 - [[http://stevelosh.com/blog/2012/10/the-homely-mutt/#how-i-use-email][Steve Losh's mutt article]]
@@ -219,10 +217,6 @@ Remove directories:
 
 - [[https://github.com/twolfson/sexy-bash-prompt/blob/master/.bash_prompt][sexy-bash-prompt/.bash_prompt]]
 - [[https://github.com/magicmonty/bash-git-prompt][magicmonty/bash-git-prompt: An informative and fancy bash prompt for Git users]]
-
-** Make
-
-https://github.com/flazzarini/dotfiles/blob/master/Makefile
 
 ** direnv
 

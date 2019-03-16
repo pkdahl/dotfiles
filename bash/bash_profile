@@ -24,11 +24,4 @@ if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then
    . ${HOME}/.nix-profile/etc/profile.d/nix.sh;
 fi
 
-# added by Anaconda3 5.2.0 installer
-# export PATH="/Users/pkdahl/.local/opt/anaconda3/bin:$PATH"
-
-if [ -d "$HOME/.cargo/bin" ]; then
-   export PATH="$HOME/.cargo/bin:$PATH"
-fi
-
 export PYTHONUSERBASE="$HOME/.local"
