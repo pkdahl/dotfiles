@@ -6,6 +6,8 @@
 
 ** TODO Create bootstrap script
 
+** TODO Create agenda view for low priority tasks
+
 * Homebrew
 
 ** Core
