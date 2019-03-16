@@ -17,7 +17,7 @@ fi
 
 # Prompt
 if [ -f $DOT_BASH/prompt.bash ]; then
-	. $DOT_BASH/bash/prompt.bash
+	. $DOT_BASH/prompt.bash
 fi
 
 # Load direnv

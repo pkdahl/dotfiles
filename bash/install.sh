@@ -18,7 +18,7 @@ fi
 
 # .profile is sourced by .bash_profile
 
-if [! -L $HOME/.profile ]; then
+if [ ! -L $HOME/.profile ]; then
 	cd ../sh
 	[ -f install.sh ] && ./install.sh
 	cd -
