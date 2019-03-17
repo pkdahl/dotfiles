@@ -1,0 +1,2 @@
+Host *, !*.uio.no
+	SendEnv LANG LC_*

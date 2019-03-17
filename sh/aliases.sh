@@ -39,6 +39,10 @@ alias p='pushd'
 alias df="df -h"
 alias du="du -h"
 
+# SSH
+
+[ -L "$HOME/.ssh/config" ] && alias ssh="ssh -F $HOME/.ssh/config"
+
 # vim
 
 alias vi="vim"
