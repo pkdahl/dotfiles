@@ -1,8 +1,8 @@
 # -*- mode: shell-script; fill-column: 72; -*-
 # ~/.bash_profile: executed by bash for login shells.
 
-if [ -e "${HOME}/.profile" ] ; then
-	. ${HOME}/.profile
+if [ -e "$HOME/.profile" ]; then
+	. "$HOME/.profile"
 fi
 
 # export EDITOR=vim
@@ -16,12 +16,10 @@ fi
 #HISTFILE=${BASH_CACHE_HOME}/bash_history
 
 # source the users bashrc if it exists
-if [ -e "${HOME}/.bashrc" ]; then
-  . "${HOME}/.bashrc"
+if [ -e "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
 fi
 
-if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then
-   . ${HOME}/.nix-profile/etc/profile.d/nix.sh;
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
-
-export PYTHONUSERBASE="$HOME/.local"

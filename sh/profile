@@ -31,15 +31,24 @@ fi
 # PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
+if [ -d "$HOME/.linuxbrew/bin" ]; then
+	PATH="$HOME/.linuxbrew/bin:$PATH"
+fi
+
 # Set PATH so it includes user's private bin if it exists
-if [ -d "${HOME}/bin" ] ; then
-	PATH=${HOME}/bin:${PATH}
+if [ -d "$HOME/bin" ]; then
+	echo "yes"
+	PATH="$HOME/bin:$PATH"
 fi
 
-if [ -d "${HOME}/.local/bin" ]; then
-	PATH=${HOME}/.local/bin:${PATH}
+if [ -d "$HOME/.local/bin" ]; then
+	PATH="$HOME/.local/bin:$PATH"
 fi
 
-if [ -d "${HOME}/.cargo/bin" ]; then
-	PATH=${HOME}/.cargo/bin:${PATH}
+if [ -d "$HOME/.cargo/bin" ]; then
+	PATH="$HOME/.cargo/bin:$PATH"
 fi
+
+# Unique entries in PATH
+PATH=$(printf %s "$PATH" | awk -vRS=: '!a[$0]++' | paste -s -d:)
+
