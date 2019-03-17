@@ -23,13 +23,15 @@ MAUDE_LIB=$HOME/.local/opt/maude
 PYTHONUSERBASE=$HOME/.local
 [ -d $PYTHONUSERBASE ] && export PYTHONUSERBASE
 
+# This only applies to Homebrew on Mac and not Homebrew on Linux.
+# Consider changing this.
 if [ -e /usr/local/bin/brew ]; then
 	export HOMEBREW_NO_GITHUB_API=1
 	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
 # PATH
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 if [ -d "$HOME/.linuxbrew/bin" ]; then
 	PATH="$HOME/.linuxbrew/bin:$PATH"
@@ -37,7 +39,6 @@ fi
 
 # Set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
-	echo "yes"
 	PATH="$HOME/bin:$PATH"
 fi
 
@@ -52,3 +53,4 @@ fi
 # Unique entries in PATH
 PATH=$(printf %s "$PATH" | awk -vRS=: '!a[$0]++' | paste -s -d:)
 
+export PATH
