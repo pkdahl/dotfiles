@@ -1,0 +1,31 @@
+#
+# Denne filen brukes for √ sette environment-variable. Den leses av
+# bourne-shell (sh), men funksjonen "setenv" M√ brukes for √ sette
+# variablene, og "unsetenv" for √ slette variable.  Disse funksjonene
+# virker som tilsvarende kommandoer i c-shell (csh og tcsh).
+
+# Se ellers kommentar i begynnelsen av /local/lib/setupfiles/envir
+# for en n√r¶mere beskrivelse av hvordan denne filen brukes.
+# Skriv 'hjelp oppsett' for en introduksjon til oppsettet.
+
+# De tingene det er mest aktuelt √ gj√∏e egne endringer i s√•r her,
+# fjern kommentar-tegnet (#) fra begynnelsen av de aktuelle linjene
+# for √ f√ dem utf√rt.
+ 
+# Setter f√rst variable som har virkning p√
+# standard-variablene ved UiO:
+
+# setenv EIGHT_BIT	true	# Bruk 8-bits tegnsett.
+
+# Setter standard variable ved UiO
+[ -f /local/lib/setupfiles/envir ] && . /local/lib/setupfiles/envir
+
+# Sett standard filbeskyttelse for nye filer, 027 lar deg selve lese og
+# skrive filene, gruppen bare lese og andre hverken lese eller skrive.
+# Dette er bare et eksempel, fjern kommentartegnet (#) dersom du vil
+# at denne beskyttelsen skal gjelde....
+# umask 027
+
+# Her kan du sette egne variable, eller forandre variable som standard-
+# oppsettet har satt:
+

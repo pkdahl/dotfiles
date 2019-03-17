@@ -4,5 +4,4 @@
 # nærmest garantert at ting vil slutteå virke om det blir ødvendig�
 # gjøre endringer.
 
-source /local/lib/setupfiles/bash_logout
-
+[ -f /local/lib/setupfiles/bash_logout ] && . /local/lib/setupfiles/bash_logout

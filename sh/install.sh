@@ -2,9 +2,12 @@
 
 DOT_SH=$(pwd)
 
-. ../helper.sh
+. ../helpers.sh
 
 echo_info "Linking .profile"
-ln -sf $DOT_SH/profile $HOME/.profile
+ln -sf "$DOT_SH/profile" "$HOME/.profile"
+
+echo_info "Linking .envir"
+ln -sf "$DOT_SH/envir" "$HOME/.envir"
 
 echo_done "Setup sh"

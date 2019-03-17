@@ -1,11 +1,10 @@
 # Denne filen utføres av loginshell (bash) som startes opp.  Det
-# skulle ikke være ødvendig � gjøre endringer i denne filen.
+# skulle ikke være ødvend � gjøre endringer i denne filen.
  
 # Environment variable settes i filen ~/.envir, se kommentar i begynnelsen
-# av /local/lib/setupfiles/envir for en n�rmere beskrivelse av hvordan dette
+# av /local/lib/setupfiles/envir for en næmere beskrivelse av hvordan dette
 # gjøres.
  
-# Utf|r den globale loginfilen, som tar seg av initiering av terminalen etc..
+# Utfør den globale loginfilen, som tar seg av initiering av terminalen etc..
 
-source /local/lib/setupfiles/bash_login
-
+[ -f /local/lib/setupfiles/bash_login ] && . /local/lib/setupfiles/bash_login
