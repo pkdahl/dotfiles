@@ -41,7 +41,10 @@ alias du="du -h"
 
 # SSH
 
-[ -L "$HOME/.ssh/config" ] && alias ssh="ssh -F $HOME/.ssh/config"
+if [ -L "$HOME/.ssh/config" ]; then
+	alias ssh="ssh -F $HOME/.ssh/config"
+	export GIT_SSH_COMMAND="ssh -F $HOME/.ssh/config"
+fi
 
 # vim
 
