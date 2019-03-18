@@ -8,11 +8,12 @@ function alias_dir () {
 	fi
 }
 
-alias_dir dotfiles $DOTFILES
-alias_dir docs $HOME/Documents
-alias_dir prj $HOME/Projects
-alias_dir 2100 $HOME/Projects/in2100
-alias_dir 4060 $HOME/Projects/in4060
+alias_dir dotfiles "$DOTFILES"
+alias_dir docs "$HOME/Documents"
+alias_dir notes "$HOME/Documents/notes"
+alias_dir prj "$HOME/Projects"
+alias_dir 2100 "$HOME/Projects/in2100"
+alias_dir 4060 "$HOME/Projects/in4060"
 
 # ls
 
