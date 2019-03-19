@@ -5,6 +5,10 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 
+## User dirs
+
+export XDG_DOCUMENTS_DIR="$HOME/Documents"
+
 export BASH_CACHE_HOME=$XDG_CACHE_HOME/bash
 export BASH_CONFIG_HOME=$XDG_CONFIG_HOME/bash
 
@@ -37,7 +41,7 @@ if [ -d "$HOME/.linuxbrew/bin" ]; then
 	PATH="$HOME/.linuxbrew/bin:$PATH"
 fi
 
-# Set PATH so it includes user's private bin if it exists
+## Set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
 	PATH="$HOME/bin:$PATH"
 fi
@@ -50,7 +54,7 @@ if [ -d "$HOME/.cargo/bin" ]; then
 	PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-# Unique entries in PATH
+## Unique entries in PATH
 PATH=$(printf %s "$PATH" | awk -v RS=: '!a[$0]++' | paste -s -d: -)
 
 export PATH
