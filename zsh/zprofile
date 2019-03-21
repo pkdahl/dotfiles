@@ -3,12 +3,18 @@
 typeset -U path # Only unique entries
 path=("$HOME/.local/bin" /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin "$path[@]")
 
-if [[ -d "$HOME/.cargo/bin" ]]; then
+if [ -d "$HOME/.cargo/bin" ]; then
    path=("$HOME/.cargo/bin" $path)
 fi
 
 typeset -U fpath
-fpath=("$ZSH_DATA_HOME/site-functions" $fpath)
+if [ -d "$HOMEBREW_PREFIX/zsh/site-functions" ]; then
+	fpath=("$HOMEBREW_PREFIX/zsh/site-functons" $fpath)
+fi
+
+if [ -d "$ZSH_DATA_HOME/site-functions" ]; then
+	fpath=("$ZSH_DATA_HOME/site-functions" $fpath)
+fi
 
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
    . $HOME/.nix-profile/etc/profile.d/nix.sh;
