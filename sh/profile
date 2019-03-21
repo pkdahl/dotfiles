@@ -34,6 +34,10 @@ if [ -e /usr/local/bin/brew ]; then
 	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
+if [ ! -z $(brew --prefix) ]; then
+	export HOMEBREW_PREFIX="$(brew --prefix)"
+fi
+
 # PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
