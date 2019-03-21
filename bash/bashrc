@@ -20,5 +20,12 @@ if [ -f $DOT_BASH/prompt.bash ]; then
 	. $DOT_BASH/prompt.bash
 fi
 
+# Completions
+if [ -d "$HOMEBREW_PREFIX/etc/bash_completion.d" ]; then
+	for COMPLETION in "$HOMEBREW_PREFIX"/etc/bash_completion.d/*; do
+		[ -f "$COMPLETION" ] && . "$COMPLETION"
+	done
+fi
+
 # Load direnv
 which direnv &> /dev/null && eval "$(direnv hook bash)"
