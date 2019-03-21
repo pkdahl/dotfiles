@@ -27,17 +27,6 @@ MAUDE_LIB=$HOME/.local/opt/maude
 PYTHONUSERBASE=$HOME/.local
 [ -d $PYTHONUSERBASE ] && export PYTHONUSERBASE
 
-# This only applies to Homebrew on Mac and not Homebrew on Linux.
-# Consider changing this.
-if [ -e /usr/local/bin/brew ]; then
-	export HOMEBREW_NO_GITHUB_API=1
-	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-fi
-
-if [ ! -z $(brew --prefix) ]; then
-	export HOMEBREW_PREFIX="$(brew --prefix)"
-fi
-
 # PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
@@ -62,3 +51,16 @@ fi
 PATH=$(printf %s "$PATH" | awk -v RS=: '!a[$0]++' | paste -s -d: -)
 
 export PATH
+
+# This only applies to Homebrew on Mac and not Homebrew on Linux.
+# Consider changing this.
+if [ -e /usr/local/bin/brew ]; then
+	export HOMEBREW_NO_GITHUB_API=1
+	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+fi
+
+# This won't work before brew is in PATH
+if [ ! -z $(brew --prefix) ]; then
+	export HOMEBREW_PREFIX="$(brew --prefix)"
+fi
+
