@@ -34,6 +34,10 @@ if [ -d "$HOME/.linuxbrew/bin" ]; then
 	PATH="$HOME/.linuxbrew/bin:$PATH"
 fi
 
+if [ -d "$HOME/.linuxbrew/sbin" ]; then
+	PATH="$HOME/.linuxbrew/sbin:$PATH"
+fi
+
 ## Set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
 	PATH="$HOME/bin:$PATH"
