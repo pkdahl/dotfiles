@@ -15,7 +15,6 @@ if [ ! -d $BASH_LIB_HOME/bash-git-prompt ]; then
 	git clone https://github.com/magicmonty/bash-git-prompt.git $BASH_LIB_HOME/bash-git-prompt --depth=1
 fi
 
-
 # .profile is sourced by .bash_profile
 
 if [ ! -L $HOME/.profile ]; then
@@ -35,6 +34,5 @@ symlink "bash_profile"
 symlink "bashrc"
 symlink "bash_login"
 symlink "bash_logout"
-
 
 echo_done "Setup bash"
