@@ -1,20 +1,44 @@
-set nocompatible
+set nocompatible        " Leave the 70s behind
+set encoding=utf-8
 set viminfo+=n~/.cache/vim/viminfo
-set ruler
+set nobackup            " Do not make backup files
+set dir=~/.cache/vim	" Directory for swap files
+" set ruler
 set tabstop=4
 set shiftwidth=4
 set shiftround
 set autoindent
-set nobackup " Do not make backup files
 set textwidth=79
-set foldmethod=marker "Allow backspacing in insert mode
-
-set bs=2
-
+set foldmethod=marker
+set relativenumber      " Turn relative line numbers on
+set hlsearch            " Enable search highlighting
+set incsearch           " Incremental search
+set bs=2                " Allow backspace over indent, eol
+set showmatch           " Highlight matching parenthesis
 if &t_Co > 2 || has("gui_running")
 	syntax on
 endif
 
-augroup filetypedetect
-	au BufNewFile,BufRead *.maude setf maude
-augroup END
+let mapleader=","
+
+set complete+=kspell " Autocomplete with dictionary words when spellcheck is on
+
+nmap <silent> <leader>s :set spell!<CR>
+
+set spelllang=en_gb,nb
+
+inoremap <special> jk <esc>
+
+" Remove whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" autocmd FileType sh set commentstring=#\ %s
+let g:is_bash = 1
+
+let g:netrw_home=$XDG_CACHE_HOME.'/vim'
+
+" N00b help
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>

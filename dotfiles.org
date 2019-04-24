@@ -128,6 +128,8 @@ Remove directories:
 - =rm -rf private/=
 - =tar xvf private.tar=
 
+echo "abcde" | gpg --passphrase-fd 0 --pinentry-mode loopback secret.txt.gpg
+
 * Setup September 2018
 
 - Setup SSH keys
@@ -185,6 +187,30 @@ Remove directories:
   =brew install wget=
 
 * Links
+
+** Vim
+
+- [[https://medium.com/actualize-network/how-to-learn-vim-a-four-week-plan-cd8b376a9b85][How To Learn Vim: A Four Week Plan – Actualize – Medium]]
+- [[https://dougblack.io/words/a-good-vimrc.html][A Good Vimrc]]
+
+- [[https://www.youtube.com/watch?v=MAHC9eZbx4o&list=PLwJS-G75vM7kFO-yUkyNphxSIdbi_1NKX][Vim screencast #1: Intro - YouTube]]
+- [[http://learnvimscriptthehardway.stevelosh.com/][Learn Vimscript the Hard Way]]
+- [[https://gabri.me/blog/diy-vim-statusline][DIY Vim statusline | Ahmed El Gabri - Front-end Engineer]]
+
+*Videos*
+- [[https://www.youtube.com/watch?v=E-ZbrtoSuzw][Talk on going mouseless with Vim, Tmux, and Hotkeys - YouTube]]
+- [[https://www.youtube.com/watch?v=XA2WjJbmmoM][How to Do 90% of What Plugins Do (With Just Vim) - YouTube]]
+- [[https://www.youtube.com/watch?v=wlR5gYd6um0][Mastering the Vim Language - YouTube]]
+- [[https://www.youtube.com/watch?v=3TX3kV3TICU][Let Vim Do the Typing - YouTube]]
+
+*filetype plugin example*
+- [[https://github.com/chrisbra/csv.vim][chrisbra/csv.vim: A Filetype plugin for csv files]]
+
+- [[https://thoughtbot.com/blog/writing-vim-syntax-plugins][Writing Vim Syntax Plugins]]
+
+*plugins to consider*
+- [[https://github.com/airblade/vim-gitgutter][airblade/vim-gitgutter: A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.]]
+- [[https://github.com/vim-airline/vim-airline][vim-airline/vim-airline: lean & mean status/tabline for vim that's light as air]]
 
 ** Mail
 
