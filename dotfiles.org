@@ -212,6 +212,10 @@ echo "abcde" | gpg --passphrase-fd 0 --pinentry-mode loopback secret.txt.gpg
 - [[https://github.com/airblade/vim-gitgutter][airblade/vim-gitgutter: A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.]]
 - [[https://github.com/vim-airline/vim-airline][vim-airline/vim-airline: lean & mean status/tabline for vim that's light as air]]
 
+** Tmux
+
+[[https://github.com/nicknisi/dotfiles/blob/master/tmux/tmux.conf.symlink][dotfiles/tmux.conf.symlink at master · nicknisi/dotfiles]]
+
 ** Mail
 
 - [[http://stevelosh.com/blog/2012/10/the-homely-mutt/#how-i-use-email][Steve Losh's mutt article]]
