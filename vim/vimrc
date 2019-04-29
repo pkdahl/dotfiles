@@ -9,7 +9,7 @@ set shiftwidth=4
 set shiftround
 set autoindent
 set textwidth=79
-set foldmethod=marker
+" set foldmethod=marker
 set relativenumber      " Turn relative line numbers on
 set hlsearch            " Enable search highlighting
 set incsearch           " Incremental search
@@ -17,6 +17,10 @@ set bs=2                " Allow backspace over indent, eol
 set showmatch           " Highlight matching parenthesis
 if &t_Co > 2 || has("gui_running")
 	syntax on
+endif
+
+if has("autocmd")
+	filetype plugin indent on
 endif
 
 let mapleader=","
@@ -27,6 +31,8 @@ nmap <silent> <leader>s :set spell!<CR>
 
 set spelllang=en_gb,nb
 
+nmap <leader>l :set list!<CR>
+set listchars=tab:▸\ ,eol:¬
 inoremap <special> jk <esc>
 
 " Remove whitespace on save
@@ -42,3 +48,12 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
+
+" Folding
+nnoremap <Space> za
+
+" VimWiki
+
+let g:vimwiki_list = [{'path': '~/Documents/notes/',
+                     \ 'syntax': 'markdown',
+					 \ 'ext': '.md'}]
