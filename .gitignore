@@ -4,6 +4,7 @@ private.tar
 
 emacs/custom.el
 tmux/plugins/
+tmux/resurrect/
 vim/pack/
 
 *.pyc
