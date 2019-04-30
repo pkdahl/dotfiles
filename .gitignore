@@ -3,6 +3,7 @@ private/
 private.tar
 
 emacs/custom.el
+tmux/plugins/
 vim/pack/
 
 *.pyc
