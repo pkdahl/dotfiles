@@ -3,5 +3,6 @@ private/
 private.tar
 
 emacs/custom.el
+vim/pack/
 
 *.pyc
