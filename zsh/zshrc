@@ -24,3 +24,6 @@ which rbenv &> /dev/null && eval "$(rbenv init -)"
 
 # OPAM configuration
 . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -29,3 +29,6 @@ fi
 
 # Load direnv
 which direnv &> /dev/null && eval "$(direnv hook bash)"
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
