@@ -16,19 +16,14 @@ if [ ! -L "$HOME/.tmux" ]; then
 	ln -sf "$DOT_TMUX" "$HOME/.tmux"
 fi
 
-function _ensure_plugin_dir () {
-	if [ ! -d "$DOT_TMUX_PLUGIN_DIR"]; then
-		echo_info "Creating directory for Tmux plugins"
-		mkdir -p "$DOT_TMUX_PLUGIN_DIR"
-	fi
-}
-
 function install_plugin () {
-	_ensure_plugin_dir
 	local src=$1
 	local plugin=$2
-	echo_info "Installing $plugin"
-	git clone "$src" "$DOT_TMUX_PLUGIN_DIR/$plugin"
+	if [ ! -d "$DOT_TMUX_PLUGIN_DIR/$plugin" ]; then
+		echo_info "Installing $plugin"
+		mkdir -p "$DOT_TMUX_PLUGIN_DIR"
+		git clone "$src" "$DOT_TMUX_PLUGIN_DIR/$plugin"
+	fi
 }
 
 install_plugin https://github.com/tmux-plugins/tmux-resurrect.git resurrect
