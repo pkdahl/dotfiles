@@ -11,7 +11,8 @@
         ci = commit
         co = checkout
         br = branch
-        lg = log --decorate=full
+        ll = log --decorate=full
+		lo = log --oneline --max-count=15
 
 [color]
         branch = auto
