@@ -14,6 +14,8 @@ set relativenumber      " Turn relative line numbers on
 set hlsearch            " Enable search highlighting
 set incsearch           " Incremental search
 set bs=2                " Allow backspace over indent, eol
+set noshowmode
+set laststatus=2
 set showmatch           " Highlight matching parenthesis
 if &t_Co > 2 || has("gui_running")
 	syntax on
@@ -25,7 +27,7 @@ endif
 
 let mapleader=","
 
-set complete+=kspell " Autocomplete with dictionary words when spellcheck is on
+set complete+=kspell	" Autocomplete with dictionary words when spellcheck is on
 
 nmap <silent> <leader>s :set spell!<CR>
 
@@ -51,6 +53,7 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
 " Folding
+
 nnoremap <Space> za
 
 " VimWiki
@@ -59,3 +62,7 @@ autocmd FileType vimwiki set spell
 
 let g:vimwiki_list = [{'path': '~/Documents/notes/'}]
 let g:vimwiki_folding = 'expr'
+
+" tmuxline
+
+let g:tmuxline_powerline_separators = 0

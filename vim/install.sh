@@ -41,5 +41,7 @@ install_pack https://github.com/masukomi/vim-markdown-folding.git markdown-foldi
 install_pack https://github.com/vimwiki/vimwiki.git vimwiki
 install_pack https://github.com/tmux-plugins/vim-tmux.git tmux
 install_pack https://github.com/tmux-plugins/vim-tmux-focus-events.git tmux-focus-events
+install_pack https://github.com/itchyny/lightline.vim.git lightline
+install_pack https://github.com/edkolev/tmuxline.vim.git tmuxline
 
 echo_done "Setup vim"
