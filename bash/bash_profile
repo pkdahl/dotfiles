@@ -5,7 +5,6 @@ if [ -e "$HOME/.profile" ]; then
 	. "$HOME/.profile"
 fi
 
-# export EDITOR=vim
 # export VISUAL=vim
 # export PAGER=less
 

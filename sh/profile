@@ -65,3 +65,8 @@ if [ ! -z $(brew --prefix) ]; then
 	export HOMEBREW_PREFIX="$(brew --prefix)"
 fi
 
+# Set EDITOR
+if type nvim > /dev/null 2>&1; then
+	export EDITOR="nvim"
+fi
+
