@@ -24,9 +24,6 @@ export DOT_ZSH=$DOTFILES/zsh
 MAUDE_LIB=$HOME/.local/opt/maude
 [ -d $MAUDE_LIB ] && export MAUDE_LIB
 
-PYTHONUSERBASE=$HOME/.local
-[ -d $PYTHONUSERBASE ] && export PYTHONUSERBASE
-
 # PATH
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
