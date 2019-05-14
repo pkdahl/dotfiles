@@ -20,11 +20,13 @@ fi
 VIM_PACK_DIR=$DOT_VIM_DIR/pack
 
 function install_pack() {
-	if [ ! -d $VIM_PACK_DIR/dist/start/$2 ]; then
-		echo_info "Installing $1"
+	local src=$1
+	local plugin=$2
+	if [ ! -d $VIM_PACK_DIR/dist/start/$plugin ]; then
+		echo_info "Installing $src"
 		mkdir -p $VIM_PACK_DIR/dist/start
-		git clone $1 $VIM_PACK_DIR/dist/start/$2
-		vim -u NONE -c "helptags $VIM_PACK_DIR/dist/start/$2/doc" -c q
+		git clone $src $VIM_PACK_DIR/dist/start/$plugin
+		vim -u NONE -c "helptags $VIM_PACK_DIR/dist/start/$plugin/doc" -c q
 	fi
 }
 
