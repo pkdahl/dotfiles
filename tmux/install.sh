@@ -29,4 +29,9 @@ function install_plugin () {
 install_plugin https://github.com/tmux-plugins/tmux-resurrect.git resurrect
 install_plugin https://github.com/tmux-plugins/tmux-continuum.git continuum
 
+if [ ! -d "$DOT_TMUX/themes/nord" ]; then
+    echo_info "Installing Nord theme"
+    git clone https://github.com/arcticicestudio/nord-tmux "$DOT_TMUX/themes/nord"
+fi
+
 echo_done "Setup tmux"
