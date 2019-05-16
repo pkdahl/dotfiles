@@ -35,7 +35,7 @@ endif
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-" This doesn't seem to work if variable is local to script 
+" This doesn't seem to work if variable is local to the script
 let g:fzf_path = trim(system('brew --prefix')) . '/opt/fzf'
 if !empty(glob(g:fzf_path))
     Plug g:fzf_path
@@ -44,6 +44,7 @@ endif
 
 Plug 'arcticicestudio/nord-vim'
 Plug 'itchyny/lightline.vim'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
