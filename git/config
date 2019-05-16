@@ -1,6 +1,5 @@
 [core]
         eol = lf
-        editor = vim
         autocrlf = input
 
 [include]
