@@ -1,4 +1,15 @@
-set number relativenumber	" hybrid line numbers 
+" hybrid line numbers
+set number
+set relativenumber
+
+" indentation
+
+set expandtab
+set smarttab
+set shiftwidth=4
+set tabstop=4
+set autoindent
+set smartindent
 
 " keybindings
 
