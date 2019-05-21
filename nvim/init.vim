@@ -43,8 +43,9 @@ if !empty(glob(g:fzf_path))
 endif
 
 Plug 'arcticicestudio/nord-vim'
-Plug 'itchyny/lightline.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'itchyny/lightline.vim'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -52,3 +53,7 @@ call plug#end()
 
 colorscheme nord
 let g:lightline = { 'colorscheme': 'nord' }
+
+" vimwiki
+
+let g:vimwiki_list = [{'path': '~/Documents/notes/'}]
