@@ -11,20 +11,6 @@ set tabstop=4
 set autoindent
 set smartindent
 
-" keybindings
-
-let mapleader=","
-
-inoremap <special> jk <esc>
-nnoremap <silent> <leader>s :set spell!<CR>
-
-" n00b help
-
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
 " plugins
 
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
@@ -45,9 +31,27 @@ endif
 Plug 'arcticicestudio/nord-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'vimwiki/vimwiki'
 
 call plug#end()
+
+" keybindings
+
+let mapleader=","
+
+inoremap <special> jk <esc>
+nnoremap <silent> <leader>s :set spell!<CR>
+
+" n00b help
+
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " theme
 
