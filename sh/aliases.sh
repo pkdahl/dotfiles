@@ -53,3 +53,9 @@ fi
 # vim
 
 alias vi="vim"
+
+# USIT things
+
+if [ -f /uio/kant/usit-houston-felles/pybofh/bin/houston-person-info.py ]; then
+    alias hbofh="/uio/kant/usit-houston-felles/pybofh/bin/houston-person-info.py"
+fi
