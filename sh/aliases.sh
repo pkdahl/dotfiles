@@ -13,8 +13,10 @@ alias_dir docs "$XDG_DOCUMENTS_DIR"
 alias_dir notes "$XDG_DOCUMENTS_DIR/notes"
 alias_dir houston "$XDG_DOCUMENTS_DIR/houston"
 alias_dir prj "$HOME/Projects"
-alias_dir 2100 "$HOME/Projects/in2100"
-alias_dir 4060 "$HOME/Projects/in4060"
+
+# Ask to confirm
+alias rm="rm -i"
+alias mv="mv -i"
 
 # ls
 
