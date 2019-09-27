@@ -14,6 +14,7 @@ alias_dir notes "$XDG_DOCUMENTS_DIR/notes"
 alias_dir houston "$XDG_DOCUMENTS_DIR/houston"
 alias_dir prj "$HOME/Projects"
 alias_dir dl "$XDG_DOWNLOAD_DIR"
+alias_dir dt "$XDG_DESKTOP_DIR"
 
 # Ask to confirm
 alias rm="rm -i"
