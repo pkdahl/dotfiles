@@ -8,7 +8,7 @@ function alias_dir () {
 	fi
 }
 
-alias_dir dotfiles "$DOTFILES"
+alias_dir dot "$DOTFILES"
 alias_dir docs "$XDG_DOCUMENTS_DIR"
 alias_dir notes "$XDG_DOCUMENTS_DIR/notes"
 alias_dir houston "$XDG_DOCUMENTS_DIR/houston"
