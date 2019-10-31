@@ -42,14 +42,19 @@ call plug#end()
 let mapleader=","
 
 inoremap <special> jk <esc>
-nnoremap <silent> <leader>s :set spell!<CR>
+nnoremap <silent> <leader> s :set spell! <cr>
+nnoremap <leader> <space> :nohlsearch <cr>
+
+" dispaly hidden characters
+" ':set list' to show hidden characters
+set listchars=tab:→\ ,eol:¬
 
 " n00b help
 
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+nnoremap <Left> :echoe "Use h" <cr>
+nnoremap <Right> :echoe "Use l" <cr>
+nnoremap <Up> :echoe "Use k" <cr>
+nnoremap <Down> :echoe "Use j" <cr>
 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
