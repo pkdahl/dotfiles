@@ -28,11 +28,13 @@ if !empty(glob(g:fzf_path))
     Plug 'junegunn/fzf.vim'
 endif
 
+Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'ledger/vim-ledger'
+Plug 'tpope/vim-fugitive'
 Plug 'vimwiki/vimwiki'
 
 call plug#end()
@@ -66,5 +68,5 @@ let g:lightline = { 'colorscheme': 'nord' }
 
 " vimwiki
 
-let g:vimwiki_list = [{'path': '~/Documents/notes/'},
-                     \{'path': '~/Documents/houston/'}]
+let g:vimwiki_list = [{ 'path': '~/Documents/notes/' },
+                     \{ 'path': '~/Documents/houston/' }]
