@@ -61,4 +61,5 @@ let g:lightline = { 'colorscheme': 'nord' }
 
 " vimwiki
 
-let g:vimwiki_list = [{'path': '~/Documents/notes/'}]
+let g:vimwiki_list = [{'path': '~/Documents/notes/'},
+                     \{'path': '~/Documents/houston/'}]
