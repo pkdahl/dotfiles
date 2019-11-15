@@ -15,6 +15,7 @@ function symlink () {
 	ln -sf $DOT_GIT_DIR/$1 $GIT_CONFIG_HOME/$1
 }
 
+symlink "attributes"
 symlink "config"
 symlink "ignore"
 symlink "private"
