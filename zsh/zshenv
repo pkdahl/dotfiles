@@ -1,3 +1,9 @@
 # ~/.zshenv
 
 [ -e $HOME/.profile ] && . $HOME/.profile
+
+# To stop Nvim complaining
+# https://vi.stackexchange.com/questions/7644
+if [[ -n ${VIRTUAL_ENV} && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  . "${VIRTUAL_ENV}/bin/activate"
+fi

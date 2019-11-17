@@ -67,6 +67,10 @@ nmap ga <Plug>(EasyAlign)
 colorscheme nord
 let g:lightline = { 'colorscheme': 'nord' }
 
+" Python
+let g:python_host_prog = "/usr/local/bin/python2"
+let g:python3_host_prog = "/usr/local/bin/python3"
+
 " vimwiki
 
 let g:vimwiki_list = [{ 'path': '~/Documents/notes/' },
