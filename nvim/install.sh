@@ -12,3 +12,8 @@ if [ ! -L "$NVIM_CONFIG_DIR/init.vim" ]; then
 	ln -sf "$DOT_NVIM/init.vim" "$NVIM_CONFIG_DIR/init.vim"
 fi
 
+if [ ! -L "$NVIM_CONFIG_DIR/coc-settings.json" ]; then
+    echo_info "Linking coc-settings.json"
+    ln -sf "$DOT_NVIM/coc-settings.json" "$NVIM_CONFIG_DIR/coc-settings.json"
+fi
+
