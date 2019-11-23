@@ -21,3 +21,6 @@
 
 [push]
         default = simple
+[user]
+	name = Per Kulseth Dahl
+	email = pkdahl@gmail.com
