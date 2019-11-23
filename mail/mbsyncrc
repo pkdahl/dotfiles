@@ -12,13 +12,22 @@ IMAPStore uio-perkda-remote
 Account uio-perkda
 
 MaildirStore uio-perkda-local
-Path ~/mail/uio-perkda/
-Inbox ~/mail/uio-perkda/inbox
+Path ~/Mail/uio-perkda/
+Inbox ~/Mail/uio-perkda/inbox
 
 # INBOX
 Channel uio-perkda-inbox
 Master :uio-perkda-remote:"INBOX"
 Slave :uio-perkda-local:inbox
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# Archive
+Channel uio-perkda-archive
+Master :uio-perkda-remote:"Archive"
+Slave :uio-perkda-local:archive
 Create Slave
 Expunge Both
 Sync All
@@ -42,15 +51,6 @@ Expunge Both
 Sync All
 SyncState *
 
-# Received Items
-Channel uio-perkda-received
-Master :uio-perkda-remote:"Received Items"
-Slave :uio-perkda-local:received
-Create Slave
-Expunge Both
-Sync All
-SyncState *
-
 # Sent Items
 Channel uio-perkda-sent
 Master :uio-perkda-remote:"Sent Items"
@@ -63,9 +63,9 @@ SyncState *
 Group uio-perkda
 Channel uio-perkda-trash
 Channel uio-perkda-inbox
-Channel uio-perkda-drafts
-Channel uio-perkda-received
+Channel uio-perkda-archive
 Channel uio-perkda-sent
+Channel uio-perkda-drafts
 
 #-------------------------------------------------------------------------------
 # UiO - pkdahl
@@ -81,13 +81,22 @@ IMAPStore uio-pkdahl-remote
 Account uio-pkdahl
 
 MaildirStore uio-pkdahl-local
-Path ~/mail/uio-pkdahl/
-Inbox ~/mail/uio-pkdahl/inbox
+Path ~/Mail/uio-pkdahl/
+Inbox ~/Mail/uio-pkdahl/inbox
 
 # INBOX
 Channel uio-pkdahl-inbox
 Master :uio-pkdahl-remote:"INBOX"
 Slave :uio-pkdahl-local:inbox
+Create Slave
+Expunge Both
+Sync All
+SyncState *
+
+# Archive
+Channel uio-pkdahl-archive
+Master :uio-pkdahl-remote:"Archive"
+Slave :uio-pkdahl-local:archive
 Create Slave
 Expunge Both
 Sync All
@@ -111,15 +120,6 @@ Expunge Both
 Sync All
 SyncState *
 
-# Received Items
-Channel uio-pkdahl-received
-Master :uio-pkdahl-remote:"Received Items"
-Slave :uio-pkdahl-local:received
-Create Slave
-Expunge Both
-Sync All
-SyncState *
-
 # INBOX.Sent
 Channel uio-pkdahl-sent
 Master :uio-pkdahl-remote:"Sent Items"
@@ -130,11 +130,11 @@ Sync All
 SyncState *
 
 Group uio-pkdahl
-Channel uio-pkdahl-inbox
 Channel uio-pkdahl-trash
-Channel uio-pkdahl-drafts
-Channel uio-pkdahl-received
+Channel uio-pkdahl-inbox
+Channel uio-pkdahl-archive
 Channel uio-pkdahl-sent
+Channel uio-pkdahl-drafts
 
 #-------------------------------------------------------------------------------
 # Gmail
@@ -151,8 +151,8 @@ IMAPStore gmail-remote
 Account gmail
 
 MaildirStore gmail-local
-Path ~/mail/gmail/
-Inbox ~/mail/gmail/all
+Path ~/Mail/gmail/
+Inbox ~/Mail/gmail/all
 
 # [Gmail]/Trash
 Channel gmail-trash

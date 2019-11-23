@@ -1,0 +1,46 @@
+# Neomutt configuration
+
+set alias_file="~/.config/neomutt/alias"
+
+# Mailbox and folder
+
+set mbox_type=Maildir
+set folder=~/Mail
+
+unmailboxes *
+
+# default mailbox
+source ~/.config/neomutt/uio-pkdahl
+# Compose email
+
+set editor="nvim"
+
+set date_format="!%d%H%M %b %y"
+set index_format=" %4C %Z %{%d %b %y} %-15.15L (%?l?%4l&%4c?) %s"
+set mail_check_stats=yes
+
+set sidebar_visible
+set sidebar_format="%D%* %?N?%N/?%S"
+bind index,pager B sidebar-toggle-visible
+bind index,pager \Cp sidebar-prev
+bind index,pager \Cn sidebar-next
+bind index,pager <Tab> sidebar-open
+
+unbind attach,index,pager g
+bind attach,index,pager \CD next-page
+bind attach,index,pager \CU previous-page
+bind attach,index gg first-entry
+bind attach,index G last-entry
+bind pager gg top
+bind pager G bottom
+
+macro index,pager <f2> "<sync-mailbox><enter-command>source ~/.config/neomutt/uio-pkdahl<enter><change-folder>!<enter>"
+macro index,pager <f3> "<sync-mailbox><enter-command>source ~/.config/neomutt/uio-perkda<enter><change-folder>!<enter>" 
+
+# Notmuch
+
+# Hooks
+
+folder-hook gmail/* "source ~/.config/neomutt/gmail"
+folder-hook uio-perkda/* "source ~/.config/neomutt/uio-perkda"
+folder-hook uio-pkdahl/* "source ~/.config/neomutt/uio-pkdahl"

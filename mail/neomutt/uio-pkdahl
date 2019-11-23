@@ -1,0 +1,14 @@
+unmailboxes *
+named-mailboxes "Inbox" =uio-pkdahl/inbox
+named-mailboxes "Archive" =uio-pkdahl/archive
+named-mailboxes "Sent" =uio-pkdahl/sent
+named-mailboxes "Drafts" =uio-pkdahl/drafts
+named-mailboxes "Trash" =uio-pkdahl/trash
+
+set spoolfile="+uio-pkdahl/inbox"
+set mbox="+uio-pkdahl/archive"
+set record="+uio-pkdahl/sent"
+set postponed="+uio-pkdahl/drafts"
+set trash="+uio-pkdahl/trash"
+
+set status_format="--- [UiO/pkdahl] %D ---"
