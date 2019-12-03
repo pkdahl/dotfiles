@@ -1,8 +1,10 @@
+#!/usr/bin/env bash
+
 . ../helpers.sh
 
 # TODO: install pynvim neovim-remote automagically
 
-CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOT_NVIM="$CURRENT_DIR"
 NVIM_CONFIG_DIR="$XDG_CONFIG_HOME/nvim"
 
