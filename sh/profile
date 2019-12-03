@@ -34,23 +34,23 @@ MAUDE_LIB=$HOME/.local/opt/maude
 [ -d $MAUDE_LIB ] && export MAUDE_LIB
 
 # PATH
-PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
-if [ -d "$HOME/.linuxbrew/bin" ]; then
-	PATH="$HOME/.linuxbrew/bin:$PATH"
-fi
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 
 if [ -d "$HOME/.linuxbrew/sbin" ]; then
 	PATH="$HOME/.linuxbrew/sbin:$PATH"
 fi
 
-## Set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ]; then
-	PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/.linuxbrew/bin" ]; then
+	PATH="$HOME/.linuxbrew/bin:$PATH"
 fi
 
+## Set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ]; then
 	PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/bin" ]; then
+	PATH="$HOME/bin:$PATH"
 fi
 
 if [ -d "$HOME/.cargo/bin" ]; then

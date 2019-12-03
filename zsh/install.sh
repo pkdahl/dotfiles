@@ -16,6 +16,7 @@ fi
 
 ZSH_LIB_HOME=$HOME/.local/lib/zsh
 ZSH_DATA_HOME=$HOME/.local/share/zsh
+ZSH_CACHE_HOME=$HOME/.cache/zsh
 
 if [ ! -d $ZSH_DATA_HOME/site-functions ]; then
 	echo_info "Creating directory for zsh site-functions"
@@ -31,11 +32,18 @@ if [ ! -d $ZSH_LIB_HOME/spaceship-prompt ]; then
 		   $ZSH_DATA_HOME/site-functions/prompt_spaceship_setup
 fi
 
+if ! [ -d "$ZSH_CACHE_HOME" ]; then
+    echo_info "Creating cache directory for Zsh"
+    mkdir -p "$ZSH_CACHE_HOME"
+fi
+
 # Symlink the zsh startup files
 
 function symlink () {
-	echo_info "Linking .$1"
-	ln -sf $DOT_ZSH_DIR/$1 $HOME/.$1
+    if ! [ -e "$HOME/.$1" ]; then
+	    echo_info "Linking .$1"
+	    ln -sf $DOT_ZSH_DIR/$1 $HOME/.$1
+    fi
 }
 
 symlink "zshenv"

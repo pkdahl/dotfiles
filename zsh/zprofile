@@ -1,11 +1,13 @@
 # ~/.zprofile
 
 typeset -U path # Only unique entries
-path=("$HOME/.local/bin" /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin "$path[@]")
 
-if [ -d "$HOME/.cargo/bin" ]; then
-   path=("$HOME/.cargo/bin" $path)
-fi
+# PATH is already set in .profile which is sourced in zshenv
+# path=("$HOME/.local/bin" /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin "$path[@]")
+
+# if [ -d "$HOME/.cargo/bin" ]; then
+#    path=("$HOME/.cargo/bin" $path)
+# fi
 
 typeset -U fpath
 if [ -d "$HOMEBREW_PREFIX/zsh/site-functions" ]; then
