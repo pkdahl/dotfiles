@@ -40,13 +40,17 @@ Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
-" keybindings
+"Mappings
 
 let mapleader=","
+nnoremap , <Nop>
 
 inoremap <special> jk <esc>
 nnoremap <silent> <leader> s :set spell! <cr>
 nnoremap <leader> <space> :nohlsearch <cr>
+
+nnoremap <Leader>bn :bnext <CR>
+nnoremap <Leader>bp :bprev <CR>
 
 " dispaly hidden characters
 " ':set list' to show hidden characters
