@@ -10,11 +10,13 @@ function alias_dir () {
 
 alias_dir dot "$DOTFILES"
 alias_dir docs "$XDG_DOCUMENTS_DIR"
-alias_dir notes "$XDG_DOCUMENTS_DIR/notes"
-alias_dir houston "$XDG_DOCUMENTS_DIR/houston"
 alias_dir prj "$HOME/Projects"
 alias_dir dl "$XDG_DOWNLOAD_DIR"
 alias_dir dt "$XDG_DESKTOP_DIR"
+
+if [ -f "$XDG_DOCUMENTS_DIR/aliases.sh" ]; then
+    . "$XDG_DOCUMENTS_DIR/aliases.sh"
+fi
 
 # Ask to confirm
 alias rm="rm -i"
