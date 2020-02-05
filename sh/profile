@@ -28,7 +28,7 @@ export ZSH_DATA_HOME=$XDG_DATA_HOME/zsh
 export DOTFILES=$HOME/.dotfiles
 export DOT_SH=$DOTFILES/sh
 export DOT_BASH=$DOTFILES/bash
-export DOT_ZSH=$DOTFILES/zsh
+export DOT_ZSH="$XDG_CONFIG_HOME/zsh"
 
 MAUDE_LIB=$HOME/.local/opt/maude
 [ -d $MAUDE_LIB ] && export MAUDE_LIB

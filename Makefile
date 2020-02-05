@@ -1,12 +1,12 @@
-CACHE_HOME = $(HOME)/.cache
-DATA_HOME  = $(HOME)/.local/share
-LIB_HOME   = $(HOME)/.local/lib
+CACHE_HOME  = $(HOME)/.cache
+CONFIG_HOME = $(HOME)/.config
+DATA_HOME   = $(HOME)/.local/share
+LIB_HOME    = $(HOME)/.local/lib
 
 default:
 	@echo "this is the default target"
 	@echo "we'll do nothing"
 	@echo $(CACHE_HOME) $(DATA_HOME) $(LIB_HOME)
-	@echo $(CACHE_HOME)
 	@echo $(HOME)
 
 #{{{ Sh
@@ -22,11 +22,16 @@ sh: $(HOME)/.profile $(HOME)/.envir
 #}}}
 #{{{ Zsh
 
-ZSH_CACHE_HOME = $(CACHE_HOME)/zsh
-ZSH_DATA_HOME  = $(DATA_HOME)/zsh
-ZSH_LIB_HOME   = $(LIB_HOME)/zsh
+ZSH_CACHE_HOME  = $(CACHE_HOME)/zsh
+ZSH_CONFIG_HOME = $(CONFIG_HOME)/zsh
+ZSH_DATA_HOME   = $(DATA_HOME)/zsh
+ZSH_LIB_HOME    = $(LIB_HOME)/zsh
 
 $(ZSH_CACHE_HOME):
+	mkdir -p $@
+	touch $@
+
+$(ZSH_CONFIG_HOME):
 	mkdir -p $@
 	touch $@
 
@@ -51,10 +56,22 @@ $(HOME)/.zprofile:
 $(HOME)/.zshrc:
 	ln -sf $(PWD)/zsh/zshrc $@
 
+$(ZSH_CONFIG_HOME)/aliases.zsh: $(ZSH_CONFIG_HOME)
+	ln -sf $(PWD)/zsh/aliases.zsh $@
+
+$(ZSH_CONFIG_HOME)/completion.zsh: $(ZSH_CONFIG_HOME)
+	ln -sf $(PWD)/zsh/completion.zsh $@
+
+$(ZSH_CONFIG_HOME)/history.zsh: $(ZSH_CONFIG_HOME)
+	ln -sf $(PWD)/zsh/history.zsh $@
+
 .PHONY = zsh
-ZSH_DEPS := $(ZSH_CACHE_HOME) $(ZSH_DATA_HOME)/site-functions
+ZSH_DEPS := $(ZSH_CACHE_HOME) $(ZSH_CONFIG_HOME)
+ZSH_DEPS += $(ZSH_DATA_HOME)/site-functions
 ZSH_DEPS += $(ZSH_LIB_HOME)/spaceship-prompt
 ZSH_DEPS += $(HOME)/.zshenv $(HOME)/.zprofile $(HOME)/.zshrc
+ZSH_DEPS += $(ZSH_CONFIG_HOME)/aliases.zsh $(ZSH_CONFIG_HOME)/completion.zsh
+ZSH_DEPS += $(ZSH_CONFIG_HOME)/history.zsh
 ZSH_DEPS += sh
 
 zsh: $(ZSH_DEPS)
