@@ -7,6 +7,7 @@ default:
 	@echo "we'll do nothing"
 	@echo $(CACHE_HOME) $(DATA_HOME) $(LIB_HOME)
 	@echo $(CACHE_HOME)
+	@echo $(HOME)
 
 #{{{ Sh
 
@@ -19,7 +20,6 @@ $(HOME)/.envir:
 .PHONY = sh
 sh: $(HOME)/.profile $(HOME)/.envir
 #}}}
-
 #{{{ Zsh
 
 ZSH_CACHE_HOME = $(CACHE_HOME)/zsh
@@ -55,6 +55,7 @@ $(HOME)/.zshrc:
 ZSH_DEPS := $(ZSH_CACHE_HOME) $(ZSH_DATA_HOME)/site-functions
 ZSH_DEPS += $(ZSH_LIB_HOME)/spaceship-prompt
 ZSH_DEPS += $(HOME)/.zshenv $(HOME)/.zprofile $(HOME)/.zshrc
+ZSH_DEPS += sh
 
 zsh: $(ZSH_DEPS)
 #}}}
