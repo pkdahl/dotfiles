@@ -1,13 +1,16 @@
+SHELL := bash
+
 CACHE_HOME  = $(HOME)/.cache
 CONFIG_HOME = $(HOME)/.config
 DATA_HOME   = $(HOME)/.local/share
 LIB_HOME    = $(HOME)/.local/lib
 
-default:
-	@echo "this is the default target"
-	@echo "we'll do nothing"
-	@echo $(CACHE_HOME) $(DATA_HOME) $(LIB_HOME)
-	@echo $(HOME)
+.DEFAULT_TARGET: help
+
+help: 
+	@echo "Usage: make {sh|zsh}"
+
+.PHONY: help
 
 #{{{ Sh
 
@@ -17,8 +20,9 @@ $(HOME)/.profile:
 $(HOME)/.envir:
 	ln -sf $(PWD)/sh/envir $@
 
-.PHONY = sh
 sh: $(HOME)/.profile $(HOME)/.envir
+
+.PHONY = sh
 #}}}
 #{{{ Zsh
 
@@ -65,7 +69,6 @@ $(ZSH_CONFIG_HOME)/completion.zsh: $(ZSH_CONFIG_HOME)
 $(ZSH_CONFIG_HOME)/history.zsh: $(ZSH_CONFIG_HOME)
 	ln -sf $(PWD)/zsh/history.zsh $@
 
-.PHONY = zsh
 ZSH_DEPS := $(ZSH_CACHE_HOME) $(ZSH_CONFIG_HOME)
 ZSH_DEPS += $(ZSH_DATA_HOME)/site-functions
 ZSH_DEPS += $(ZSH_LIB_HOME)/spaceship-prompt
@@ -75,4 +78,6 @@ ZSH_DEPS += $(ZSH_CONFIG_HOME)/history.zsh
 ZSH_DEPS += sh
 
 zsh: $(ZSH_DEPS)
+
+.PHONY = zsh
 #}}}
