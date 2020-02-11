@@ -44,7 +44,7 @@ $(ZSH_DATA_HOME)/site-functions:
 	touch $@ 
 
 $(ZSH_LIB_HOME)/spaceship-prompt: $(ZSH_DATA_HOME)/site-functions
-	mkdir -p $(ZSH_LIB_HOME)
+	mkdir -p $(@D)
 	git clone https://github.com/denysdovhan/spaceship-prompt.git \
 		$(ZSH_LIB_HOME)/spaceship-prompt
 	ln -sf $(ZSH_LIB_HOME)/spaceship-prompt/spaceship.zsh \
@@ -60,13 +60,16 @@ $(HOME)/.zprofile:
 $(HOME)/.zshrc:
 	ln -sf $(PWD)/zsh/zshrc $@
 
-$(ZSH_CONFIG_HOME)/aliases.zsh: $(ZSH_CONFIG_HOME)
+$(ZSH_CONFIG_HOME)/aliases.zsh:
+	mkdir -p $(@D)
 	ln -sf $(PWD)/zsh/aliases.zsh $@
 
-$(ZSH_CONFIG_HOME)/completion.zsh: $(ZSH_CONFIG_HOME)
+$(ZSH_CONFIG_HOME)/completion.zsh:
+	mkdir $(@D)
 	ln -sf $(PWD)/zsh/completion.zsh $@
 
-$(ZSH_CONFIG_HOME)/history.zsh: $(ZSH_CONFIG_HOME)
+$(ZSH_CONFIG_HOME)/history.zsh:
+	mkdir $(@D)
 	ln -sf $(PWD)/zsh/history.zsh $@
 
 ZSH_DEPS := $(ZSH_CACHE_HOME) $(ZSH_CONFIG_HOME)
@@ -80,4 +83,35 @@ ZSH_DEPS += sh
 zsh: $(ZSH_DEPS)
 
 .PHONY = zsh
+#}}}
+#{{{ Homebrew
+
+/usr/local/bin/brew:
+	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+homebrew: /usr/local/bin/brew
+
+.PHONY = homebrew
+#}}}
+#{{{ Git
+
+GIT_CONFIG_HOME = $(CONFIG_HOME)/git
+
+$(GIT_CONFIG_HOME)/attributes:
+	mkdir -p $(@D)
+	ln -sf $(PWD)/git/attributes $@
+
+$(GIT_CONFIG_HOME)/config:
+	mkdir -p $(@D)
+	ln -sf $(PWD)/git/config $@
+
+$(GIT_CONFIG_HOME)/ignore:
+	mkdir -p $(@D)
+	ln -sf $(PWD)/git/ignore $@
+
+GIT_DEPS := $(GIT_CONFIG_HOME)/attributes $(GIT_CONFIG_HOME)/config $(GIT_CONFIG_HOME)/ignore
+
+git: $(GIT_DEPS)
+
+.PHONY = git
 #}}}
