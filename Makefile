@@ -12,7 +12,7 @@ help:
 
 .PHONY: help
 
-#{{{ Sh
+#{{{ Common Bourne settings
 
 $(HOME)/.profile:
 	ln -sf $(PWD)/sh/profile $@
@@ -24,7 +24,7 @@ sh: $(HOME)/.profile $(HOME)/.envir
 
 .PHONY = sh
 #}}}
-#{{{ Zsh
+#{{{ Z shell
 
 ZSH_CACHE_HOME  = $(CACHE_HOME)/zsh
 ZSH_CONFIG_HOME = $(CONFIG_HOME)/zsh

@@ -69,8 +69,7 @@ if [ -e /usr/local/bin/brew ]; then
 	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
-# This won't work before brew is in PATH
-if [ ! -z $(brew --prefix) ]; then
+if [ -x "$(command -v brew)" ]; then
 	export HOMEBREW_PREFIX="$(brew --prefix)"
 fi
 
