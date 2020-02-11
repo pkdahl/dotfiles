@@ -115,3 +115,15 @@ git: $(GIT_DEPS)
 
 .PHONY = git
 #}}}
+#{{{ SSH (Secure shell)
+
+SSH_CONFIG_HOME = $(HOME)/.ssh
+
+$(SSH_CONFIG_HOME)/config:
+	mkdir -p $(@D)
+	ln -sf $(PWD)/ssh/config $@
+
+ssh: $(SSH_CONFIG_HOME)/config
+
+.PHONY = ssh
+#}}}
