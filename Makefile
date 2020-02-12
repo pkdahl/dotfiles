@@ -13,15 +13,20 @@ help:
 
 #{{{ Common Bourne shell settings
 
+SH_CONFIG_HOME = $(CONFIG_HOME)/sh
+
 $(HOME)/.profile:
 	ln -sf $(PWD)/sh/profile $@
 
 $(HOME)/.envir:
 	ln -sf $(PWD)/sh/envir $@
 
-sh: $(HOME)/.profile $(HOME)/.envir
+$(SH_CONFIG_HOME)/aliases.sh:
+	mkdir -p $(@D)
+	ln -sf $(PWD)/sh/aliases.sh $@
 
-.PHONY = sh
+.PHONY: sh
+sh: $(HOME)/.profile $(HOME)/.envir $(SH_CONFIG_HOME)/aliases.sh
 #}}}
 #{{{ Z shell
 
@@ -79,9 +84,8 @@ ZSH_DEPS += $(ZSH_CONFIG_HOME)/aliases.zsh $(ZSH_CONFIG_HOME)/completion.zsh
 ZSH_DEPS += $(ZSH_CONFIG_HOME)/history.zsh
 ZSH_DEPS += sh
 
+.PHONY: zsh
 zsh: $(ZSH_DEPS)
-
-.PHONY = zsh
 #}}}
 #{{{ Homebrew
 
