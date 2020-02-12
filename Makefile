@@ -8,7 +8,7 @@ LIB_HOME    = $(HOME)/.local/lib
 .DEFAULT_TARGET: help
 
 help: 
-	@echo "Usage: make {sh|zsh}"
+	@echo "Usage: make {zsh | homebrew | git | ssh | neovim}"
 
 .PHONY: help
 
