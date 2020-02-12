@@ -158,7 +158,20 @@ NVIM_DEPS := $(NVIM_EXE)
 NVIM_DEPS += $(NVIM_CONFIG_HOME)/init.vim
 NVIM_DEPS += $(NVIM_DATA_HOME)/site/autoload/plug.vim
 
-neovim: $(NVIM_DEPS)
-
 .PHONY: neovim
+neovim: $(NVIM_DEPS)
+#}}}
+#{{{ Pass
+
+PASS_EXE := /usr/local/bin/pass
+
+$(PASS_EXE): | $(BREW_EXE)
+	brew install pass
+
+$(HOME)/.password-store/.git: | $(PASS_EXE)
+	git clone ssh://pkdahl@login.uio.no/~/git/password-store.git $(@D)
+
+.PHONY: pass
+pass: | $(PASS_EXE) $(HOME)/.password-store/.git
+	@echo "Remember to setup GPG keys"
 #}}}
