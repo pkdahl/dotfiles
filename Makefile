@@ -7,10 +7,9 @@ LIB_HOME    = $(HOME)/.local/lib
 
 .DEFAULT_TARGET: help
 
+.PHONY: help
 help: 
 	@echo "Usage: make {zsh | homebrew | git | ssh | neovim}"
-
-.PHONY: help
 
 #{{{ Common Bourne shell settings
 
@@ -174,4 +173,14 @@ $(HOME)/.password-store/.git: | $(PASS_EXE)
 .PHONY: pass
 pass: | $(PASS_EXE) $(HOME)/.password-store/.git
 	@echo "Remember to setup GPG keys"
+#}}}
+#{{{ macOS settings
+
+$(DATA_HOME)/dotfiles/macos-sentinel:
+	bash $(PWD)/macos/dock-settings.bash
+	mkdir -p $(@D)
+	touch $@
+
+.PHONY: macos
+macos: $(DATA_HOME)/dotfiles/macos-sentinel
 #}}}
