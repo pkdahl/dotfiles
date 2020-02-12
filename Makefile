@@ -12,7 +12,7 @@ help:
 
 .PHONY: help
 
-#{{{ Common Bourne settings
+#{{{ Common Bourne shell settings
 
 $(HOME)/.profile:
 	ln -sf $(PWD)/sh/profile $@
@@ -86,10 +86,12 @@ zsh: $(ZSH_DEPS)
 #}}}
 #{{{ Homebrew
 
-/usr/local/bin/brew:
+BREW_EXE := /usr/local/bin/brew
+
+$(BREW_EXE):
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-homebrew: /usr/local/bin/brew
+homebrew: $(BREW_EXE)
 
 .PHONY = homebrew
 #}}}
@@ -126,4 +128,37 @@ $(SSH_CONFIG_HOME)/config:
 ssh: $(SSH_CONFIG_HOME)/config
 
 .PHONY = ssh
+#}}}
+#{{{ Neovim
+# Depends on some Python stuff and node stuff for LSP
+
+DOT_NVIM = $(PWD)/nvim
+NVIM_CONFIG_HOME = $(CONFIG_HOME)/nvim
+NVIM_DATA_HOME = $(DATA_HOME)/nvim
+NVIM_EXE = /usr/local/bin/nvim
+
+# Installing Neovim with Homebrew
+$(NVIM_EXE): | $(BREW_EXE)
+	brew install neovim
+
+$(NVIM_CONFIG_HOME)/init.vim: | $(NVIM_EXE)
+	mkdir -p $(@D)
+	ln -sf $(DOT_NVIM)/init.vim $@
+
+$(NVIM_DATA_HOME)/site/autoload/plug.vim: | $(NVIM_EXE) $(NVIM_CONFIG_HOME)/init.vim
+	mkdir -p $(@D) 
+	curl -fLo $@ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	nvim --headless +'PlugInstall --sync' +qa
+
+# install fzf
+# missing coc. dependens on nodejs
+# neovim python module
+
+NVIM_DEPS := $(NVIM_EXE)
+NVIM_DEPS += $(NVIM_CONFIG_HOME)/init.vim
+NVIM_DEPS += $(NVIM_DATA_HOME)/site/autoload/plug.vim
+
+neovim: $(NVIM_DEPS)
+
+.PHONY: neovim
 #}}}
