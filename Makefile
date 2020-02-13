@@ -94,9 +94,8 @@ BREW_EXE := /usr/local/bin/brew
 $(BREW_EXE):
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+.PHONY: homebrew
 homebrew: $(BREW_EXE)
-
-.PHONY = homebrew
 #}}}
 #{{{ Git
 
@@ -116,9 +115,8 @@ $(GIT_CONFIG_HOME)/ignore:
 
 GIT_DEPS := $(GIT_CONFIG_HOME)/attributes $(GIT_CONFIG_HOME)/config $(GIT_CONFIG_HOME)/ignore
 
+.PHONY= git
 git: $(GIT_DEPS)
-
-.PHONY = git
 #}}}
 #{{{ SSH (Secure shell)
 
@@ -128,9 +126,8 @@ $(SSH_CONFIG_HOME)/config:
 	mkdir -p $(@D)
 	ln -sf $(PWD)/ssh/config $@
 
+.PHONY: ssh
 ssh: $(SSH_CONFIG_HOME)/config
-
-.PHONY = ssh
 #}}}
 #{{{ Neovim
 # Depends on some Python stuff and node stuff for LSP
@@ -215,7 +212,6 @@ iterm: /Applications/iTerm.app $(HOME)/Downloads/Nord.itermcolors
 
 .PHONY: firefox
 firefox: /Applications/Firefox.app
-
 #}}}
 #{{{ Fonts
 
@@ -251,10 +247,6 @@ FONTS_OO_DEPS += $(FONT_FIRA_CODE)
 FONTS_OO_DEPS += $(FONT_IBM_3270)
 FONTS_OO_DEPS += $(FONT_MONOFUR)
 FONTS_OO_DEPS += $(FONT_SOURCE_CODE_PRO)
-
-.PHONY: fonts-test
-fonts-test:
-	echo $(FONT_FIRA_CODE)
 
 .PHONY: fonts
 fonts: | $(FONTS_OO_DEPS)
