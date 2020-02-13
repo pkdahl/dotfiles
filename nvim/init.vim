@@ -65,6 +65,7 @@ nmap ga <Plug>(EasyAlign)
 
 silent! colorscheme nord
 let g:lightline = { 'colorscheme': 'nord' }
+highlight Folded ctermfg=Blue
 
 " Python
 let g:python_host_prog = trim(system('command -v python2'))
