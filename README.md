@@ -21,5 +21,5 @@ quit
 - [X] Source Code Pro
 - [X] Fira Code
 - [X] Monofur
-- [R] IBM 3270
+- [X] IBM 3270
 - [Firicico](https://github.com/kosimst/Firicico) installed manually
