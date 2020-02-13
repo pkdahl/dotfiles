@@ -13,3 +13,13 @@ trust
 1-5
 quit
 
+# Fonts
+
+[homebrew-cask-fonts](https://github.com/Homebrew/homebrew-cask-fonts)
+
+- [X] DejaVu Sans Mono
+- [X] Source Code Pro
+- [X] Fira Code
+- [X] Monofur
+- [R] IBM 3270
+- [Firicico](https://github.com/kosimst/Firicico) installed manually

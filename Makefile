@@ -217,3 +217,45 @@ iterm: /Applications/iTerm.app $(HOME)/Downloads/Nord.itermcolors
 firefox: /Applications/Firefox.app
 
 #}}}
+#{{{ Fonts
+
+BREW_TAP_CASK_FONTS := /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-fonts
+FONTS_LIB := $(HOME)/Library/Fonts
+
+$(BREW_TAP_CASK_FONTS): | $(BREW_EXE)
+	$(BREW_EXE) tap homebrew/cask-fonts
+
+FONT_DEJAVU := $(FONTS_LIB)/DejaVu\ Sans\ Mono\ Nerd\ Font\ Complete.ttf
+$(FONT_DEJAVU): | $(BREW_TAP_CASK_FONTS)
+	$(BREW_EXE) cask install font-dejavusansmono-nerd-font
+
+FONT_FIRA_CODE := $(FONTS_LIB)/Fira\ Code\ Regular\ Nerd\ Font\ Complete.otf
+$(FONT_FIRA_CODE): | $(BREW_TAP_CASK_FONTS)
+	$(BREW_EXE) cask install font-firacode-nerd-font
+
+FONT_IBM_3270 := $(FONTS_LIB)/3270\ Narrow\ Nerd\ Font\ Complete.ttf
+$(FONT_IBM_3270): | $(BREW_TAP_CASK_FONTS)
+	$(BREW_EXE) cask install font-3270-nerd-font
+
+FONT_MONOFUR := $(FONTS_LIB)/monofur\ Nerd\ Font\ Complete.ttf
+$(FONT_MONOFUR): | $(BREW_TAP_CASK_FONTS)
+	$(BREW_EXE) cask install font-monofur-nerd-font
+
+FONT_SOURCE_CODE_PRO := $(FONTS_LIB)/Sauce\ Code\ Pro\ Nerd\ Font\ Complete.ttf
+$(FONT_SOURCE_CODE_PRO): | $(BREW_TAP_CASK_FONTS)
+	$(BREW_EXE) cask install font-sourcecodepro-nerd-font
+
+FONTS_OO_DEPS := $(BREW_TAP_CASK_FONTS)
+FOTNS_OO_DEPS += $(FONT_DEJAVU)
+FONTS_OO_DEPS += $(FONT_FIRA_CODE)
+FONTS_OO_DEPS += $(FONT_IBM_3270)
+FONTS_OO_DEPS += $(FONT_MONOFUR)
+FONTS_OO_DEPS += $(FONT_SOURCE_CODE_PRO)
+
+.PHONY: fonts-test
+fonts-test:
+	echo $(FONT_FIRA_CODE)
+
+.PHONY: fonts
+fonts: | $(FONTS_OO_DEPS)
+#}}}
