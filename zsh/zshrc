@@ -16,6 +16,7 @@ autoload -U promptinit
 if is-at-least 5.1; then
 	promptinit
 	prompt spaceship
+    spaceship_vi_mode_enable
 fi
 
 which direnv &> /dev/null && eval "$(direnv hook zsh)"
