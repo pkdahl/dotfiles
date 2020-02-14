@@ -5,11 +5,26 @@ CONFIG_HOME = $(HOME)/.config
 DATA_HOME   = $(HOME)/.local/share
 LIB_HOME    = $(HOME)/.local/lib
 
+USERNAME       := $(shell whoami)
+LOCAL_HOSTNAME := $(shell scutil --get LocalHostName)
+DATE           := $(shell date "+%d %b %Y")
+
 .DEFAULT_TARGET: help
 
 .PHONY: help
 help: 
-	@echo "Usage: make {zsh | homebrew | git | ssh | neovim}"
+	@echo "Usage: make [RULE]"
+	@echo "Available rules:"
+	@echo "  - zsh"
+	@echo "  - ssh"
+	@echo "  - git"
+	@echo "  - homebrew"
+	@echo "  - neovim"
+	@echo "  - pass"
+	@echo "  - macos"
+	@echo "  - iterm"
+	@echo "  - firefox"
+	@echo "  - fonts"
 
 #{{{ Common Bourne shell settings
 
@@ -47,7 +62,7 @@ $(ZSH_DATA_HOME)/site-functions:
 	mkdir -p $@
 	touch $@ 
 
-$(ZSH_LIB_HOME)/spaceship-prompt: $(ZSH_DATA_HOME)/site-functions
+$(ZSH_LIB_HOME)/spaceship-prompt: | $(ZSH_DATA_HOME)/site-functions
 	mkdir -p $(@D)
 	git clone https://github.com/denysdovhan/spaceship-prompt.git \
 		$(ZSH_LIB_HOME)/spaceship-prompt
@@ -87,15 +102,21 @@ ZSH_DEPS += sh
 .PHONY: zsh
 zsh: $(ZSH_DEPS)
 #}}}
-#{{{ Homebrew
+#{{{ SSH (Secure shell)
 
-BREW_EXE := /usr/local/bin/brew
+SSH_CONFIG_HOME = $(HOME)/.ssh
 
-$(BREW_EXE):
-	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+$(SSH_CONFIG_HOME)/config:
+	mkdir -p $(@D)
+	ln -sf $(PWD)/ssh/config $@
 
-.PHONY: homebrew
-homebrew: $(BREW_EXE)
+$(SSH_CONFIG_HOME)/id_rsa_test:
+	mkdir -p $(@D)
+	ssh-keygen -f $@ -t rsa -b 4096 -q -N "" \
+	-C "Created on $(DATE) by $(USER) on $(LOCAL_HOSTNAME)"
+
+.PHONY: ssh
+ssh: $(SSH_CONFIG_HOME)/config
 #}}}
 #{{{ Git
 
@@ -115,19 +136,18 @@ $(GIT_CONFIG_HOME)/ignore:
 
 GIT_DEPS := $(GIT_CONFIG_HOME)/attributes $(GIT_CONFIG_HOME)/config $(GIT_CONFIG_HOME)/ignore
 
-.PHONY= git
+.PHONY: git
 git: $(GIT_DEPS)
 #}}}
-#{{{ SSH (Secure shell)
+#{{{ Homebrew
 
-SSH_CONFIG_HOME = $(HOME)/.ssh
+BREW_EXE := /usr/local/bin/brew
 
-$(SSH_CONFIG_HOME)/config:
-	mkdir -p $(@D)
-	ln -sf $(PWD)/ssh/config $@
+$(BREW_EXE):
+	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-.PHONY: ssh
-ssh: $(SSH_CONFIG_HOME)/config
+.PHONY: homebrew
+homebrew: $(BREW_EXE)
 #}}}
 #{{{ Neovim
 # Depends on some Python stuff and node stuff for LSP
