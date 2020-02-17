@@ -22,6 +22,7 @@ help:
 	@echo "  - homebrew"
 	@echo "  - neovim"
 	@echo "  - pass"
+	@echo "  - cheat"
 	@echo "  - macos"
 	@echo "  - iterm"
 	@echo "  - firefox"
@@ -196,6 +197,31 @@ $(HOME)/.password-store/.git: | $(PASS_EXE)
 .PHONY: pass
 pass: | $(PASS_EXE) $(HOME)/.password-store/.git
 	@echo "Remember to setup GPG keys"
+#}}}
+#{{{ Cheat
+
+CHEAT_BIN         := $(BREW_PREFIX)/bin/cheat
+CHEAT_CONFIG_HOME := $(CONFIG_HOME)/cheat
+CHEAT_DATA_HOME   := $(DATA_HOME)/cheat
+DOT_CHEAT         := $(PWD)/cheat
+
+$(CHEAT_BIN): | $(BREW_EXE)
+	$(BREW_EXE) install cheat
+
+$(CHEAT_CONFIG_HOME)/conf.yml: | $(CHEAT_BIN)
+	mkdir -p $(@D)
+	ln -sf $(DOT_CHEAT)/conf.yml $@
+
+$(CHEAT_DATA_HOME)/cheatsheets/community: | $(CHEAT_BIN)
+	mkdir -p $(@D)
+	git clone https://github.com/cheat/cheatsheets $@
+
+CHEAT_OO_DEPS := $(CHEAT_BIN)
+CHEAT_OO_DEPS += $(CHEAT_CONFIG_HOME)/conf.yml
+CHEAT_OO_DEPS += $(CHEAT_DATA_HOME)/cheatsheets/community
+
+.PHONY: cheat
+cheat: | $(CHEAT_OO_DEPS)
 #}}}
 #{{{ macOS settings
 
