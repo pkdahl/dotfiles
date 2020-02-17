@@ -8,6 +8,7 @@ LIB_HOME    = $(HOME)/.local/lib
 USERNAME       := $(shell whoami)
 LOCAL_HOSTNAME := $(shell scutil --get LocalHostName)
 DATE           := $(shell date "+%d %b %Y")
+DATE_ISO       := $(shell date "+%F")
 
 .DEFAULT_TARGET: help
 
@@ -213,14 +214,9 @@ macos: $(DATA_HOME)/dotfiles/macos-sentinel
 	$(BREW_EXE) cask install iterm2
 
 $(HOME)/Downloads/Nord.itermcolors: | /Applications/iTerm.app
+	@echo "Downloading Nord theme for iTerm"
 	curl -fLo $@ https://raw.githubusercontent.com/arcticicestudio/nord-iterm2/develop/src/xml/Nord.itermcolors
-	@echo "Downloaded Nord color theme for iTerm2 to ~/Downloads"
-	@echo "To install it:"
-	@echo "1. Start iTerm2 and open the Preferences"
-	@echo "2. Switch to the Profiles tab located in the topbar"
-	@echo "3. Select the Colors tabs on the right side"
-	@echo "4. Click on the Load Presets drop-down menu and select the Import entry"
-	@echo "5. Import the downloaded Nord.itermcolors"
+	open $@
 
 .PHONY: iterm
 iterm: /Applications/iTerm.app $(HOME)/Downloads/Nord.itermcolors
