@@ -142,7 +142,8 @@ git: $(GIT_DEPS)
 #}}}
 #{{{ Homebrew
 
-BREW_EXE := /usr/local/bin/brew
+BREW_PREFIX := /usr/local
+BREW_EXE    := $(BREW_PREFIX)/bin/brew
 
 $(BREW_EXE):
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
