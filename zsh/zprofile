@@ -1,23 +1,17 @@
 # ~/.zprofile
 
-typeset -U path # Only unique entries
+# Only unique entries
+typeset -U path
 
 # PATH is already set in .profile which is sourced in zshenv
 # path=("$HOME/.local/bin" /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin "$path[@]")
 
-# if [ -d "$HOME/.cargo/bin" ]; then
-#    path=("$HOME/.cargo/bin" $path)
-# fi
-
 typeset -U fpath
-if [ -d "$HOMEBREW_PREFIX/zsh/site-functions" ]; then
-	fpath=("$HOMEBREW_PREFIX/zsh/site-functons" $fpath)
+
+if [ -d "$HOMEBREW_PREFIX/share/zsh/site-functions" ]; then
+	fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
 fi
 
 if [ -d "$ZSH_DATA_HOME/site-functions" ]; then
 	fpath=("$ZSH_DATA_HOME/site-functions" $fpath)
-fi
-
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-   . $HOME/.nix-profile/etc/profile.d/nix.sh;
 fi
