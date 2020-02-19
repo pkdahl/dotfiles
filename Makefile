@@ -203,6 +203,7 @@ pass: | $(PASS_EXE) $(HOME)/.password-store/.git
 CHEAT_BIN         := $(BREW_PREFIX)/bin/cheat
 CHEAT_CONFIG_HOME := $(CONFIG_HOME)/cheat
 CHEAT_DATA_HOME   := $(DATA_HOME)/cheat
+CHEAT_CHEATSHEETS := $(CHEAT_DATA_HOME)/cheatsheets
 DOT_CHEAT         := $(PWD)/cheat
 
 $(CHEAT_BIN): | $(BREW_EXE)
@@ -212,13 +213,18 @@ $(CHEAT_CONFIG_HOME)/conf.yml: | $(CHEAT_BIN)
 	mkdir -p $(@D)
 	ln -sf $(DOT_CHEAT)/conf.yml $@
 
-$(CHEAT_DATA_HOME)/cheatsheets/community: | $(CHEAT_BIN)
+$(CHEAT_CHEATSHEETS)/community: | $(CHEAT_BIN)
 	mkdir -p $(@D)
 	git clone https://github.com/cheat/cheatsheets $@
 
+$(CHEAT_CHEATSHEETS)/personal: | $(CHEAT_BIN)
+	mkdir -p $(@D)
+	git clone git@github.com:pkdahl/cheatsheets.git $@
+
 CHEAT_OO_DEPS := $(CHEAT_BIN)
 CHEAT_OO_DEPS += $(CHEAT_CONFIG_HOME)/conf.yml
-CHEAT_OO_DEPS += $(CHEAT_DATA_HOME)/cheatsheets/community
+CHEAT_OO_DEPS += $(CHEAT_CHEATSHEETS)/community
+CHEAT_OO_DEPS += $(CHEAT_CHEATSHEETS)/personal
 
 .PHONY: cheat
 cheat: | $(CHEAT_OO_DEPS)
