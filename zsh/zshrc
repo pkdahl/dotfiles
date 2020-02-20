@@ -19,6 +19,11 @@ if is-at-least 5.1; then
     spaceship_vi_mode_enable
 fi
 
+if [ -r "$HOME/.local/src/z/1.9/z.sh" ]; then
+    export _Z_DATA="$XDG_CACHE_HOME/z/data"
+    . "$HOME/.local/src/z/1.9/z.sh"
+fi
+
 which direnv &> /dev/null && eval "$(direnv hook zsh)"
 
 which rbenv &> /dev/null && eval "$(rbenv init -)"

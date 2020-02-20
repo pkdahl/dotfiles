@@ -62,6 +62,12 @@ PATH=$(printf %s "$PATH" | awk -v RS=: '!a[$0]++' | paste -s -d: -)
 
 export PATH
 
+if [ -d "$XDG_DATA_HOME/man" ]; then
+    MANPATH="$XDG_DATA_HOME/man:$(man -w)"
+    MANPATH=$(printf %s "$MANPATH" | awk -v RS=: '!a[$0]++' | paste -s -d: -)
+    export MANPATH
+fi
+
 # This only applies to Homebrew on Mac and not Homebrew on Linux.
 # Consider changing this.
 if [ -e /usr/local/bin/brew ]; then

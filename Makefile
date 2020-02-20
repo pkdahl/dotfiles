@@ -28,6 +28,10 @@ help:
 	@echo "  - firefox"
 	@echo "  - fonts"
 
+.PHONY: clean
+clean:
+	rm -rf $(CACHE_HOME)/dotfiles
+
 #{{{ Common Bourne shell settings
 
 SH_CONFIG_HOME = $(CONFIG_HOME)/sh
@@ -140,6 +144,32 @@ GIT_DEPS := $(GIT_CONFIG_HOME)/attributes $(GIT_CONFIG_HOME)/config $(GIT_CONFIG
 
 .PHONY: git
 git: $(GIT_DEPS)
+#}}}
+#{{{ Z
+# https://github.com/rupa/z/
+
+Z_VERSION = 1.9
+Z_DIR := $(HOME)/.local/src/z/$(Z_VERSION)
+Z_FILES = z.sh z.1
+
+$(CACHE_HOME)/dotfiles/z-$(Z_VERSION).tar.gz:
+	mkdir -p $(@D)
+	curl -fsSLo $@ https://github.com/rupa/z/archive/v$(Z_VERSION).tar.gz
+
+$(Z_DIR)/%: | $(CACHE_HOME)/dotfiles/z-$(Z_VERSION).tar.gz
+	mkdir -p $(@D)
+	tar -xf  $| -C $(@D) --strip-components 1
+
+$(DATA_HOME)/man/man1/z.1: | $(Z_DIR)/z.1 
+	mkdir -p $(@D)
+	ln -sf $(Z_DIR)/z.1 $@
+
+$(CACHE_HOME)/z/data: | $(Z_DIR)/z.sh
+	mkdir -p $(@D)
+	touch $@
+
+.PHONY: z
+z: | $(Z_FILES:%=$(Z_DIR)/%) $(DATA_HOME)/man/man1/z.1 $(CACHE_HOME)/z/data
 #}}}
 #{{{ Homebrew
 
