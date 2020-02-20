@@ -30,8 +30,10 @@ export DOT_ZSH="$ZSH_CONFIG_HOME"
 
 export DOTFILES="$HOME/.dotfiles"
 
-MAUDE_LIB=$HOME/.local/opt/maude
-[ -d $MAUDE_LIB ] && export MAUDE_LIB
+MAUDE_LIB="$HOME/.local/lib/maude"
+if [ -d "$MAUDE_LIB" ]; then
+    export MAUDE_LIB
+fi
 
 # PATH
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH

@@ -23,3 +23,8 @@ quit
 - [X] Monofur
 - [X] IBM 3270
 - [Firicico](https://github.com/kosimst/Firicico) installed manually
+
+# Maude
+
+Manual install for now. Installed to ~/.local/lib/maude/ and bin symlinked to
+~/.local/bin. $MAUDE_LIB set in .profile.

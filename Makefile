@@ -330,3 +330,12 @@ FONTS_OO_DEPS += $(FONT_SOURCE_CODE_PRO)
 .PHONY: fonts
 fonts: | $(FONTS_OO_DEPS)
 #}}}
+#{{{ Maude
+# http://maude.cs.illinois.edu/w/index.php/The_Maude_System
+
+MAUDE_VERSION = 3.0
+
+http://maude.cs.illinois.edu/w/images/b/bb/Maude-3.0+yices2-osx.zip
+http://maude.cs.illinois.edu/w/images/0/04/Full-Maude-3.0.zip
+
+#}}}
