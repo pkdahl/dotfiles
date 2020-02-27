@@ -6,14 +6,14 @@ DATA_HOME   = $(HOME)/.local/share
 LIB_HOME    = $(HOME)/.local/lib
 
 USERNAME       := $(shell whoami)
-LOCAL_HOSTNAME := $(shell scutil --get LocalHostName)
+# LOCAL_HOSTNAME := $(shell scutil --get LocalHostName)
 DATE           := $(shell date "+%d %b %Y")
 DATE_ISO       := $(shell date "+%F")
 
 .DEFAULT_TARGET: help
 
 .PHONY: help
-help: 
+help:
 	@echo "Usage: make [RULE]"
 	@echo "Available rules:"
 	@echo "  - zsh"
@@ -66,7 +66,7 @@ $(ZSH_CONFIG_HOME):
 
 $(ZSH_DATA_HOME)/site-functions:
 	mkdir -p $@
-	touch $@ 
+	touch $@
 
 $(ZSH_LIB_HOME)/spaceship-prompt: | $(ZSH_DATA_HOME)/site-functions
 	mkdir -p $(@D)
@@ -160,7 +160,7 @@ $(Z_DIR)/%: | $(CACHE_HOME)/dotfiles/z-$(Z_VERSION).tar.gz
 	mkdir -p $(@D)
 	tar -xf  $| -C $(@D) --strip-components 1
 
-$(DATA_HOME)/man/man1/z.1: | $(Z_DIR)/z.1 
+$(DATA_HOME)/man/man1/z.1: | $(Z_DIR)/z.1
 	mkdir -p $(@D)
 	ln -sf $(Z_DIR)/z.1 $@
 
@@ -173,11 +173,21 @@ z: | $(Z_FILES:%=$(Z_DIR)/%) $(DATA_HOME)/man/man1/z.1 $(CACHE_HOME)/z/data
 #}}}
 #{{{ Homebrew
 
-BREW_PREFIX := /usr/local
-BREW_EXE    := $(BREW_PREFIX)/bin/brew
+ifeq (, $(findstring kant, $(HOME)))
+BREW_PREFIX      := /usr/local
+BREW_INSTALL_CMD := /usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+BREW_PREFIX      := $(HOME)/.linuxbrew
+BREW_INSTALL_CMD := sh -c "$$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+endif
+
+BREW_EXE := $(BREW_PREFIX)/bin/brew
 
 $(BREW_EXE):
-	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+ifeq (kant, $(findstring kant, $(HOME)))
+	$(info Press Control-D when asked for sudoer password)
+endif
+	$(BREW_INSTALL_CMD)
 
 .PHONY: homebrew
 homebrew: $(BREW_EXE)
@@ -199,7 +209,7 @@ $(NVIM_CONFIG_HOME)/init.vim: | $(NVIM_EXE)
 	ln -sf $(DOT_NVIM)/init.vim $@
 
 $(NVIM_DATA_HOME)/site/autoload/plug.vim: | $(NVIM_EXE) $(NVIM_CONFIG_HOME)/init.vim
-	mkdir -p $(@D) 
+	mkdir -p $(@D)
 	curl -fLo $@ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	nvim --headless +'PlugInstall --sync' +qa
 
