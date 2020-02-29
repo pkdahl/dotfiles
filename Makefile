@@ -230,8 +230,9 @@ NVIM_DEPS := $(NVIM_EXE)
 NVIM_DEPS += $(NVIM_CONFIG_HOME)/init.vim
 NVIM_DEPS += $(NVIM_DATA_HOME)/site/autoload/plug.vim
 
-.PHONY: neovim
-neovim: $(NVIM_DEPS)
+.PHONY: nvim neovim
+nvim: $(NVIM_DEPS)
+neovim: nvim
 #}}}
 #{{{ Pass
 
