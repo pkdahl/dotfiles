@@ -189,8 +189,17 @@ ifeq (kant, $(findstring kant, $(HOME)))
 endif
 	$(BREW_INSTALL_CMD)
 
+$(BREW_PREFIX)/bin/gcc: $(BREW_EXE)
+	$(BREW_EXE) install gcc
+
+BREW_DEPS := $(BREW_EXE)
+ifeq (kant, $(findstring kant, $(HOME)))
+BREW_DEPS += $(BREW_PREFIX)/bin/gcc
+endif
+
 .PHONY: homebrew
-homebrew: $(BREW_EXE)
+homebrew: $(BREW_DEPS)
+	$(info You may need to reload shell)
 #}}}
 #{{{ Neovim
 # Depends on some Python stuff and node stuff for LSP
