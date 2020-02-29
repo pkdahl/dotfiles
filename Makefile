@@ -269,15 +269,15 @@ $(CHEAT_CONFIG_HOME)/conf.yml: | $(CHEAT_BIN)
 	mkdir -p $(@D)
 	ln -sf $(DOT_CHEAT)/conf.yml $@
 
-$(CHEAT_CHEATSHEETS)/community: | $(CHEAT_BIN)
+$(CHEAT_CHEATSHEETS)/community: | $(CHEAT_BIN) $(CHEAT_CONFIG_HOME)/conf.yml
 	mkdir -p $(@D)
 	git clone https://github.com/cheat/cheatsheets $@
 
-$(CHEAT_CHEATSHEETS)/personal: | $(CHEAT_BIN)
+$(CHEAT_CHEATSHEETS)/personal: | $(CHEAT_BIN) $(CHEAT_CONFIG_HOME)/conf.yml
 	mkdir -p $(@D)
 	git clone git@github.com:pkdahl/cheatsheets.git $@
 
-$(CHEAT_CHEATSHEETS)/work: | $(CHEAT_BIN)
+$(CHEAT_CHEATSHEETS)/work: | $(CHEAT_BIN) $(CHEAT_CONFIG_HOME)/conf.yml
 	mkdir -p $(@D)
 	git clone $(GIT_REPO_BASE_PATH)/cheatsheets.git $@
 
