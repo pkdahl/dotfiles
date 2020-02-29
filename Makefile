@@ -10,6 +10,12 @@ USERNAME       := $(shell whoami)
 DATE           := $(shell date "+%d %b %Y")
 DATE_ISO       := $(shell date "+%F")
 
+GIT_REPO_BASE_PATH := ~/git
+# If we are not on a UiO machine
+ifeq (, $(findstring kant, $(HOME)))
+GIT_REPO_BASE_PATH := ssh://pkdahl@login.uio.no/$(GIT_REPO_BASE_PATH)
+endif
+
 .DEFAULT_TARGET: help
 
 .PHONY: help
@@ -271,10 +277,15 @@ $(CHEAT_CHEATSHEETS)/personal: | $(CHEAT_BIN)
 	mkdir -p $(@D)
 	git clone git@github.com:pkdahl/cheatsheets.git $@
 
+$(CHEAT_CHEATSHEETS)/work: | $(CHEAT_BIN)
+	mkdir -p $(@D)
+	git clone $(GIT_REPO_BASE_PATH)/cheatsheets.git $@
+
 CHEAT_OO_DEPS := $(CHEAT_BIN)
 CHEAT_OO_DEPS += $(CHEAT_CONFIG_HOME)/conf.yml
 CHEAT_OO_DEPS += $(CHEAT_CHEATSHEETS)/community
 CHEAT_OO_DEPS += $(CHEAT_CHEATSHEETS)/personal
+CHEAT_OO_DEPS += $(CHEAT_CHEATSHEETS)/work
 
 .PHONY: cheat
 cheat: | $(CHEAT_OO_DEPS)

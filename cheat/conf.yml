@@ -55,6 +55,10 @@ cheatpaths:
     tags: [ personal ]
     readonly: false
 
+  - name: work
+    path: ~/.local/share/cheat/cheatsheets/work
+    tags: [ work ]
+    readonly: false
   # While it requires no specific configuration here, it's also worth noting
   # that 'cheat' will automatically append directories named '.cheat' within
   # the current working directory to the 'cheatpath'. This can be very useful
