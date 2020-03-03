@@ -290,6 +290,16 @@ CHEAT_OO_DEPS += $(CHEAT_CHEATSHEETS)/work
 .PHONY: cheat
 cheat: | $(CHEAT_OO_DEPS)
 #}}}
+#{{{ direnv
+
+DIRENV_EXE := $(BREW_PREFIX)/bin/direnv
+
+$(DRIENV_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install direnv
+
+.PHONY: direnv
+direnv: | $(DIRENV_EXE)
+#}}}
 #{{{ macOS settings
 
 $(DATA_HOME)/dotfiles/macos-sentinel:
