@@ -32,4 +32,6 @@ which rbenv &> /dev/null && eval "$(rbenv init -)"
 . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ]; then 
+    . "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+fi

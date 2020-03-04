@@ -300,6 +300,21 @@ $(DRIENV_EXE): | $(BREW_EXE)
 .PHONY: direnv
 direnv: | $(DIRENV_EXE)
 #}}}
+#{{{ fzf
+# https://github.com/junegunn/fzf
+
+FZF_EXE         := $(BREW_PREFIX)/bin/fzf
+FZF_CONFIG_HOME := $(CONFIG_HOME)/fzf
+
+$(FZF_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install fzf
+
+$(FZF_CONFIG_HOME)/fzf.zsh: | $(FZF_EXE)
+	$(BREW_PREFIX)/opt/fzf/install --xdg --key-bindings --completions --no-update-rc --no-fish
+
+.PHONY: fzf
+fzf: | $(FZF_EXE) $(FZF_CONFIG_HOME)/fzf.zsh
+#}}}
 #{{{ macOS settings
 
 $(DATA_HOME)/dotfiles/macos-sentinel:

@@ -17,13 +17,6 @@ set foldmethod=marker
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-" This doesn't seem to work if variable is local to the script
-" let g:fzf_path = trim(system('brew --prefix')) . '/opt/fzf'
-" if !empty(glob(g:fzf_path))
-"     Plug g:fzf_path
-"     Plug 'junegunn/fzf.vim'
-" endif
-
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'editorconfig/editorconfig-vim'
@@ -32,6 +25,14 @@ Plug 'junegunn/vim-easy-align'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'vimwiki/vimwiki'
+
+if !empty(system("command -v brew"))
+    let g:brew_prefix = trim(system("brew --prefix"))
+    let fzf_path = g:brew_prefix . "/opt/fzf"
+    if exists('fzf_path')
+        Plug 'junegunn/fzf.vim'
+    endif
+endif
 
 call plug#end()
 
