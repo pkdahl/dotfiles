@@ -30,6 +30,7 @@ if !empty(system("command -v brew"))
     let g:brew_prefix = trim(system("brew --prefix"))
     let fzf_path = g:brew_prefix . "/opt/fzf"
     if exists('fzf_path')
+        Plug glob(fzf_path)
         Plug 'junegunn/fzf.vim'
     endif
 endif
