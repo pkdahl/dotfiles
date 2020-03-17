@@ -315,6 +315,38 @@ $(FZF_CONFIG_HOME)/fzf.zsh: | $(FZF_EXE)
 .PHONY: fzf
 fzf: | $(FZF_EXE) $(FZF_CONFIG_HOME)/fzf.zsh
 #}}}
+#{{{ tmux
+
+TMUX_EXE := $(BREW_PREFIX)/bin/tmux
+TMUX_DATA_HOME := $(DATA_HOME)/tmux
+
+$(TMUX_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install tmux
+
+$(HOME)/.tmux.conf: | $(TMUX_EXE)
+	ln -sf $(PWD)/tmux/tmux.conf $@ 
+
+$(TMUX_DATA_HOME)/plugins/resurrect: | $(HOME)/.tmux.conf
+	mkdir -p $(@D)
+	git clone https://github.com/tmux-plugins/tmux-resurrect.git $@
+
+$(TMUX_DATA_HOME)/plugins/continuum: | $(HOME)/.tmux.conf
+	mkdir -p $(@D)
+	git clone https://github.com/tmux-plugins/tmux-continuum.git $@
+
+$(TMUX_DATA_HOME)/themes/nord: | $(HOME)/.tmux.conf
+	mkdir -p $(@D)
+	git clone https://github.com/arcticicestudio/nord-tmux $@
+
+TMUX_OO_DEPS := $(TMUX_EXE)
+TMUX_OO_DEPS += $(HOME)/.tmux.conf
+TMUX_OO_DEPS += $(TMUX_DATA_HOME)/plugins/resurrect
+TMUX_OO_DEPS += $(TMUX_DATA_HOME)/plugins/continuum
+TMUX_OO_DEPS += $(TMUX_DATA_HOME)/themes/nord
+
+.PHONY: tmux
+tmux: | $(TMUX_OO_DEPS)
+#}}}
 #{{{ macOS settings
 
 $(DATA_HOME)/dotfiles/macos-sentinel:
