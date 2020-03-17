@@ -35,6 +35,8 @@ if [ -d "$MAUDE_LIB" ]; then
     export MAUDE_LIB
 fi
 
+export STACK_ROOT="$XDG_DATA_HOME/stack"
+
 # PATH
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 

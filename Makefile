@@ -395,3 +395,13 @@ http://maude.cs.illinois.edu/w/images/b/bb/Maude-3.0+yices2-osx.zip
 http://maude.cs.illinois.edu/w/images/0/04/Full-Maude-3.0.zip
 
 #}}}
+#{{{ Haskell
+
+STACK_EXE := $(BREW_PREFIX)/bin/stack
+
+$(STACK_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install stack
+
+.PHONY: stack
+stack: | $(STACK_EXE)
+#}}}
