@@ -379,6 +379,21 @@ iterm: /Applications/iTerm.app $(HOME)/Downloads/Nord.itermcolors
 
 .PHONY: firefox
 firefox: /Applications/Firefox.app
+
+# Karabiner-Elements
+
+/Applications/Karabiner-Elements.app: | $(BREW_EXE)
+	$(BREW_EXE) cask install karabiner-elements
+
+$(CONFIG_HOME)/karabiner/karabiner.json: | /Applications/Karabiner-Elements.app
+	mkdir -p $(@D)
+	ln -sf $(PWD)/karabiner/karabiner.json $@
+
+KARABINER_OO_DEPS := /Applications/Karabiner-Elements.app
+KARABINER_OO_DEPS += $(CONFIG_HOME)/karabiner/karabiner.json
+
+.PNONY: karabiner
+karabiner: | $(KARABINER_OO_DEPS)
 #}}}
 #{{{ Fonts
 
