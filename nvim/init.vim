@@ -22,6 +22,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'ledger/vim-ledger'
 Plug 'nathangrigg/vim-beancount'
 Plug 'nathangrigg/vim-beancount'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
