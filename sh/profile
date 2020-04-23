@@ -37,6 +37,16 @@ fi
 
 export STACK_ROOT="$XDG_DATA_HOME/stack"
 
+NODE_PATH="$XDG_DATA_HOME/node"
+if [ -d "$NODE_PATH" ]; then
+    export NODE_PATH
+fi
+
+NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+if [ -r "$NPM_CONFIG_USERCONFIG" ]; then
+    export NPM_CONFIG_USERCONFIG
+fi
+
 # PATH
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 
