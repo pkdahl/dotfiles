@@ -210,10 +210,11 @@ homebrew: $(BREW_DEPS)
 #{{{ Neovim
 # Depends on some Python stuff and node stuff for LSP
 
-DOT_NVIM = $(PWD)/nvim
+DOT_NVIM         = $(PWD)/nvim
 NVIM_CONFIG_HOME = $(CONFIG_HOME)/nvim
-NVIM_DATA_HOME = $(DATA_HOME)/nvim
-NVIM_EXE = /usr/local/bin/nvim
+NVIM_DATA_HOME   = $(DATA_HOME)/nvim
+NVIM_EXE         = /usr/local/bin/nvim
+PYNVIM           = $(PYTHON3_SITE_PACKAGES_PATH)/pynvim
 
 # Installing Neovim with Homebrew
 $(NVIM_EXE): | $(BREW_EXE)
@@ -228,13 +229,16 @@ $(NVIM_DATA_HOME)/site/autoload/plug.vim: | $(NVIM_EXE) $(NVIM_CONFIG_HOME)/init
 	curl -fLo $@ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	nvim --headless +'PlugInstall --sync' +qa
 
+$(PYNVIM): | $(PIP3_EXE)
+	pip3 install pynvim
+
 # install fzf
 # missing coc. dependens on nodejs
-# neovim python module
 
 NVIM_DEPS := $(NVIM_EXE)
 NVIM_DEPS += $(NVIM_CONFIG_HOME)/init.vim
 NVIM_DEPS += $(NVIM_DATA_HOME)/site/autoload/plug.vim
+NVIM_DEPS += $(PYNVIM_EXE)
 
 .PHONY: nvim neovim
 nvim: $(NVIM_DEPS)
@@ -452,3 +456,40 @@ $(STACK_EXE): | $(BREW_EXE)
 .PHONY: stack
 stack: | $(STACK_EXE)
 #}}}
+#{{{ Node.js
+
+NODE_EXE := $(BREW_PREFIX)/bin/node
+NODE_DATA_HOME := $(DATA_HOME)/node
+NPM_CONFIG_HOME := $(CONFIG_HOME)/npm
+YARN_EXE := $(BREW_PREFIX)/bin/yarn
+
+$(NODE_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install node
+
+$(NODE_DATA_HOME): | $(NODE_EXE)
+	mkdir -p $@
+
+$(NPM_CONFIG_HOME): | $(NODE_EXE)
+	mkdir -p $@
+
+$(YARN_EXE): | $(BREW_EXE) $(NODE_EXE)
+	$(BREW_EXE) install yarn
+
+.PHONY: node
+node: | $(NODE_EXE) $(NODE_DATA_HOME) $(NPM_CONFIG_HOME) $(YARN_EXE)
+#}}}
+# Python 3 {{{
+
+PYTHON3_EXE := $(BREW_PREFIX)/bin/python3
+PIP3_EXE    := $(BREW_EXE)/bin/pip3
+PYTHON3_VERSION = $(python3 -c "import platform; print('.'.join(platform.python_version_tuple()[:2]))")
+PYTHON3_SITE_PACKAGES_PATH = $(BREW_PREFIX)/lib/python$(PYTHON3_VERSION)/site-packages
+
+$(PYTHON3_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install python3
+
+$(PIP3_EXE): | $(PYTHON3_EXE)
+
+.PHONY: python3
+python3: | $(PYTHON3_EXE)
+# }}}
