@@ -319,6 +319,16 @@ $(FZF_CONFIG_HOME)/fzf.zsh: | $(FZF_EXE)
 .PHONY: fzf
 fzf: | $(FZF_EXE) $(FZF_CONFIG_HOME)/fzf.zsh
 #}}}
+# ripgrep {{{
+
+RG_EXE := $(BREW_PREFIX)/bin/rg
+
+$(RG_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install ripgrep
+
+.PHONY: ripgrep
+ripgrep: | $(RG_EXE)
+# }}}
 #{{{ tmux
 
 TMUX_EXE := $(BREW_PREFIX)/bin/tmux
