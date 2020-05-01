@@ -355,6 +355,7 @@ tmux: | $(TMUX_OO_DEPS)
 
 $(DATA_HOME)/dotfiles/macos-sentinel:
 	bash $(PWD)/macos/dock-settings.bash
+	bash $(PWD)/macos/finder-settings.bash
 	mkdir -p $(@D)
 	touch $@
 
