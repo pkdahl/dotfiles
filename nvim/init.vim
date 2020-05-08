@@ -13,6 +13,12 @@ set smartindent
 
 set foldmethod=marker
 
+if !empty(trim(system('command -v fzf')))
+    let s:fzf = trim(system('command -v fzf'))
+    let g:fzf_opt = substitute(s:fzf, "\/bin\/", "\/opt\/", "")
+    unlet s:fzf
+endif
+
 " plugins
 
 call plug#begin('~/.local/share/nvim/plugged')
@@ -24,23 +30,17 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'ledger/vim-ledger'
 Plug 'nathangrigg/vim-beancount'
-Plug 'nathangrigg/vim-beancount'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'vimwiki/vimwiki'
 
-if !empty(system("command -v brew"))
-    let g:brew_prefix = trim(system("brew --prefix"))
-    let fzf_path = g:brew_prefix . "/opt/fzf"
-    if exists('fzf_path')
-        Plug glob(fzf_path)
-        Plug 'junegunn/fzf.vim'
-    endif
+if exists("g:fzf_opt")
+    Plug g:fzf_opt
+    Plug 'junegunn/fzf.vim'
 endif
 
 call plug#end()
 
-"Mappings
+" Mappings
 
 let mapleader=","
 nnoremap , <Nop>
