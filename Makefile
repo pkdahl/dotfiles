@@ -314,7 +314,7 @@ $(FZF_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install fzf
 
 $(FZF_CONFIG_HOME)/fzf.zsh: | $(FZF_EXE)
-	$(BREW_PREFIX)/opt/fzf/install --xdg --key-bindings --completions --no-update-rc --no-fish
+	$(BREW_PREFIX)/opt/fzf/install --xdg --key-bindings --completion --no-update-rc --no-fish
 
 .PHONY: fzf
 fzf: | $(FZF_EXE) $(FZF_CONFIG_HOME)/fzf.zsh
