@@ -42,12 +42,12 @@ call plug#end()
 
 " Mappings
 
-let mapleader=","
-nnoremap , <Nop>
+" Default Leader is \. want to use backspace as well
+map <BS> <Leader>
 
-inoremap <special> jk <esc>
-nnoremap <silent> <leader> s :set spell! <cr>
-nnoremap <leader> <space> :nohlsearch <cr>
+inoremap <special> jk <Esc>
+nnoremap <silent> <leader> s :set spell! <CR>
+nnoremap <Leader> <Space> :nohlsearch <CR>
 
 nnoremap <Leader>bn :bnext <CR>
 nnoremap <Leader>bp :bprev <CR>
@@ -58,10 +58,10 @@ set listchars=tab:→\ ,eol:¬
 
 " n00b help
 
-nnoremap <Left> :echoe "Use h" <cr>
-nnoremap <Right> :echoe "Use l" <cr>
-nnoremap <Up> :echoe "Use k" <cr>
-nnoremap <Down> :echoe "Use j" <cr>
+nnoremap <Left> :echoe "Use h" <CR>
+nnoremap <Right> :echoe "Use l" <CR>
+nnoremap <Up> :echoe "Use k" <CR>
+nnoremap <Down> :echoe "Use j" <CR>
 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
