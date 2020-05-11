@@ -361,6 +361,16 @@ TMUX_OO_DEPS += $(TMUX_DATA_HOME)/themes/nord
 .PHONY: tmux
 tmux: | $(TMUX_OO_DEPS)
 #}}}
+# exa {{{
+
+EXA_EXE := $(BREW_PREFIX)/bin/exa
+
+$(EXA_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install exa
+
+.PHONY: exa
+exa: | $(EXA_EXE)
+#}}}
 #{{{ macOS settings
 
 $(DATA_HOME)/dotfiles/macos-sentinel:
