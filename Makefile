@@ -207,43 +207,6 @@ endif
 homebrew: $(BREW_DEPS)
 	$(info You may need to reload shell)
 #}}}
-#{{{ Neovim
-# Depends on some Python stuff and node stuff for LSP
-
-DOT_NVIM         = $(PWD)/nvim
-NVIM_CONFIG_HOME = $(CONFIG_HOME)/nvim
-NVIM_DATA_HOME   = $(DATA_HOME)/nvim
-NVIM_EXE         = /usr/local/bin/nvim
-PYNVIM           = $(PYTHON3_SITE_PACKAGES_PATH)/pynvim
-
-# Installing Neovim with Homebrew
-$(NVIM_EXE): | $(BREW_EXE)
-	brew install neovim
-
-$(NVIM_CONFIG_HOME)/init.vim: | $(NVIM_EXE)
-	mkdir -p $(@D)
-	ln -sf $(DOT_NVIM)/init.vim $@
-
-$(NVIM_DATA_HOME)/site/autoload/plug.vim: | $(NVIM_EXE) $(NVIM_CONFIG_HOME)/init.vim
-	mkdir -p $(@D)
-	curl -fLo $@ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	nvim --headless +'PlugInstall --sync' +qa
-
-$(PYNVIM): | $(PIP3_EXE)
-	pip3 install pynvim
-
-# install fzf
-# missing coc. dependens on nodejs
-
-NVIM_DEPS := $(NVIM_EXE)
-NVIM_DEPS += $(NVIM_CONFIG_HOME)/init.vim
-NVIM_DEPS += $(NVIM_DATA_HOME)/site/autoload/plug.vim
-NVIM_DEPS += $(PYNVIM_EXE)
-
-.PHONY: nvim neovim
-nvim: $(NVIM_DEPS)
-neovim: nvim
-#}}}
 #{{{ Pass
 
 PASS_EXE := /usr/local/bin/pass
@@ -481,6 +444,7 @@ stack: | $(STACK_EXE)
 
 NODE_EXE := $(BREW_PREFIX)/bin/node
 NODE_DATA_HOME := $(DATA_HOME)/node
+NPM_EXE := $(BREW_PREFIX)/bin/npm
 NPM_CONFIG_HOME := $(CONFIG_HOME)/npm
 YARN_EXE := $(BREW_PREFIX)/bin/yarn
 
@@ -496,21 +460,79 @@ $(NPM_CONFIG_HOME): | $(NODE_EXE)
 $(YARN_EXE): | $(BREW_EXE) $(NODE_EXE)
 	$(BREW_EXE) install yarn
 
+NODE_OO_DEPS := $(NODE_EXE) $(NODE_DATA_HOME)
+NODE_OO_DEPS += $(NPM_CONFIG_HOME)
+NODE_OO_DEPS += $(YARN_EXE)
+ifneq ($(command -v nvim),)
+NODE_OO_DEPS += neovim-node-client
+endif
+
 .PHONY: node
-node: | $(NODE_EXE) $(NODE_DATA_HOME) $(NPM_CONFIG_HOME) $(YARN_EXE)
+node: | $(NODE_OO_DEPS)
 #}}}
 # Python 3 {{{
 
 PYTHON3_EXE := $(BREW_PREFIX)/bin/python3
-PIP3_EXE    := $(BREW_EXE)/bin/pip3
-PYTHON3_VERSION = $(python3 -c "import platform; print('.'.join(platform.python_version_tuple()[:2]))")
-PYTHON3_SITE_PACKAGES_PATH = $(BREW_PREFIX)/lib/python$(PYTHON3_VERSION)/site-packages
+PIP3_EXE := $(BREW_PREFIX)/bin/pip3
+PYTHON3_VERSION := $(shell python3 -c "import platform; print('.'.join(platform.python_version_tuple()[:2]))")
+PYTHON3_SITE_PACKAGES_PATH := $(BREW_PREFIX)/lib/python$(PYTHON3_VERSION)/site-packages
 
 $(PYTHON3_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install python3
 
 $(PIP3_EXE): | $(PYTHON3_EXE)
 
+PYTHON3_OO_DEPS := $(PYTHON3_EXE)
+ifneq ($(shell command -v nvim),)
+PYTHON3_OO_DEPS += neovim-pip3-pynvim
+endif
+
 .PHONY: python3
-python3: | $(PYTHON3_EXE)
-# }}}
+python3: | $(PYTHON3_OO_DEPS)
+#}}}
+#{{{ Neovim
+# Depends on some Python 3 and Node for pynvim and neovim-node.
+# Needs to be after because of variable usage, it seems.
+
+DOT_NVIM         = $(PWD)/nvim
+NVIM_CONFIG_HOME = $(CONFIG_HOME)/nvim
+NVIM_DATA_HOME   = $(DATA_HOME)/nvim
+NVIM_EXE         = /usr/local/bin/nvim
+
+# Installing Neovim with Homebrew
+$(NVIM_EXE): | $(BREW_EXE)
+	brew install neovim
+
+$(NVIM_CONFIG_HOME)/init.vim: | $(NVIM_EXE)
+	mkdir -p $(@D)
+	ln -sf $(DOT_NVIM)/init.vim $@
+
+$(NVIM_DATA_HOME)/site/autoload/plug.vim: | $(NVIM_EXE) $(NVIM_CONFIG_HOME)/init.vim
+	mkdir -p $(@D)
+	curl -fLo $@ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	nvim --headless +'PlugInstall --sync' +qa
+
+$(PYTHON3_SITE_PACKAGES_PATH)/pynvim: | $(PIP3_EXE)
+	$(PIP3_EXE) install pynvim
+.PHONY: neovim-pip3-pynvim
+neovim-pip3-pynvim: $(PYTHON3_SITE_PACKAGES_PATH)/pynvim
+
+$(BREW_PREFIX)/bin/neovim-node-host: | $(NPM_EXE)
+	$(NPM_EXE) install -g neovim
+.PHONY: neovim-node-client
+neovim-node-client: | $(BREW_PREFIX)/bin/neovim-node-host
+
+NVIM_OO_DEPS := $(NVIM_EXE)
+NVIM_OO_DEPS += $(NVIM_CONFIG_HOME)/init.vim
+NVIM_OO_DEPS += $(NVIM_DATA_HOME)/site/autoload/plug.vim
+ifeq ($(PIP3_EXE), $(shell command -v pip3))
+NVIM_OO_DEPS += neovim-pip3-pynvim
+endif
+ifeq ($(NPM_EXE), $(shell command -v npm))
+NVIM_OO_DEPS += neovim-node-client
+endif
+
+.PHONY: nvim neovim
+nvim: | $(NVIM_OO_DEPS)
+neovim: nvim
+#}}}
