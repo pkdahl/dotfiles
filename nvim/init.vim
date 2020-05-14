@@ -1,8 +1,9 @@
-" hybrid line numbers
+" Hybrid line numbers
+"
 set number
 set relativenumber
 
-" indentation
+" Indentation
 
 set expandtab
 set smarttab
@@ -13,6 +14,11 @@ set smartindent
 
 set foldmethod=marker
 
+" Dispaly hidden characters
+" ':set list' to show hidden characters
+set listchars=tab:→\ ,eol:¬
+
+set scrolloff=5
 
 " Plugins {{{
 
@@ -52,10 +58,6 @@ nnoremap <Leader> <Space> :nohlsearch <CR>
 
 nnoremap <Leader>bn :bnext <CR>
 nnoremap <Leader>bp :bprev <CR>
-
-" dispaly hidden characters
-" ':set list' to show hidden characters
-set listchars=tab:→\ ,eol:¬
 
 " n00b help
 
