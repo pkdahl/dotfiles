@@ -13,13 +13,14 @@ set smartindent
 
 set foldmethod=marker
 
-if !empty(trim(system('command -v fzf')))
-    let s:fzf = trim(system('command -v fzf'))
-    let g:fzf_opt = substitute(s:fzf, "\/bin\/", "\/opt\/", "")
-    unlet s:fzf
-endif
 
-" plugins
+" Plugins {{{
+
+if !empty(trim(system('command -v fzf')))
+let s:fzf = trim(system('command -v fzf'))
+let g:fzf_opt = substitute(s:fzf, "\/bin\/", "\/opt\/", "")
+unlet s:fzf
+endif
 
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -39,8 +40,8 @@ if exists("g:fzf_opt")
 endif
 
 call plug#end()
-
-" Mappings
+" }}}
+" Mappings {{{
 
 " Default Leader is \. want to use backspace as well
 map <BS> <Leader>
@@ -66,6 +67,7 @@ nnoremap <Down> :echoe "Use j" <CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" }}}
 " theme
 
 silent! colorscheme nord
@@ -80,3 +82,5 @@ let g:python3_host_prog = trim(system('command -v python3'))
 
 let g:vimwiki_list = [{ 'path': '~/Documents/notes/' },
                      \{ 'path': '~/Documents/houston/' }]
+
+" vim: set foldmethod=marker foldlevel=0
