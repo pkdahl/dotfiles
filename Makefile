@@ -403,7 +403,7 @@ FONT_FIRA_CODE := $(FONTS_LIB)/Fira\ Code\ Regular\ Nerd\ Font\ Complete.otf
 $(FONT_FIRA_CODE): | $(BREW_TAP_CASK_FONTS)
 	$(BREW_EXE) cask install font-firacode-nerd-font
 
-FONT_IBM_3270 := $(FONTS_LIB)/3270\ Narrow\ Nerd\ Font\ Complete.ttf
+FONT_IBM_3270 := $(FONTS_LIB)/3270\ Narrow\ Nerd\ Font\ Complete.otf
 $(FONT_IBM_3270): | $(BREW_TAP_CASK_FONTS)
 	$(BREW_EXE) cask install font-3270-nerd-font
 
