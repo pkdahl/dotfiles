@@ -70,11 +70,16 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " }}}
-" theme
 
+" Theme
+augroup nord-overrides
+    autocmd!
+    " autocmd ColorScheme nord highlight Comment ctermfg=14
+    autocmd ColorScheme nord highlight Folded ctermfg=Blue
+augroup END
 silent! colorscheme nord
+
 let g:lightline = { 'colorscheme': 'nord' }
-highlight Folded ctermfg=Blue
 
 " Python
 let g:python_host_prog = trim(system('command -v python2'))
