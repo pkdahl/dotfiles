@@ -395,6 +395,10 @@ FONT_DEJAVU := $(FONTS_LIB)/DejaVu\ Sans\ Mono\ Nerd\ Font\ Complete.ttf
 $(FONT_DEJAVU): | $(BREW_TAP_CASK_FONTS)
 	$(BREW_EXE) cask install font-dejavusansmono-nerd-font
 
+FONT_FANTASQUE := $(FONTS_LIB)/Fantasque\ Sans\ Mono\ Regular\ Nerd\ Font\ Complete.ttf
+$(FONT_FANTASQUE): | $(BREW_TAP_CASK_FONTS)
+	$(BREW_EXE) cask install font-fantasquesansmono-nerd-font
+
 FONT_FIRA_CODE := $(FONTS_LIB)/Fira\ Code\ Regular\ Nerd\ Font\ Complete.otf
 $(FONT_FIRA_CODE): | $(BREW_TAP_CASK_FONTS)
 	$(BREW_EXE) cask install font-firacode-nerd-font
@@ -413,6 +417,7 @@ $(FONT_SOURCE_CODE_PRO): | $(BREW_TAP_CASK_FONTS)
 
 FONTS_OO_DEPS := $(BREW_TAP_CASK_FONTS)
 FOTNS_OO_DEPS += $(FONT_DEJAVU)
+FONTS_OO_DEPS += $(FONT_FANTASQUE)
 FONTS_OO_DEPS += $(FONT_FIRA_CODE)
 FONTS_OO_DEPS += $(FONT_IBM_3270)
 FONTS_OO_DEPS += $(FONT_MONOFUR)
