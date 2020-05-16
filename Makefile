@@ -559,10 +559,49 @@ neovim: nvim
 
 DOT_MAIL := $(PWD)/mail
 DOT_MAIL_REPO := $(GIT_REPO_BASE_PATH)/config-mail.git
+MAILDIR := $(HOME)/Maildir
 
 $(DOT_MAIL): | git
 	git clone $(DOT_MAIL_REPO) $@	
 
+$(MAILDIR):
+	mkdir -p $@
+
+# isync/mbsync
+
+MBSYNC_EXE := $(BREW_PREFIX)/bin/mbsync
+MBSYNC_CONFIG := $(HOME)/.mbsyncrc
+
+$(MBSYNC_EXE): | $(BREW_EXE) 
+	$(BREW_EXE) install isync
+
+$(MBSYNC_CONFIG): | $(DOT_MAIL) $(MBSYNC_EXE)
+	ln -sf $(PWD)/mail/mbsyncrc $@
+
+.PHONY: isync
+isync: | $(DOT_MAIL) mailboxes $(MBSYNC_EXE) $(MBSYNC_CONFIG)
+
+# mu - maildir-utils
+
+MU_EXE := $(BREW_PREFIX)/bin/mu
+
+$(MU_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install mu
+
+# Neomutt
+
+NEOMUTT_EXE := $(BREW_PREFIX)/bin/neomutt
+NEOMUTT_CONFIG_HOME := $(CONFIG_HOME)/neomutt
+
+$(NEOMUTT_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install neomutt
+
+$(NEOMUTT_CONFIG_HOME): $(NEOMUTT_EXE)
+	ln -sf $(DOT_MAIL)/neomutt $@
+
+.PHONY: neomutt
+neomutt: $(NEOMUTT_EXE) $(NEOMUTT_CONFIG_HOME)
+
 .PHONY: mail
-mail: $(DOT_MAIL)
+mail: | $(DOT_MAIL) $(MAILDIR) isync neomutt
 # }}}
