@@ -349,17 +349,29 @@ macos: $(DATA_HOME)/dotfiles/macos-sentinel
 
 # iTerm
 
+ITERM_COLORS_DIR := $(DATA_HOME)/iterm/colors
+ITERM_COLORS := Nord gruvbox-dark gruvbox-light
+
 /Applications/iTerm.app: | $(BREW_EXE)
 	$(BREW_EXE) cask install iterm2
 
-$(HOME)/Downloads/Nord.itermcolors: | /Applications/iTerm.app
-	@echo "Downloading Nord theme for iTerm"
+.PHONY: iterm
+iterm: /Applications/iTerm.app iterm-colors
+
+$(ITERM_COLORS_DIR)/Nord.itermcolors: | /Applications/iTerm.app
+	@echo "Downloading Nord colors for iTerm"
+	mkdir -p $(@D)
 	curl -fLo $@ https://raw.githubusercontent.com/arcticicestudio/nord-iterm2/develop/src/xml/Nord.itermcolors
 	open $@
 
-.PHONY: iterm
-iterm: /Applications/iTerm.app $(HOME)/Downloads/Nord.itermcolors
+$(ITERM_COLORS_DIR)/gruvbox-%.itermcolors: | /Applications/iTerm.app
+	@echo "Downloading gruvbox-$* colors for iTerm"
+	mkdir -p $(@D)
+	curl -fLo $@ https://raw.githubusercontent.com/morhetz/gruvbox-contrib/master/iterm2/gruvbox-$*.itermcolors
+	open $@
 
+.PHONY: iterm-colors
+iterm-colors: | $(ITERM_COLORS:%=$(ITERM_COLORS_DIR)/%.itermcolors)
 # Firefox
 
 /Applications/Firefox.app: | $(BREW_EXE)
