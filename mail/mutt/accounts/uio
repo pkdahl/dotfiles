@@ -1,6 +1,0 @@
-# Mutt UiO settings
-
-# set from =
-set mbox = "+uio/received"
-set record = "+uio/sent"
-set postponed = "+uio/drafts"

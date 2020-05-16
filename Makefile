@@ -553,3 +553,16 @@ endif
 nvim: | $(NVIM_OO_DEPS)
 neovim: nvim
 #}}}
+# Mail {{{
+
+# Clone mail config
+
+DOT_MAIL := $(PWD)/mail
+DOT_MAIL_REPO := $(GIT_REPO_BASE_PATH)/config-mail.git
+
+$(DOT_MAIL): | git
+	git clone $(DOT_MAIL_REPO) $@	
+
+.PHONY: mail
+mail: $(DOT_MAIL)
+# }}}

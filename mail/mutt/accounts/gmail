@@ -1,5 +1,0 @@
-# Mutt Gmail settings
-
-set mbox = "+gmail/all"
-unset record
-set postponed = "+gmail/drafts"

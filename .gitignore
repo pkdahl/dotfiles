@@ -2,6 +2,10 @@
 private/
 private.tar
 
+# Other Git repositories
+mail/
+
+# Things are installed here and I don't want to keep it under version control
 emacs/custom.el
 tmux/plugins/
 tmux/themes/
