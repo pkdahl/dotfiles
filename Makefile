@@ -602,6 +602,15 @@ $(MBSYNC_CONFIG): | $(DOT_MAIL) $(MBSYNC_EXE)
 .PHONY: isync
 isync: | $(DOT_MAIL) mailboxes $(MBSYNC_EXE) $(MBSYNC_CONFIG)
 
+# imapfilter
+
+
+$(IMAPFILTER_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install imapfilter
+
+.PHONY: imapfilter
+imapfilter: $(IMAPFILTER_EXE)
+
 # mu - maildir-utils
 
 MU_EXE := $(BREW_PREFIX)/bin/mu

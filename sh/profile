@@ -47,6 +47,11 @@ if [ -r "$NPM_CONFIG_USERCONFIG" ]; then
     export NPM_CONFIG_USERCONFIG
 fi
 
+IMAPFILTER_HOME="$XDG_CONFIG_HOME/imapfilter"
+if [ -d "$IMAPFILTER_HOME" ]; then
+    export IMAPFILTER_HOME
+fi
+
 # PATH
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 
