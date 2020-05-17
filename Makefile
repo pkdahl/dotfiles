@@ -564,8 +564,29 @@ MAILDIR := $(HOME)/Maildir
 $(DOT_MAIL): | git
 	git clone $(DOT_MAIL_REPO) $@	
 
-$(MAILDIR):
+$(MAILDIR)/uio-pkdahl:
 	mkdir -p $@
+
+$(MAILDIR)/uio-perkda:
+	mkdir -p $@
+
+$(MAILDIR)/gmail:
+	mkdir -p $@
+
+$(MAILDIR)/neomutt-sidebar-spacer-0:
+	touch $@
+
+$(MAILDIR)/neomutt-sidebar-spacer-1:
+	touch $@
+
+MAILBOXES_OO_DEPS := $(MAILDIR)/uio-pkdahl
+MAILBOXES_OO_DEPS += $(MAILDIR)/uio-perkda
+MAILBOXES_OO_DEPS += $(MAILDIR)/gmail
+MAILBOXES_OO_DEPS += $(MAILDIR)/neomutt-sidebar-spacer-0
+MAILBOXES_OO_DEPS += $(MAILDIR)/neomutt-sidebar-spacer-1
+
+.PHONY: mailboxes
+mailboxes: | $(MAILBOXES_OO_DEPS)
 
 # isync/mbsync
 
