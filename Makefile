@@ -622,6 +622,7 @@ $(MU_EXE): | $(BREW_EXE)
 
 NEOMUTT_EXE := $(BREW_PREFIX)/bin/neomutt
 NEOMUTT_CONFIG_HOME := $(CONFIG_HOME)/neomutt
+NEOMUTT_CACHE_HOME := $(CACHE_HOME)/neomutt
 
 $(NEOMUTT_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install neomutt
@@ -629,8 +630,11 @@ $(NEOMUTT_EXE): | $(BREW_EXE)
 $(NEOMUTT_CONFIG_HOME): $(NEOMUTT_EXE)
 	ln -sf $(DOT_MAIL)/neomutt $@
 
+$(NEOMUTT_CACHE_HOME)/tmp : $(NEOMUTT_EXE)
+	mkdir -p $@
+
 .PHONY: neomutt
-neomutt: $(NEOMUTT_EXE) $(NEOMUTT_CONFIG_HOME)
+neomutt: $(NEOMUTT_EXE) $(NEOMUTT_CONFIG_HOME) $(NEOMUTT_CACHE_HOME)/tmp
 
 .PHONY: mail
 mail: | $(DOT_MAIL) $(MAILDIR) isync neomutt
