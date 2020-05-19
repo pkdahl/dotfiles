@@ -604,12 +604,18 @@ isync: | $(DOT_MAIL) mailboxes $(MBSYNC_EXE) $(MBSYNC_CONFIG)
 
 # imapfilter
 
+IMAPFILER_EXE := $(BREW_PREFIX)/bin/imapfilter
+IMAPFILTER_CONFIG := $(CONFIG_HOME)/imapfilter/config.lua
 
 $(IMAPFILTER_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install imapfilter
 
+$(IMAPFILTER_CONFIG): mail/imapfilter_config.lua | $(DOT_MAIL) $(IMAPFILTER_EXE)
+	mkdir -p $(@D)
+	cp mail/imapfilter_config.lua $@
+
 .PHONY: imapfilter
-imapfilter: $(IMAPFILTER_EXE)
+imapfilter: $(IMAPFILTER_CONFIG) | $(IMAPFILTER_EXE)
 
 # mu - maildir-utils
 
