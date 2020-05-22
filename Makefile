@@ -624,6 +624,9 @@ MU_EXE := $(BREW_PREFIX)/bin/mu
 $(MU_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install mu
 
+.PHONY: mu
+mu: $(MU_EXE)
+
 # Neomutt
 
 NEOMUTT_EXE := $(BREW_PREFIX)/bin/neomutt
