@@ -29,7 +29,7 @@ which direnv &> /dev/null && eval "$(direnv hook zsh)"
 which rbenv &> /dev/null && eval "$(rbenv init -)"
 
 # OPAM configuration
-. ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+which opam &> /dev/null && eval "$(opam env)"
 
 # fzf
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ]; then 

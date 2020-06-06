@@ -487,6 +487,15 @@ endif
 .PHONY: node
 node: | $(NODE_OO_DEPS)
 #}}}
+# OCaml {{{
+OPAM_EXE := $(BREW_PREFIX)/bin/opam
+
+$(OPAM_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install opam
+
+.PHONY: ocaml
+ocaml: | $(OPAM_EXE)
+# }}}
 # Python 3 {{{
 
 PYTHON3_EXE := $(BREW_PREFIX)/bin/python3
