@@ -421,6 +421,7 @@ QL_OO_DEPS += $(QL_DIR)/QuickLookJSON.qlgenerator
 
 .PHONY: quicklook
 quicklook: | $(QL_OO_DEPS)
+	$(info sudo xattr -r -d com.apple.quarantine ~/Library/QuickLook/QuickLookJSON.qlgenerator)
 
 #}}}
 #}}}
