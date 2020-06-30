@@ -394,6 +394,35 @@ KARABINER_OO_DEPS += $(CONFIG_HOME)/karabiner/karabiner.json
 
 .PNONY: karabiner
 karabiner: | $(KARABINER_OO_DEPS)
+
+# Quick Look {{{
+
+QL_DIR := $(HOME)/Library/QuickLook
+
+$(QL_DIR)/QLColorCode.qlgenerator: | $(BREW_EXE)
+	$(BREW_EXE) cask install qlcolorcode
+QL_OO_DEPS := $(QL_DIR)/QLColorCode.qlgenerator
+
+$(QL_DIR)/QLStephen.qlgenerator: | $(BREW_EXE)
+	$(BREW_EXE) cask install qlstephen
+QL_OO_DEPS += $(QL_DIR)/QLStephen.qlgenerator
+
+$(QL_DIR)/QLMarkdown.qlgenerator: | $(BREW_EXE)
+	$(BREW_EXE) cask install qlmarkdown
+QL_OO_DEPS += $(QL_DIR)/QLMarkdown.qlgenerator
+
+$(QL_DIR)/QuickLookCSV.qlgenerator: | $(BREW_EXE)
+	$(BREW_EXE) cask install quicklook-csv
+QL_OO_DEPS += $(QL_DIR)/QuickLookCSV.qlgenerator
+
+$(QL_DIR)/QuickLookJSON.qlgenerator: | $(BREW_EXE)
+	$(BREW_EXE) cask install quicklook-json
+QL_OO_DEPS += $(QL_DIR)/QuickLookJSON.qlgenerator
+
+.PHONY: quicklook
+quicklook: | $(QL_OO_DEPS)
+
+#}}}
 #}}}
 #{{{ Fonts
 
