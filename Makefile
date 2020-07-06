@@ -523,8 +523,11 @@ OPAM_EXE := $(BREW_PREFIX)/bin/opam
 $(OPAM_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install opam
 
+$(HOME)/.ocamlinit: | $(OPAM_EXE)
+	ln -sf $(PWD)/ocaml/ocamlinit $@
+
 .PHONY: ocaml
-ocaml: | $(OPAM_EXE)
+ocaml: | $(OPAM_EXE) $(HOME)/.ocamlinit
 # }}}
 # Python 3 {{{
 
