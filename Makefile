@@ -261,7 +261,7 @@ cheat: | $(CHEAT_OO_DEPS)
 
 DIRENV_EXE := $(BREW_PREFIX)/bin/direnv
 
-$(DRIENV_EXE): | $(BREW_EXE)
+$(DIRENV_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install direnv
 
 .PHONY: direnv
