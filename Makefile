@@ -21,18 +21,6 @@ endif
 .PHONY: help
 help:
 	@echo "Usage: make [RULE]"
-	@echo "Available rules:"
-	@echo "  - zsh"
-	@echo "  - ssh"
-	@echo "  - git"
-	@echo "  - homebrew"
-	@echo "  - neovim"
-	@echo "  - pass"
-	@echo "  - cheat"
-	@echo "  - macos"
-	@echo "  - iterm"
-	@echo "  - firefox"
-	@echo "  - fonts"
 
 .PHONY: clean
 clean:
@@ -261,7 +249,7 @@ cheat: | $(CHEAT_OO_DEPS)
 
 DIRENV_EXE := $(BREW_PREFIX)/bin/direnv
 
-$(DIRENV_EXE): | $(BREW_EXE)
+$(DRIENV_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install direnv
 
 .PHONY: direnv
@@ -479,6 +467,11 @@ http://maude.cs.illinois.edu/w/images/0/04/Full-Maude-3.0.zip
 #}}}
 #{{{ Haskell
 
+CABAL_EXE := $(BREW_PREFIX)/bin/cabal
+
+$(CABAL_EXE): | $(BREW_EXE)
+	$(BREW_EXE) install cabal-install
+
 STACK_EXE := $(BREW_PREFIX)/bin/stack
 
 $(STACK_EXE): | $(BREW_EXE)
@@ -486,6 +479,7 @@ $(STACK_EXE): | $(BREW_EXE)
 
 .PHONY: stack
 stack: | $(STACK_EXE)
+
 #}}}
 #{{{ Node.js
 
@@ -652,9 +646,9 @@ IMAPFILTER_CONFIG := $(CONFIG_HOME)/imapfilter/config.lua
 $(IMAPFILTER_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install imapfilter
 
-$(IMAPFILTER_CONFIG): mail/imapfilter_config.lua | $(DOT_MAIL) $(IMAPFILTER_EXE)
+$(IMAPFILTER_CONFIG): mail/imapfilter/config.lua | $(DOT_MAIL) $(IMAPFILTER_EXE)
 	mkdir -p $(@D)
-	cp mail/imapfilter_config.lua $@
+	cp mail/imapfilter/config.lua $@
 
 .PHONY: imapfilter
 imapfilter: $(IMAPFILTER_CONFIG) | $(IMAPFILTER_EXE)

@@ -35,7 +35,10 @@ if [ -d "$MAUDE_LIB" ]; then
     export MAUDE_LIB
 fi
 
-export STACK_ROOT="$XDG_DATA_HOME/stack"
+export CABAL_DIR="$HOME/.local/opt/cabal"
+export CABAL_CONFIG="$XDG_CONFIG_HOME/cabal/config"
+export STACK_ROOT="$HOME/.local/opt/stack"
+
 export OPAMROOT="$HOME/.local/opt/opam"
 
 NODE_PATH="$XDG_DATA_HOME/node"
