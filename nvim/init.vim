@@ -46,6 +46,13 @@ if exists("g:fzf_opt")
     Plug 'junegunn/fzf.vim'
 endif
 
+if has("nvim-0.5.0")
+    Plug 'neovim/nvim-lsp'
+    Plug 'lifepillar/vim-mucomplete'
+endif
+
+Plug 'sbdchd/neoformat'
+
 call plug#end()
 " }}}
 " Mappings {{{
@@ -71,6 +78,22 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " }}}
+
+" Completion
+
+set completeopt+=menuone
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#completion_delay = 1
+
+" Formatting
+
+let g:neoformat_enabled_ocaml = ['ocamlformat']
+
+" LSP
+
+:lua << END
+    require'nvim_lsp'.ocamllsp.setup{}
+END
 
 " Theme
 augroup nord-overrides
