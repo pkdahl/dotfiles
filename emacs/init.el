@@ -686,6 +686,15 @@
   :config
   (evil-mode 1))
 
+(use-package magit
+  :ensure t
+  :pin melpa-stable)
+
+(use-package evil-magit
+  :ensure t
+  :pin melpa-stable
+  :after (evil magit))
+
 ;;; Customize
 
 ; (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
