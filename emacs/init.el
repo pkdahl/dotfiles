@@ -159,12 +159,13 @@
 ;	(set-default-font "Fira Code"))
 ;   (load-theme 'zenburn t))
 
-; (use-package nord-theme
-;   :pin melpa-stable
-;   :init
-;   (when (member "Fira Code" (font-family-list))
-;	(set-default-font "Fira Code"))
-;   (load-theme 'nord t))
+(use-package nord-theme
+  :ensure t
+  :pin melpa-stable
+  :init
+  (when (member "Fira Code" (font-family-list))
+	(set-default-font "Fira Code"))
+  (load-theme 'nord t))
 
 ;;;; OS X keys
 
