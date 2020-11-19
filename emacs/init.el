@@ -679,6 +679,8 @@
 ;		  (auto-fill-mode 0)
 ;		  (visual-line-mode 1))))
 
+(setq display-line-numbers 'visual)
+
 (use-package evil
   :ensure t
   :pin melpa-stable
