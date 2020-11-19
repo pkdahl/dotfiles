@@ -689,6 +689,13 @@
   :config
   (evil-mode 1))
 
+(use-package evil-escape
+  :ensure t
+  :pin melpa-stable
+  :after evil
+  :init (setq-default evil-escape-key-sequence "jk")
+  :config (evil-escape-mode 1))
+
 (use-package magit
   :ensure t
   :pin melpa-stable)
