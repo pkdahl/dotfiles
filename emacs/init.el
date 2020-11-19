@@ -27,15 +27,19 @@
 
 (require 'package)
 (setq package-enable-at-startup nil
-	  package-archives '(("gnu"          . "https://elpa.gnu.org/packages/")
+	  package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 						 ("melpa-stable" . "https://stable.melpa.org/packages/")
-						 ("melpa"        . "https://melpa.org/packages/")
-						 ("org"          . "http://orgmode.org/elpa/"))
+						 ("melpa" . "https://melpa.org/packages/")
+						 ("org" . "http://orgmode.org/elpa/"))
 	  package-pinned-packages nil
 	  package-user-dir (concat data-dir "site-lisp")
 	  package-archive-priorities '(("melpa-stable" . 10)
 								   ("gnu"          . 5)
 								   ("melpa"        . 0)))
+
+(when (version< emacs-version "26.3")
+  (setq package-check-signature nil
+		gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
 (package-initialize)
 
@@ -673,6 +677,14 @@
 ;		(lambda ()
 ;		  (auto-fill-mode 0)
 ;		  (visual-line-mode 1))))
+
+(use-package evil
+  :ensure t
+  :pin melpa-stable
+  :init
+  (setq evil-want-C-u-scroll t)
+  :config
+  (evil-mode 1))
 
 ;;; Customize
 
