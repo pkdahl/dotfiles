@@ -91,9 +91,11 @@ let g:neoformat_enabled_ocaml = ['ocamlformat']
 
 " LSP
 
+if has("nvim-0.5.0")
 :lua << END
     require'nvim_lsp'.ocamllsp.setup{}
 END
+endif
 
 " Theme
 augroup nord-overrides
