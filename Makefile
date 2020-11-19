@@ -16,11 +16,25 @@ ifeq (, $(findstring kant, $(HOME)))
 GIT_REPO_BASE_PATH := ssh://pkdahl@login.uio.no/$(GIT_REPO_BASE_PATH)
 endif
 
+BREW_BIN := $(brew --prefix)/bin
+
 .DEFAULT_TARGET: help
 
 .PHONY: help
 help:
 	@echo "Usage: make [RULE]"
+	@echo "Available rules:"
+	@echo "  - zsh"
+	@echo "  - ssh"
+	@echo "  - git"
+	@echo "  - homebrew"
+	@echo "  - neovim"
+	@echo "  - pass"
+	@echo "  - cheat"
+	@echo "  - macos"
+	@echo "  - iterm"
+	@echo "  - firefox"
+	@echo "  - fonts"
 
 .PHONY: clean
 clean:
@@ -197,13 +211,13 @@ homebrew: $(BREW_DEPS)
 #}}}
 #{{{ Pass
 
-PASS_EXE := /usr/local/bin/pass
+PASS_EXE := $(BREW_BIN)/pass
 
 $(PASS_EXE): | $(BREW_EXE)
 	brew install pass
 
 $(HOME)/.password-store/.git: | $(PASS_EXE)
-	git clone ssh://pkdahl@login.uio.no/~/git/password-store.git $(@D)
+	git clone $(GIT_REPO_BASE_PATH)/password-store.git $(@D)
 
 .PHONY: pass
 pass: | $(PASS_EXE) $(HOME)/.password-store/.git
@@ -249,7 +263,7 @@ cheat: | $(CHEAT_OO_DEPS)
 
 DIRENV_EXE := $(BREW_PREFIX)/bin/direnv
 
-$(DRIENV_EXE): | $(BREW_EXE)
+$(DIRENV_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install direnv
 
 .PHONY: direnv
@@ -646,9 +660,9 @@ IMAPFILTER_CONFIG := $(CONFIG_HOME)/imapfilter/config.lua
 $(IMAPFILTER_EXE): | $(BREW_EXE)
 	$(BREW_EXE) install imapfilter
 
-$(IMAPFILTER_CONFIG): mail/imapfilter/config.lua | $(DOT_MAIL) $(IMAPFILTER_EXE)
+$(IMAPFILTER_CONFIG): mail/imapfilter_config.lua | $(DOT_MAIL) $(IMAPFILTER_EXE)
 	mkdir -p $(@D)
-	cp mail/imapfilter/config.lua $@
+	cp mail/imapfilter_config.lua $@
 
 .PHONY: imapfilter
 imapfilter: $(IMAPFILTER_CONFIG) | $(IMAPFILTER_EXE)
