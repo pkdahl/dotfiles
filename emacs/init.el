@@ -690,7 +690,20 @@
 
 (use-package magit
   :ensure t
-  :pin melpa-stable)
+  :pin melpa-stable
+  :after evil
+  :init (define-key evil-normal-state-map (kbd "vg") 'magit-status)
+  :custom-face
+  (magit-diff-hunk-heading ((((type tty)) (:foreground "blue" :background "white"))))
+  (magit-diff-hunk-heading-highlight ((((type tty)) (:foreground "white" :background "blue"))))
+  (magit-diff-hunk-heading-selection ((((type tty)) (:foreground "yellow" :background "blue"))))
+  (magit-diff-added ((((type tty)) (:foreground "green"))))
+  (magit-diff-added-highlight ((((type tty)) (:foreground "green" :background "brightblack"))))
+  (magit-diff-removed ((((type tty)) (:foreground "red"))))
+  (magit-diff-removed-highlight ((((type tty)) (:foreground "red" :background "brightblack"))))
+  (magit-diff-context-highlight ((((type tty)) (:foreground "white" :background "brightblack"))))
+  (magit-context-highlight ((((type tty)) (:background "blue"))))
+  (magit-section-highlight ((((type tty)) (:background "blue")))))
 
 (use-package evil-magit
   :ensure t
