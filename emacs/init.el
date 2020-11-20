@@ -546,14 +546,6 @@
 ;   :config
 ;   (setq geiser-active-implementations '(guile)))
 
-;;;; Tools
-
-;;;;; Magit
-
-(use-package magit
-  :pin melpa-stable
-  :bind ("C-x g" . magit-status))
-
 ;;; Text
 
 ;;;; Outlines
