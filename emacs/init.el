@@ -710,6 +710,11 @@
   :pin melpa-stable
   :after (evil magit))
 
+(use-package editorconfig
+  :ensure t
+  :pin melpa-stable
+  :config (editorconfig-mode 1))
+
 ;;; Customize
 
 ; (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
