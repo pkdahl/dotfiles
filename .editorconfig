@@ -5,6 +5,9 @@ end_of_line = lf
 charset = utf-8
 max_line_length = 80
 
+[{M,m}akefile,*.mk]
+indent_style = tab
+
 [*.vim]
 indent_style = space
 indent_size = 4
