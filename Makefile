@@ -98,11 +98,11 @@ $(ZSH_CONFIG_HOME)/aliases.zsh:
 	ln -sf $(PWD)/zsh/aliases.zsh $@
 
 $(ZSH_CONFIG_HOME)/completion.zsh:
-	mkdir $(@D)
+	mkdir -p $(@D)
 	ln -sf $(PWD)/zsh/completion.zsh $@
 
 $(ZSH_CONFIG_HOME)/history.zsh:
-	mkdir $(@D)
+	mkdir -p $(@D)
 	ln -sf $(PWD)/zsh/history.zsh $@
 
 ZSH_DEPS := $(ZSH_CACHE_HOME) $(ZSH_CONFIG_HOME)
