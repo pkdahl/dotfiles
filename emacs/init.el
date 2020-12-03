@@ -715,6 +715,32 @@
   :pin melpa-stable
   :config (editorconfig-mode 1))
 
+(use-package org
+  :init
+  (setq org-hide-leading-stars t
+        org-startup-indented t))
+
+(use-package evil-org
+  :ensure t
+  :pin melpa-stable
+  :after (evil org)
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+    (lambda ()
+      (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys)
+  :init
+  (evil-define-key '(normal visual) 'evil-org-mode
+    (kbd "<tab>") 'org-cycle))
+
+(use-package org-agenda
+  :after org
+  :init
+  (when (file-directory-p "~/Documents/houston")
+    (setq org-agenda-files (list "~/Documents/houston/tsd.org"))))
+
 ;;; Customize
 
 ; (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
