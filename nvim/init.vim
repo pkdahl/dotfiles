@@ -36,6 +36,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'ledger/vim-ledger'
+Plug 'liuchengxu/vim-which-key'
 Plug 'nathangrigg/vim-beancount'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -58,14 +59,38 @@ call plug#end()
 " Mappings {{{
 
 " Default Leader is \. want to use backspace as well
-map <BS> <Leader>
+let g:mapleader = ' '
+let g:maplocalleader = ','
+map <bs> <leader>
 
-inoremap <special> jk <Esc>
-nnoremap <silent> <leader> s :set spell! <CR>
-nnoremap <Leader> <Space> :nohlsearch <CR>
+call which_key#register(' ', 'g:which_key_map')
+let g:which_key_map = {}
+nnoremap <silent> <leader> :<c-u>WhichKey '<space>'<cr>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<space>'<cr>
 
-nnoremap <Leader>bn :bnext <CR>
-nnoremap <Leader>bp :bprev <CR>
+inoremap <special> jk <esc>
+" nnoremap <silent> <leader> s :set spell! <CR>
+" nnoremap <Leader> <Space> :nohlsearch <CR>
+
+let g:which_key_map.b = {
+    \ 'name' : '+buffer',
+    \ 'd' : ['bd'       , 'delete-buffer']  ,
+    \ 'f' : ['bfirst'   , 'first-buffer']   ,
+    \ 'n' : ['bnext'    , 'next-buffer']    ,
+    \ 'p' : ['bprevious', 'previous-buffer'],
+    \ 'B' : ['Buffers'  , 'fzf-buffer']     ,
+    \ }
+
+let g:which_key_map.z = {
+    \ 'name' : '+fold',
+    \ 'c'    : ['zc', 'close-fold']        ,
+    \ 'o'    : ['zo', 'open-fold']         ,
+    \ 'j'    : ['zj', 'start-next']        ,
+    \ 'k'    : ['zk', 'end-previous']      ,
+    \ 'R'    : ['zR', 'open-all-folds']    ,
+    \ '<'    : ['[z', 'move-start-current'],
+    \ '>'    : [']z', 'move-end-current']  ,
+    \ }
 
 " n00b help
 
