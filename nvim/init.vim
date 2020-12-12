@@ -78,7 +78,28 @@ let g:which_key_map.b = {
     \ 'f' : ['bfirst'   , 'first-buffer']   ,
     \ 'n' : ['bnext'    , 'next-buffer']    ,
     \ 'p' : ['bprevious', 'previous-buffer'],
-    \ 'B' : ['Buffers'  , 'fzf-buffer']     ,
+    \ 'B' : [':Buffers'  , 'fzf-buffer']     ,
+    \ 'l' : [':BLines'   , 'fzf-blines']     ,
+    \ 'L' : [':Lines'    , 'fzf-lines']      ,
+    \ }
+
+let g:which_key_map.f = {
+    \ 'name' : '+files',
+    \ 'f'    : [':Files'   , 'files'] ,
+    \ 'g'    : [':GFiles'  , 'git files'],
+    \ 'G'    : [':GFiles?' , 'modified git files'] ,
+    \ }
+
+let g:which_key_map.s = {
+    \ 'name' : '+search',
+    \ 'r'    : ['Rg' , 'fzf-ripgrep'],
+    \ }
+
+let g:which_key_map.w = {
+    \ 'name' : '+windows',
+    \ 'd' : ['<C-w>c' , 'delete-window']      ,
+    \ 'v' : ['<C-w>v' , 'split-window-right'] ,
+    \ '=' : ['<C-w>=' , 'balance-window']     ,
     \ }
 
 let g:which_key_map.z = {
