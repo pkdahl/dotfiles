@@ -139,7 +139,7 @@ let g:neoformat_enabled_ocaml = ['ocamlformat']
 
 if has("nvim-0.5.0")
 :lua << END
-    require'nvim_lsp'.ocamllsp.setup{}
+    require'lspconfig'.ocamllsp.setup{}
 END
 endif
 
