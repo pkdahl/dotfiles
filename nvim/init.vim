@@ -41,6 +41,7 @@ Plug 'nathangrigg/vim-beancount'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vimwiki/vimwiki'
+Plug 'voldikss/vim-floaterm'
 
 if exists("g:fzf_opt")
     Plug g:fzf_opt
