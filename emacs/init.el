@@ -745,7 +745,8 @@
         org-agenda-custom-commands
           '(("c" "Agenda"
              ((agenda ""
-                ((org-agenda-skip-function
+                ((org-agenda-span 1)
+                 (org-agenda-skip-function
                    '(org-agenda-skip-entry-if 'todo 'done))))
               (tags-todo "-PRIORITY=\"C\""
                 ((org-agenda-skip-function
