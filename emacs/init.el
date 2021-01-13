@@ -699,6 +699,7 @@
   :init
   (setq org-adapt-indentation nil
         org-hide-leading-stars t
+        org-log-done 'time
         org-log-into-drawer t
         org-todo-keywords
           '((sequence "TODO" "|" "DONE(!)"))
