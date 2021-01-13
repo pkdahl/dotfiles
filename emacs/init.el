@@ -5,8 +5,8 @@
 (setq inhibit-startup-message t)
 
 (defvar current-user (getenv (if (equal system-type 'windows-nt)
-								 "USERNAME"
-							   "USER")))
+                 "USERNAME"
+                 "USER")))
 
 (defvar config-dir (file-name-directory load-file-name)
   "Directory for Emacs configuration files.")
@@ -27,29 +27,32 @@
 
 (require 'package)
 (setq package-enable-at-startup nil
-	  package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-						 ("melpa-stable" . "https://stable.melpa.org/packages/")
-						 ("melpa" . "https://melpa.org/packages/")
-						 ("org" . "http://orgmode.org/elpa/"))
-	  package-pinned-packages nil
-	  package-user-dir (concat data-dir "site-lisp")
-	  package-archive-priorities '(("melpa-stable" . 10)
-								   ("gnu"          . 5)
-								   ("melpa"        . 0)))
+  package-archives
+    '(("gnu"          . "https://elpa.gnu.org/packages/")
+      ("melpa-stable" . "https://stable.melpa.org/packages/")
+      ("melpa"        . "https://melpa.org/packages/")
+      ("org"          . "http://orgmode.org/elpa/"))
+  package-pinned-packages nil
+  package-user-dir (concat data-dir "site-lisp")
+  package-archive-priorities
+    '(("melpa-stable" . 10)
+      ("gnu"          . 5)
+      ("melpa"        . 0)))
 
 (when (version< emacs-version "26.3")
   (setq package-check-signature nil
-		gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+  gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
 (package-initialize)
 
 ;;;; Bootstrap `use-package' from Melpa stable
 
 (unless (package-installed-p 'use-package)
-  (let ((package-archives '(("melpa-stable" . "https://stable.melpa.org/packages/"))))
-	(progn
-	  (package-refresh-contents)
-	  (package-install 'use-package))))
+  (let ((package-archives
+          '(("melpa-stable" . "https://stable.melpa.org/packages/"))))
+    (progn
+      (package-refresh-contents)
+      (package-install 'use-package))))
 
 (eval-when-compile
   (require 'use-package))
@@ -59,12 +62,12 @@
 ;; Add Homebrew site-lisp direcotry to load-path if present
 (let ((default-directory  "/usr/local/share/emacs/site-lisp/"))
   (when (file-directory-p default-directory)
-	(normal-top-level-add-subdirs-to-load-path)))
+  (normal-top-level-add-subdirs-to-load-path)))
 
 ;; Add packages provided by Nix to load-path
 (let ((default-directory "/run/current-system/sw/share/emacs/site-lisp/"))
   (when (file-directory-p default-directory)
-	(normal-top-level-add-subdirs-to-load-path)))
+  (normal-top-level-add-subdirs-to-load-path)))
 
 ; (add-to-list 'load-path (concat user-emacs-directory "lisp/"))
 ; (add-to-list 'load-path config-dir)
@@ -81,18 +84,18 @@
 ;;;; Frames and Windows
 
 (dolist (mode '(blink-cursor-mode
-				scroll-bar-mode
-				tool-bar-mode))
+                scroll-bar-mode
+                tool-bar-mode))
   (when (fboundp mode)
-	(funcall mode -1)))
+  (funcall mode -1)))
 
 ;; Turn of menu-bar-mode too, unless we are on OS X
 (unless (memq window-system '(mac ns))
   (menu-bar-mode -1))
 
-(setq default-frame-alist '((width . 120)
-							(height . 50))
-	  split-width-threshold 100)
+(setq default-frame-alist '((width  . 120)
+                            (height . 50))
+  split-width-threshold 100)
 
 ;;;; Mode Line
 
@@ -164,7 +167,7 @@
   :pin melpa-stable
   :init
   (when (member "Fira Code" (font-family-list))
-	(set-default-font "Fira Code"))
+  (set-default-font "Fira Code"))
   (load-theme 'nord t))
 
 ;;;; OS X keys
@@ -176,10 +179,10 @@
 ;; - Right option key is =alt=
 (when (string-equal system-type "darwin")
   (setq ns-function-modifier 'hyper
-		ns-option-modifier 'nil          ; ns-alternate-modifier
-		ns-command-modifier 'meta        ; mac-command-modifier
-		ns-right-command-modifier 'super ; mac-right-command-modifier
-		ns-right-option-modifier 'nil))
+        ns-option-modifier 'nil          ; ns-alternate-modifier
+        ns-command-modifier 'meta        ; mac-command-modifier
+        ns-right-command-modifier 'super ; mac-right-command-modifier
+        ns-right-option-modifier 'nil))
 
 ;;; Help
 
@@ -199,7 +202,7 @@
 ;;;; Abbreviations
 
 (setq abbrev-file-name (concat config-dir "abbrev_defs")
-	  save-abbrevs t)
+  save-abbrevs t)
 
 ;;;; Register
 
@@ -223,7 +226,7 @@
 ; (use-package counsel
 ;   :ensure t
 ;   :bind* (("M-x"     . counsel-M-x)
-;		  ("C-x C-f" . counsel-find-file))
+;     ("C-x C-f" . counsel-find-file))
 ;   :config
 ;   (setq counsel-find-file-ignore-regexp "\\.DS_Store\\|.git"))
 
@@ -291,11 +294,11 @@
 
 (use-package recentf
   :commands (recentf-mode
-			 counsel-recentf)
+             counsel-recentf)
   :config
   (setq recentf-save-file (concat cache-dir "recentf")
-		recentf-max-menu-items 50
-		recentf-exclude '("/.git/")))
+        recentf-max-menu-items 50
+        recentf-exclude '("/.git/")))
 
 (setq auto-save-list-file-prefix (concat cache-dir "auto-save-list/saves-"))
 
@@ -395,9 +398,9 @@
 ;   :init
 ;   (setq mu4e-headers-date-format "%Y-%m-%d %H:%M"
 ;		mu4e-headers-fields '( (:date       . 17)
-;							   (:flags      . 5)
-;							   (:from-or-to . 25)
-;							   (:subject    . nil)))
+;                (:flags      . 5)
+;                (:from-or-to . 25)
+;                (:subject    . nil)))
 ;   (setq message-send-mail-function 'message-send-mail-with-sendmail
 ;		sendmail-program (executable-find "msmtpq")
 ;		message-kill-buffer-on-exit t
@@ -408,15 +411,15 @@
 ;   ;; don't apply trashed flag, just move
 ;   ;; FIX we get code for trash twice in the list
 ;   (add-to-list 'mu4e-marks
-;			   '(trash :char ("d" . "▼")
-;					   :prompt "dtrash"
-;					   :dyn-target (lambda (target msg)
+;        '(trash :char ("d" . "▼")
+;            :prompt "dtrash"
+;            :dyn-target (lambda (target msg)
 ;									 (mu4e-get-trash-folder msg))
-;					   :action (lambda (docid msg target)
+;            :action (lambda (docid msg target)
 ;								 (mu4e~proc-move
-;								  docid
-;								  (mu4e~mark-check-target target)
-;								  "-N")))))
+;                 docid
+;                 (mu4e~mark-check-target target)
+;                 "-N")))))
 
 ; (use-package org-mu4e
 ;   :after (mu4e org-mode))
@@ -435,18 +438,18 @@
 (use-package prog-mode
   :init
   (add-hook 'prog-mode-hook
-			(lambda ()
-			  (add-hook 'before-save-hook
-						(lambda ()
-						  (whitespace-cleanup))))))
+    (lambda ()
+    (add-hook 'before-save-hook
+      (lambda ()
+        (whitespace-cleanup))))))
 
 ;;;;; CC mode (C, C++, Java etc.)
 
 (use-package cc-mode
   :init
   (setq-default c-basic-offset 4
-				tab-width 4
-				indent-tabs-mode t))
+                tab-width 4
+                indent-tabs-mode t))
 
 ;;;;; Coq
 
@@ -454,7 +457,7 @@
 ;   :if (package-installed-p 'proof-general)
 ;   :mode ("\\.v\\'" . coq-mode)
 ;   :init (when (package-installed-p 'proof-general)
-;		  (add-to-list 'load-path (let ((cmd (concat "printf %s \"$(find " package-user-dir " -name generic)\"")))
+;     (add-to-list 'load-path (let ((cmd (concat "printf %s \"$(find " package-user-dir " -name generic)\"")))
 ;									(shell-command-to-string cmd)))))
 
 ;;;;; Elm
@@ -482,11 +485,11 @@
 ; (defvar opam-share
 ;   (let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
 ;	(when (and opam-share (file-directory-p opam-share))
-;	  ;; Register Merlin
-;	  (let ((opam-lisp (expand-file-name "emacs/site-lisp" opam-share)))
+;   ;; Register Merlin
+;   (let ((opam-lisp (expand-file-name "emacs/site-lisp" opam-share)))
 ;		(unless (member opam-lisp load-path)
-;		  (add-to-list 'load-path opam-lisp)))
-;	  opam-share))
+;     (add-to-list 'load-path opam-lisp)))
+;   opam-share))
 ;   "opam share directory")
 
 ; (use-package tuareg
@@ -510,8 +513,8 @@
 ;   :config
 ;   (add-hook 'tuareg-mode-hook
 ;			(lambda ()
-;			  (define merlin-mode-map (kbd "C-M-<tab>") 'ocamlformat)
-;			  (add-hook 'before-save-hook 'ocamlformat-before-save))))
+;       (define merlin-mode-map (kbd "C-M-<tab>") 'ocamlformat)
+;       (add-hook 'before-save-hook 'ocamlformat-before-save))))
 
 ; (use-package utop
 ;   :if opam-share
@@ -519,7 +522,7 @@
 ;   :config
 ;   (add-hook 'tuareg-mode-hook #'utop-minor-mode)
 ;   (if (executable-find "opam")
-;	  (setq utop-command "opam config exec -- utop -emacs")))
+;   (setq utop-command "opam config exec -- utop -emacs")))
 
 ;;;;; ReasonML
 
@@ -561,14 +564,14 @@
 ;   :preface
 ;   (defface org-todo-keyword-waiting-face
 ;	'((((class color))
-;	   (:foreground "orange" :weight bold))
-;	  (t (:weight bold)))
+;    (:foreground "orange" :weight bold))
+;   (t (:weight bold)))
 ;	"face to fontify Org TODO keyword WAITING"
 ;	:group 'org)
 ;   (defface org-todo-keyword-cancelled-face
 ;	'((((class color))
-;	   (:foreground "yellow" :weight bold))
-;	  (t (:weight bold)))
+;    (:foreground "yellow" :weight bold))
+;   (t (:weight bold)))
 ;	"face to fontify Org TODO keyword CANCELLED"
 ;	:group 'org)
 
@@ -585,9 +588,9 @@
 ;								 ("CANCELLED" . org-todo-keyword-cancelled-face)))
 ;   (add-hook 'org-mode-hook
 ;		(lambda ()
-;		  (add-hook 'before-save-hook
+;     (add-hook 'before-save-hook
 ;			(lambda ()
-;			  (whitespace-cleanup))))))
+;       (whitespace-cleanup))))))
 
 ; (use-package org-mac-link
 ;   :if (string-equal system-type "darwin")
@@ -597,30 +600,7 @@
 ; (defun time-string-days-ago (n)
 ;   "Description"
 ;   (format-time-string "[%Y-%m-%d]"
-;					  (time-subtract (current-time) (days-to-time n))))
-
-; (use-package org-agenda
-;   :after (org org-habit)
-;   :bind ("C-c a" . org-agenda)
-;   :config
-;   (setq org-agenda-start-on-weekday nil
-;		org-agenda-time-leading-zero t)
-;   (setq org-agenda-custom-commands
-;		'(("c" "Agenda"
-;		   ((tags "PRIORITY=\"A\""
-;				  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-;				   (org-agenda-overriding-header "High-priority tasks:")))
-;			(agenda ""
-;					((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))))
-;			(tags-todo "-TODO=\"WAITING\"-PRIORITY=\"A\"-PRIORITY=\"C\""
-;					   ((org-agenda-skip-function '(org-agenda-skip-if nil '(scheduled deadline)))
-;						(org-agenda-overriding-header "Normal-priority tasks:")))))
-;		  ("r" "Archivable tasks"
-;		   ((tags (concat "CLOSED<\"" (time-string-days-ago 14) "\"")
-;				  ((org-agenda-overriding-header "Archivable tasks:")))
-;			(tags (concat "TIMESTAMP<\"" (time-string-days-ago 14) "\"")
-;				  ((org-agenda-overriding-header "Archivable entries:"))))
-;		   ((org-agenda-compact-blocks t))))))
+;           (time-subtract (current-time) (days-to-time n))))
 
 ; (use-package org-capture
 ;   :after (org)
@@ -668,8 +648,8 @@
 ;   :init
 ;   (add-hook 'markdown-mode-hook
 ;		(lambda ()
-;		  (auto-fill-mode 0)
-;		  (visual-line-mode 1))))
+;     (auto-fill-mode 0)
+;     (visual-line-mode 1))))
 
 (setq display-line-numbers 'visual)
 
@@ -717,8 +697,60 @@
 
 (use-package org
   :init
-  (setq org-hide-leading-stars t
+  (setq org-adapt-indentation nil
+        org-hide-leading-stars t
+        org-log-into-drawer t
+        org-todo-keywords
+          '((sequence "TODO" "|" "DONE(!)"))
         org-startup-indented t))
+
+; (use-package org-agenda
+
+;   :after (org org-habit)
+;   :bind ("C-c a" . org-agenda)
+;   :config
+;   (setq org-agenda-start-on-weekday nil
+;		org-agenda-time-leading-zero t)
+;   (setq org-agenda-custom-commands
+;		'(("c" "Agenda"
+;      ((tags "PRIORITY=\"A\""
+;         ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+;          (org-agenda-overriding-header "High-priority tasks:")))
+;			(agenda ""
+;					((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))))
+;			(tags-todo "-TODO=\"WAITING\"-PRIORITY=\"A\"-PRIORITY=\"C\""
+;            ((org-agenda-skip-function '(org-agenda-skip-if nil '(scheduled deadline)))
+;						(org-agenda-overriding-header "Normal-priority tasks:")))))
+;     ("r" "Archivable tasks"
+;      ((tags (concat "CLOSED<\"" (time-string-days-ago 14) "\"")
+;         ((org-agenda-overriding-header "Archivable tasks:")))
+;			(tags (concat "TIMESTAMP<\"" (time-string-days-ago 14) "\"")
+;         ((org-agenda-overriding-header "Archivable entries:"))))
+;      ((org-agenda-compact-blocks t))))))
+
+(use-package org-agenda
+  :after org
+  :bind (("C-c a" . org-agenda))
+  :init
+  (when (file-directory-p "~/Documents/houston")
+    (add-to-list 'org-agenda-files "~/Documents/houston/"))
+  (when (file-directory-p "~/Documents/notes")
+    (add-to-list 'org-agenda-files "~/Documents/notes/"))
+  :config
+  (setq org-agenda-skip-deadline-if-done t
+        org-agenda-skip-scheduled-if-done t
+        org-agenda-start-on-weekday nil
+        org-agenda-time-leading-zero t
+
+        org-agenda-custom-commands
+          '(("c" "Agenda"
+             ((agenda ""
+                ((org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'todo 'done))))
+              (tags-todo "-PRIORITY=\"C\""
+                ((org-agenda-skip-function
+                   '(org-agenda-skip-entry-if 'scheduled 'deadline))
+                 (org-agenda-overrriding-header "Unscheduled tasks"))))))))
 
 (use-package evil-org
   :ensure t
@@ -732,14 +764,9 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys)
   :init
-  (evil-define-key '(normal visual) 'evil-org-mode
-    (kbd "<tab>") 'org-cycle))
-
-(use-package org-agenda
-  :after org
-  :init
-  (when (file-directory-p "~/Documents/houston")
-    (setq org-agenda-files (list "~/Documents/houston/tsd.org"))))
+  (evil-define-key
+    '(normal visual)
+    'evil-org-mode (kbd "C-i") 'org-cycle))
 
 ;;; Customize
 
