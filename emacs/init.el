@@ -701,8 +701,10 @@
         org-hide-leading-stars t
         org-log-done 'time
         org-log-into-drawer t
+        org-todo-keyword-faces
+          '(("STARTED" . (:foreground "magenta")))
         org-todo-keywords
-          '((sequence "TODO" "|" "DONE(!)"))
+          '((sequence "TODO(t)" "STARTED(s!)" "|" "DONE(d!)"))
         org-startup-indented t))
 
 ; (use-package org-agenda
