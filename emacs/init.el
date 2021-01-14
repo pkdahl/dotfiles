@@ -733,8 +733,8 @@
   :after org
   :bind (("C-c a" . org-agenda))
   :init
-  (when (file-directory-p "~/Documents/houston")
-    (add-to-list 'org-agenda-files "~/Documents/houston/"))
+  (when (file-directory-p "~/Documents/usit")
+    (add-to-list 'org-agenda-files "~/Documents/usit"))
   (when (file-directory-p "~/Documents/notes")
     (add-to-list 'org-agenda-files "~/Documents/notes/"))
   :config
