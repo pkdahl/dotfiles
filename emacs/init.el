@@ -699,7 +699,7 @@
         org-todo-keyword-faces
           '(("STARTED" . (:foreground "magenta")))
         org-todo-keywords
-          '((sequence "TODO(t)" "STARTED(s!)" "|" "DONE(d!)"))
+          '((sequence "TODO(t)" "STARTED(s!)" "WAITING(w@/!)" "|" "DONE(d!)"))
         org-startup-indented t))
 
 ; (use-package org-agenda
