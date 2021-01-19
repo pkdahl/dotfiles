@@ -612,11 +612,6 @@
 ;   :preface (add-to-list 'org-modules 'org-habit)
 ;   :after (org))
 
-; (use-package org-id
-;   :after (org)
-;   :config
-;   (setq org-id-locations-file (concat cache-dir "org-id-location")))
-
 ; (use-package org-setup
 ;   :after (org))
 
@@ -755,6 +750,12 @@
                 ((org-agenda-skip-function
                    '(org-agenda-skip-entry-if 'scheduled 'deadline))
                  (org-agenda-overrriding-header "Unscheduled tasks"))))))))
+
+(use-package org-id
+  :after org
+  :config
+  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id
+        org-id-locations-file (concat cache-dir "org-id-location")))
 
 (use-package evil-org
   :ensure t
