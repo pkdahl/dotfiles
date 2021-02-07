@@ -1,2 +1,5 @@
 Host *, !*.uio.no
 	SendEnv LANG LC_*
+
+Host ashbringer
+    HostName ashbringer.uio.no
