@@ -32,6 +32,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
+Plug 'chrisbra/csv.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align'
