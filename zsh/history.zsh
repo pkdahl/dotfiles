@@ -4,6 +4,7 @@ setopt SHARE_HISTORY
 setopt HIST_VERIFY            # Allow editing of command instead of running it immediately
 setopt HIST_FIND_NO_DUPS      # Backward search with editor do not show commands more than once
 setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE      # Commands starting with space are not added to history
 setopt HIST_EXPIRE_DUPS_FIRST
 HISTFILE=$ZSH_CACHE_HOME/zhistory
 HISTSIZE=10240
