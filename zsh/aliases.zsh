@@ -1,7 +1,9 @@
 # ~/.dofiles/zsh/aliases.zsh
 
 # Load common Bourne shell aliases
-[ -e "$SH_CONFIG_HOME/aliases.sh" ] && . "$SH_CONFIG_HOME/aliases.sh"
+if [ -e "$SH_CONFIG_HOME/aliases.sh" ]; then
+    source "$SH_CONFIG_HOME/aliases.sh"
+fi
 
 alias h='history -fi'
 

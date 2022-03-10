@@ -31,6 +31,32 @@ export DOT_ZSH="$ZSH_CONFIG_HOME"
 
 export DOTFILES="$HOME/.dotfiles"
 
+# Homebrew
+
+if [ -e "/opt/homebrew" ]; then
+	export HOMEBREW_PREFIX="/opt/homebrew";
+	export HOMEBREW_CASK_OPTS="--appdir=/Applications";
+elif [ -x "/usr/local/bin/brew" ]; then
+	export HOMEBREW_PREFIX="/usr/local";
+	export HOMEBREW_CASK_OPTS="--appdir=/Applications";
+elif [ -e "$HOME/.linuxbrew" ]; then
+	export HOMEBREW_PREFIX="$HOME/.linuxbrew";
+fi
+
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar";
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX";
+export HOMEBREW_SHELLENV_PREFIX="$HOMEBREW_PREFIX";
+export HOMEBREW_NO_GITHUB_API=1;
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}";
+export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
+
+
+# Pass 
+
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+
+
 MAUDE_LIB="$HOME/.local/lib/maude"
 if [ -d "$MAUDE_LIB" ]; then
     export MAUDE_LIB
@@ -52,6 +78,10 @@ if [ -r "$NPM_CONFIG_USERCONFIG" ]; then
     export NPM_CONFIG_USERCONFIG
 fi
 
+export CARGO_HOME="$HOME/.local/opt/cargo"
+export RUSTUP_HOME="$HOME/.local/opt/rustup"
+source "$CARGO_HOME/env"
+
 MAILDIR="$HOME/Maildir"
 if [ -d "$MAILDIR" ]; then
     export MAILDIR
@@ -62,31 +92,28 @@ if [ -d "$IMAPFILTER_HOME" ]; then
     export IMAPFILTER_HOME
 fi
 
+export _Z_DATA="$XDG_CACHE_HOME/z/directories"
+
 # PATH
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 
-if [ -d "$HOME/.linuxbrew/sbin" ]; then
-	PATH="$HOME/.linuxbrew/sbin:$PATH"
-fi
-
-if [ -d "$HOME/.linuxbrew/bin" ]; then
-	PATH="$HOME/.linuxbrew/bin:$PATH"
-fi
-
-## Set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ]; then
-	PATH="$HOME/.local/bin:$PATH"
-fi
+# PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 
 if [ -d "$HOME/bin" ]; then
-	PATH="$HOME/bin:$PATH"
+    PATH="$HOME/bin:$PATH"
 fi
 
-if [ -d "$HOME/.cargo/bin" ]; then
-	PATH="$HOME/.cargo/bin:$PATH"
+if [ -d "$HOME/.local/opt/cargo/bin" ]; then
+    PATH="$HOME/.local/opt/cargo/bin:$PATH"
+elif [ -d "$HOME/.cargo/bin" ]; then
+    PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-## Unique entries in PATH
+# Set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Unique entries in PATH
 PATH=$(printf %s "$PATH" | awk -v RS=: '!a[$0]++' | paste -s -d: -)
 
 export PATH
@@ -97,20 +124,10 @@ if [ -d "$XDG_DATA_HOME/man" ]; then
     export MANPATH
 fi
 
-# This only applies to Homebrew on Mac and not Homebrew on Linux.
-# Consider changing this.
-if [ -e /usr/local/bin/brew ]; then
-	export HOMEBREW_NO_GITHUB_API=1
-	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-fi
-
-if [ -x "$(command -v brew)" ]; then
-	export HOMEBREW_PREFIX="$(brew --prefix)"
-fi
 
 # Set EDITOR
 if type nvim > /dev/null 2>&1; then
-	export EDITOR="nvim"
+    export EDITOR="nvim"
 else
     export EDITOR="vim"
 fi
@@ -120,7 +137,7 @@ if [ -r "$XDG_DOCUMENTS_DIR/.profile" ]; then
 fi
 
 if [ -d "$ETC_HOME/profile.d" ]; then
-	for f in "$ETC_HOME/profile.d"/*; do
-		source $f
-	done
+    for f in "$ETC_HOME/profile.d"/*; do
+        source $f
+    done
 fi

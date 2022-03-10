@@ -10,18 +10,21 @@ setopt NO_BEEP            # Never beep
 
 source $DOT_ZSH/aliases.zsh
 source $DOT_ZSH/completion.zsh
-source $DOT_ZSH/history.zsh
-
-autoload -U promptinit
-if is-at-least 5.1; then
-	promptinit
-	prompt spaceship
-    spaceship_vi_mode_enable
+if [ -f "$DOT_ZSH/history.zsh" ]; then
+    source $DOT_ZSH/history.zsh
 fi
+
+# Switch to starship prompt https://starship.rs/
+# autoload -U promptinit
+# if is-at-least 5.1; then
+#     promptinit
+#     prompt spaceship
+#     spaceship_vi_mode_enable
+# fi
 
 if [ -r "$HOME/.local/src/z/1.9/z.sh" ]; then
     export _Z_DATA="$XDG_CACHE_HOME/z/data"
-    . "$HOME/.local/src/z/1.9/z.sh"
+    source "$HOME/.local/src/z/1.9/z.sh"
 fi
 
 which direnv &> /dev/null && eval "$(direnv hook zsh)"
@@ -34,4 +37,9 @@ which opam &> /dev/null && eval "$(opam env)"
 # fzf
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ]; then 
     . "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+fi
+
+# z
+if [ -f "$HOMEBREW_PREFIX/etc/profile.d/z.sh" ]; then
+    source "$HOMEBREW_PREFIX/etc/profile.d/z.sh"
 fi
