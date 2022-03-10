@@ -1,26 +1,27 @@
 [core]
-        eol = lf
-        autocrlf = input
+    eol = lf
+    autocrlf = input
 
 [include]
-        path = private
+    path = private
 
 [alias]
-        st = status
-        ci = commit
-        co = checkout
-        br = branch
-        ll = log --decorate=full
-		lo = log --oneline --max-count=15
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    ll = log --decorate=full
+    lo = log --oneline --max-count=15
 
 [color]
-        branch = auto
-        diff = auto
-        interactive = auto
-        status = auto
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
 
 [push]
-        default = simple
+    default = simple
+
 [user]
 	name = Per Kulseth Dahl
 	email = pkdahl@gmail.com
