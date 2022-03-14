@@ -7,4 +7,3 @@
 if [[ -n ${VIRTUAL_ENV} && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   . "${VIRTUAL_ENV}/bin/activate"
 fi
-. "/Users/pkdahl/.local/opt/cargo/env"
