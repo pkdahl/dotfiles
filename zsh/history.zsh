@@ -6,6 +6,6 @@ setopt HIST_FIND_NO_DUPS      # Backward search with editor do not show commands
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE      # Commands starting with space are not added to history
 setopt HIST_EXPIRE_DUPS_FIRST
-HISTFILE=$ZSH_CACHE_HOME/zhistory
-HISTSIZE=10240
-SAVEHIST=$HISTSIZE
+export HISTFILE=$ZSH_CACHE_HOME/zhistory
+export HISTSIZE=10240
+export SAVEHIST=$((HISTSIZE - 240))
